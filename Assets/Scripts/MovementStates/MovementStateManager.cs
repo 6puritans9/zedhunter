@@ -36,7 +36,6 @@ public class MovementStateManager : MonoBehaviourPun {
 
     PlayerSetup playerSetup;
 
-
     #region Init_and_Update
 
     private void Awake() {
@@ -56,7 +55,7 @@ public class MovementStateManager : MonoBehaviourPun {
         hzInput = Input.GetAxis("Horizontal");
         vInput = Input.GetAxis("Vertical");
 
-        dir = transform.forward * vInput + transform.right * hzInput;
+        dir = (transform.forward * vInput) + (transform.right * hzInput);
         dir.y = 0;
 
         playerSetup.anim.SetFloat("hzInput", hzInput);
