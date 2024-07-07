@@ -1,0 +1,4 @@
+repository "zedhunter@The3rdFloor@cloud"
+  path "/"
+    br "/main"
+    co "/main"
