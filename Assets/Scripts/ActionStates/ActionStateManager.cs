@@ -21,7 +21,7 @@ public class ActionStateManager : MonoBehaviourPun
     public MultiAimConstraint rHandAim;
     public TwoBoneIKConstraint lHandIK;
 
-	public GameObject sword;
+	//public GameObject sword;
 	public GameObject gun;
     public Rig gunRig;
 
@@ -46,9 +46,9 @@ public class ActionStateManager : MonoBehaviourPun
 		swordRangeBox.enabled = false;
 
 		gun.SetActive(false);
-		sword.SetActive(false);
 		gunRig.weight = 0;
 		SetLayerWeight(0, 1);  // ¹«±â ¾øÀ½
+		playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
 	}
 
     // Update is called once per frame
@@ -59,7 +59,6 @@ public class ActionStateManager : MonoBehaviourPun
 		{
 			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
 			gun.SetActive(false);
-			sword.SetActive(false);
 			gunRig.weight = 0;
 			SetLayerWeight(0, 1);  // ¹«±â ¾øÀ½
 		}
@@ -67,17 +66,8 @@ public class ActionStateManager : MonoBehaviourPun
 		{
 			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 2);
 			gun.SetActive(true);
-			sword.SetActive(false);
 			gunRig.weight = 1;
 			SetLayerWeight(1, 1);  // ÃÑ
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 3);
-			gun.SetActive(false);
-			sword.SetActive(true);
-			gunRig.weight = 0;
-			SetLayerWeight(2, 1);  // Ä®
 		}
 
 		currentState.UpdateState(this);

@@ -18,7 +18,7 @@ public class controls : MonoBehaviour
 	private Rigidbody rb;
 	private CapsuleCollider capsuleCollider;
 	private Vector2 moveInput;
-
+	
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();

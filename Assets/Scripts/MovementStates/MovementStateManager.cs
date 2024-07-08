@@ -19,8 +19,6 @@ public class MovementStateManager : MonoBehaviourPun {
     [SerializeField] private LayerMask groundMask;
     Vector3 spherePos;
 
-    [SerializeField] private float gravity = -9.81f;
-    Vector3 velocity;
 
     [SerializeField] private float jumpHeight = 1.0f;
 
@@ -34,7 +32,6 @@ public class MovementStateManager : MonoBehaviourPun {
 
     [HideInInspector] public Animator anim;
 
-    PlayerSetup playerSetup;
 
     #region Init_and_Update
 
@@ -42,8 +39,6 @@ public class MovementStateManager : MonoBehaviourPun {
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
-        playerSetup = GetComponent<PlayerSetup>();
-        //controller = GetComponent<CharacterController>();
         SwitchState(Idle);
 
         // Cursor settings
@@ -58,15 +53,14 @@ public class MovementStateManager : MonoBehaviourPun {
         dir = (transform.forward * vInput) + (transform.right * hzInput);
         dir.y = 0;
 
-        playerSetup.anim.SetFloat("hzInput", hzInput);
-        playerSetup.anim.SetFloat("vInput", vInput);
+        anim.SetFloat("hzInput", hzInput);
+        anim.SetFloat("vInput", vInput);
 
         currentState.UpdateState(this);
     }
 
     void FixedUpdate() {
         Move();
-        ApplyGravity();
     }
 
     #endregion
@@ -88,20 +82,7 @@ public class MovementStateManager : MonoBehaviourPun {
         return Physics.CheckSphere(spherePos, capsuleCollider.radius, groundMask, QueryTriggerInteraction.Ignore);
     }
 
-    void ApplyGravity() {
-        if (IsGrounded() && rb.velocity.y < 0) {
-            rb.velocity = new Vector3(rb.velocity.x, -2f, rb.velocity.z);
-        }
-        else {
-            rb.AddForce(new Vector3(0, gravity, 0), ForceMode.Acceleration);
-        }
-    }
 
-    public void Jump() {
-        if (IsGrounded()) {
-            rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2 * gravity), ForceMode.Impulse);
-        }
-    }
 
     #endregion
 }

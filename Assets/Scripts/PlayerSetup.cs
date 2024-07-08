@@ -10,17 +10,16 @@ public class PlayerSetup : MonoBehaviour
 {
 	public AimStateManager aimStateManager;
 	public Cinemachine.CinemachineVirtualCamera VirtualCamera;
+	public Cinemachine3rdPersonAim cinemachine3RdPersonAim;
+
 	public MovementStateManager movementStateManager;
 	public ActionStateManager actionStateManager;
-	public PhotonView photonView;
-	public RigBuilder rig;
 
 	public WeaponManager weaponManager;
 	public WeaponAmmo weaponAmmo;
 	public WeaponRecoil weaponRecoil;
 	public WeaponBloom weaponBloom;
 	public GameObject gun;
-	public GameObject sword;
 
 	public Transform TPWeaponHolder;
 
@@ -28,14 +27,16 @@ public class PlayerSetup : MonoBehaviour
 
 	public void IsLocalPlayer()
 	{
-		TPWeaponHolder.gameObject.SetActive(false);
+		//TPWeaponHolder.gameObject.SetActive(false);
 
 		gun.SetActive(true);
-		sword.SetActive(true);
 
 		movementStateManager.enabled = true;
+		
 		aimStateManager.enabled = true;
 		VirtualCamera.enabled = true;
+		cinemachine3RdPersonAim.enabled = true;
+
 		actionStateManager.enabled = true;
 		weaponManager.enabled = true;
 		weaponAmmo.enabled = true;
@@ -58,11 +59,11 @@ public class PlayerSetup : MonoBehaviour
 		{
 			TPWeaponHolder.GetChild(0).gameObject.SetActive(true);
 			TPWeaponHolder.GetChild(1).gameObject.SetActive(false);
-		}
+		}/*
 		else if (_weaponIndex == 3)
 		{
 			TPWeaponHolder.GetChild(0).gameObject.SetActive(false);
 			TPWeaponHolder.GetChild(1).gameObject.SetActive(true);
-		}
+		}*/
 	}
 }
