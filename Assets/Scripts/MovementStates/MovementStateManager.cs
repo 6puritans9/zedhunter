@@ -1,111 +1,88 @@
 using Photon.Pun;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public class MovementStateManager : MonoBehaviourPun
-{
-	public float currentMoveSpeed;
-	public float walkSpeed = 3, walkBackSpeed = 2;
-	public float runSpeed = 7, runBackSpeed = 5;
-	public float crouchSpeed = 2, crouchBackSpeed = 1;
+public class MovementStateManager : MonoBehaviourPun {
+    public float currentMoveSpeed;
+    public float walkSpeed = 3, walkBackSpeed = 2;
+    public float runSpeed = 7, runBackSpeed = 5;
+    public float crouchSpeed = 2, crouchBackSpeed = 1;
 
-	[HideInInspector] public Vector3 dir;
-	[HideInInspector] public float hzInput, vInput;
-	private Rigidbody rb;
-	private CapsuleCollider capsuleCollider;
+    [HideInInspector] public Vector3 dir;
+    [HideInInspector] public float hzInput, vInput;
+    private Rigidbody rb;
+    private CapsuleCollider capsuleCollider;
 
-	[SerializeField] private float groundYOffset;
-	[SerializeField] private LayerMask groundMask;
-	Vector3 spherePos;
+    [SerializeField] private float groundYOffset;
+    [SerializeField] private LayerMask groundMask;
+    Vector3 spherePos;
 
-	[SerializeField] private float gravity = -9.81f;
-	Vector3 velocity;
 
-	[SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private float jumpHeight = 1.0f;
 
-	[HideInInspector] public MovementBaseState currentState;
+    [HideInInspector] public MovementBaseState currentState;
 
-	public IdleState Idle = new IdleState();
-	public WalkState Walk = new WalkState();
-	public CrouchState Crouch = new CrouchState();
-	public RunState Run = new RunState();
 
-	[HideInInspector] public Animator anim;
+    public IdleState Idle = new IdleState();
+    public WalkState Walk = new WalkState();
+    public CrouchState Crouch = new CrouchState();
+    public RunState Run = new RunState();
 
-	PlayerSetup playerSetup;
+    [HideInInspector] public Animator anim;
 
-	private void Awake()
-	{
-		rb = GetComponent<Rigidbody>();
-		capsuleCollider = GetComponent<CapsuleCollider>();
-		anim = GetComponent<Animator>();
-		//controller = GetComponent<CharacterController>();
-		SwitchState(Idle);
 
-		// Cursor settings
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+    #region Init_and_Update
 
-		playerSetup = GetComponent<PlayerSetup>();
-	}
+    private void Awake() {
+        rb = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        anim = GetComponent<Animator>();
+        SwitchState(Idle);
 
-	void Update()
-	{
-		hzInput = Input.GetAxis("Horizontal");
-		vInput = Input.GetAxis("Vertical");
+        // Cursor settings
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
-		dir = transform.forward * vInput + transform.right * hzInput;
-		dir.y = 0;
+    void Update() {
+        hzInput = Input.GetAxis("Horizontal");
+        vInput = Input.GetAxis("Vertical");
 
-		playerSetup.anim.SetFloat("hzInput", hzInput);
-		playerSetup.anim.SetFloat("vInput", vInput);
+        dir = (transform.forward * vInput) + (transform.right * hzInput);
+        dir.y = 0;
 
-		currentState.UpdateState(this);
-	}
+        anim.SetFloat("hzInput", hzInput);
+        anim.SetFloat("vInput", vInput);
 
-	void FixedUpdate()
-	{
-		Move();
-		ApplyGravity();
-	}
+        currentState.UpdateState(this);
+    }
 
-	public void SwitchState(MovementBaseState state)
-	{
-		currentState = state;
-		currentState.EnterState(this);
-	}
+    void FixedUpdate() {
+        Move();
+    }
 
-	void Move()
-	{
-		Vector3 moveVelocity = dir.normalized * currentMoveSpeed;
-		rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-	}
+    #endregion
 
-	bool IsGrounded()
-	{
-		spherePos = transform.position + Vector3.down * groundYOffset;
-		return Physics.CheckSphere(spherePos, capsuleCollider.radius, groundMask, QueryTriggerInteraction.Ignore);
-	}
+    #region Other_Functions
 
-	void ApplyGravity()
-	{
-		if (IsGrounded() && rb.velocity.y < 0)
-		{
-			rb.velocity = new Vector3(rb.velocity.x, -2f, rb.velocity.z);
-		}
-		else
-		{
-			rb.AddForce(new Vector3(0, gravity, 0), ForceMode.Acceleration);
-		}
-	}
+    public void SwitchState(MovementBaseState state) {
+        currentState = state;
+        currentState.EnterState(this);
+    }
 
-	public void Jump()
-	{
-		if (IsGrounded())
-		{
-			rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2 * gravity), ForceMode.Impulse);
-		}
-	}
+    void Move() {
+        Vector3 moveVelocity = dir.normalized * currentMoveSpeed;
+        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+    }
+
+    bool IsGrounded() {
+        spherePos = transform.position + Vector3.down * groundYOffset;
+        return Physics.CheckSphere(spherePos, capsuleCollider.radius, groundMask, QueryTriggerInteraction.Ignore);
+    }
+
+
+
+    #endregion
 }

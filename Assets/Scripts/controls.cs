@@ -9,16 +9,16 @@ public class controls : MonoBehaviour
 	[SerializeField]
 	private Camera cam;
 	[SerializeField]
-	private float moveSpeed = 5f; // ÀÌµ¿ ¼Óµµ
+	private float moveSpeed = 5f; // ì´ë™ ì†ë„
 	[SerializeField]
 	private GameObject gun;
 	[SerializeField]
-	private float rotationSpeed = 5f; // È¸Àü ¼Óµµ¸¦ Á¶ÀıÇÏ±â À§ÇÑ º¯¼ö Ãß°¡
+	private float rotationSpeed = 5f; // íšŒì „ ì†ë„ë¥¼ ì¡°ì ˆí•˜ê¸° ìœ„í•œ ë³€ìˆ˜ ì¶”ê°€
 
 	private Rigidbody rb;
 	private CapsuleCollider capsuleCollider;
 	private Vector2 moveInput;
-
+	
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -33,10 +33,10 @@ public class controls : MonoBehaviour
 	private void Move()
 	{
 		Vector3 moveDirection = cam.transform.right * moveInput.x + cam.transform.forward * moveInput.y;
-		moveDirection.y = 0; // yÃà ¹æÇâ Á¦°Å
+		moveDirection.y = 0; // yì¶• ë°©í–¥ ì œê±°
 		Vector3 moveVelocity = moveDirection.normalized * moveSpeed;
 
-		// Rigidbody¸¦ »ç¿ëÇÑ ÀÌµ¿ Ã³¸®
+		// Rigidbodyë¥¼ ì‚¬ìš©í•œ ì´ë™ ì²˜ë¦¬
 		rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
 
 		if (moveDirection.sqrMagnitude > 0.1f)

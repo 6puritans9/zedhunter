@@ -9,7 +9,6 @@ public class DefaultState : ActionBaseState
 		actions.rHandAim.weight = 1;
 		actions.lHandIK.weight = 1;
 	}
-
 	
 
 	public override void UpdateState(ActionStateManager actions)

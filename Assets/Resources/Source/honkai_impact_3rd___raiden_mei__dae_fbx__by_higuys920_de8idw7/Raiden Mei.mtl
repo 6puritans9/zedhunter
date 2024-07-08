@@ -1,0 +1,123 @@
+# Blender MTL File: 'None'
+# Material Count: 11
+
+newmtl BodyArmor-Hand_A
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_BodyB_Color.png
+
+newmtl BodyArmor-Hand_B
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_BodyB_Color.png
+
+newmtl Body_A
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_BodyA_Color.png
+
+newmtl Body_B
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_BodyB_Color.png
+
+newmtl EyeShape
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_Face_Color.png
+
+newmtl Eyebrow
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_Face_Color.png
+
+newmtl Face1
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_Face_Color.png
+
+newmtl Hair1
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_Hair_Color.png
+
+newmtl Kanata
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_WeaponA.png
+
+newmtl Ring
+Ns 602.255641
+Ka 0.581402 0.581402 0.581402
+Kd 1.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_Ring.png
+
+newmtl Shell
+Ns 181.205606
+Ka 0.114896 0.114896 0.114896
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\Hi Guys 920\\Desktop\\_mmd_hi3_raiden_mei___herrscher_of_thunder_dl_by_kishidanatsumi_de04bo6\\ùïöVùÑÄÊ\\Avatar_Mei_C5_Texture_WeaponA.png
