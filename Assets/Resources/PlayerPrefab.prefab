@@ -645,6 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4256456666513094658}
   - component: {fileID: 1485789118339103608}
+  - component: {fileID: 919880973736064753}
   m_Layer: 7
   m_Name: Rig 1
   m_TagString: Untagged
@@ -683,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors:
   - m_Transform: {fileID: 0}
     m_Style:
@@ -749,6 +750,28 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!114 &919880973736064753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745908273270909414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1746068893058766480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,12 +1542,12 @@ GameObject:
   - component: {fileID: 8263821945247401467}
   - component: {fileID: 312523885108585572}
   - component: {fileID: 6260421965399165153}
+  - component: {fileID: 1674926951055670818}
   - component: {fileID: 665821376349874052}
   - component: {fileID: 4641686318339187057}
   - component: {fileID: 4715956553531810002}
   - component: {fileID: 702463513339430767}
   - component: {fileID: 6536418397756737144}
-  - component: {fileID: 1674926951055670818}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1719,6 +1742,27 @@ MonoBehaviour:
   maxComboDelay: 1
   swordRangeBox: {fileID: 2729967354372011403}
   playerSetipView: {fileID: 665821376349874052}
+--- !u!114 &1674926951055670818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166690808381232654}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e1f77b1e8714e64a1ba519eea3dcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 7761354061606159499, guid: 9de381b4d201a4d1db4ab9b79f95f094, type: 3}
+  wallPreviewPrefab: {fileID: 7761354061606159499, guid: 1b6143257b1664c36adf47b3249a56c8, type: 3}
+  buildableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  maxWalls: 3
 --- !u!114 &665821376349874052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,39 +1881,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d51657a33d78ab45ad2a840744d50a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimStateManager: {fileID: 312523885108585572}
   VirtualCamera: {fileID: 2879247204573747508}
   cinemachine3RdPersonAim: {fileID: 6024038987034868540}
+  aimStateManager: {fileID: 312523885108585572}
   movementStateManager: {fileID: 8263821945247401467}
   actionStateManager: {fileID: 6260421965399165153}
+  wallBuilder: {fileID: 1674926951055670818}
   weaponManager: {fileID: 5461669437690214941}
   weaponAmmo: {fileID: 4834064527596095888}
   weaponRecoil: {fileID: 8829407678799067102}
   weaponBloom: {fileID: 2047247374905221296}
   gun: {fileID: 1933249026035186335}
   TPWeaponHolder: {fileID: 6482668684000752546}
+  gunRig: {fileID: 1485789118339103608}
   anim: {fileID: 5880321304973833004}
---- !u!114 &1674926951055670818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3166690808381232654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e1f77b1e8714e64a1ba519eea3dcb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 7761354061606159499, guid: 9de381b4d201a4d1db4ab9b79f95f094, type: 3}
-  wallPreviewPrefab: {fileID: 7761354061606159499, guid: 1b6143257b1664c36adf47b3249a56c8, type: 3}
-  buildableLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  maxWalls: 3
 --- !u!1 &3296297320964258434
 GameObject:
   m_ObjectHideFlags: 0

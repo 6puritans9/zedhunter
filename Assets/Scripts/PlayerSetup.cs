@@ -8,12 +8,14 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerSetup : MonoBehaviour
 {
-	public AimStateManager aimStateManager;
+	
 	public Cinemachine.CinemachineVirtualCamera VirtualCamera;
 	public Cinemachine3rdPersonAim cinemachine3RdPersonAim;
 
+	public AimStateManager aimStateManager;
 	public MovementStateManager movementStateManager;
 	public ActionStateManager actionStateManager;
+	public WallBuilder wallBuilder;
 
 	public WeaponManager weaponManager;
 	public WeaponAmmo weaponAmmo;
@@ -22,6 +24,8 @@ public class PlayerSetup : MonoBehaviour
 	public GameObject gun;
 
 	public Transform TPWeaponHolder;
+
+	public Rig gunRig;
 
 	public Animator anim;
 
@@ -32,19 +36,21 @@ public class PlayerSetup : MonoBehaviour
 		gun.SetActive(true);
 
 		movementStateManager.enabled = true;
-		
 		aimStateManager.enabled = true;
+		actionStateManager.enabled = true;
+		wallBuilder.enabled = true;
+		
 		VirtualCamera.enabled = true;
 		cinemachine3RdPersonAim.enabled = true;
 
-		actionStateManager.enabled = true;
+
+		gunRig.weight = 0;
+
 		weaponManager.enabled = true;
 		weaponAmmo.enabled = true;
 		weaponRecoil.enabled = true;
 		weaponBloom.enabled = true;
 
-		/*anim.enabled = true;
-		anim = GetComponent<Animator>();*/
 	}
 
 	[PunRPC]
@@ -54,16 +60,13 @@ public class PlayerSetup : MonoBehaviour
 		{
 			TPWeaponHolder.GetChild(0).gameObject.SetActive(false);
 			TPWeaponHolder.GetChild(1).gameObject.SetActive(false);
+			gunRig.weight = 0;
 		}
 		else if (_weaponIndex == 2)
 		{
 			TPWeaponHolder.GetChild(0).gameObject.SetActive(true);
 			TPWeaponHolder.GetChild(1).gameObject.SetActive(false);
-		}/*
-		else if (_weaponIndex == 3)
-		{
-			TPWeaponHolder.GetChild(0).gameObject.SetActive(false);
-			TPWeaponHolder.GetChild(1).gameObject.SetActive(true);
-		}*/
+			gunRig.weight = 1;
+		}
 	}
 }

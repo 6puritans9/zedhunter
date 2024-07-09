@@ -59,14 +59,14 @@ public class ActionStateManager : MonoBehaviourPun
 		{
 			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
 			gun.SetActive(false);
-			gunRig.weight = 0;
+			//gunRig.weight = 0;
 			SetLayerWeight(0, 1);  // ¹«±â ¾øÀ½
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 2);
 			gun.SetActive(true);
-			gunRig.weight = 1;
+			//gunRig.weight = 1;
 			SetLayerWeight(1, 1);  // ÃÑ
 		}
 

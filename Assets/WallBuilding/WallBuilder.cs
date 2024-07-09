@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Photon.Pun;
 
-public class WallBuilder : MonoBehaviour
+public class WallBuilder : MonoBehaviourPun
 {
+    PhotonView photonView;
+
     public GameObject wallPrefab;
     public GameObject wallPreviewPrefab;
     public LayerMask buildableLayer;
@@ -16,8 +19,9 @@ public class WallBuilder : MonoBehaviour
 
     void Start()
     {
-        // 여기서 레이어를 확인하고 설정합니다.
-        if (LayerMask.NameToLayer("Wall") == -1)
+		photonView = GetComponent<PhotonView>();
+		// 여기서 레이어를 확인하고 설정합니다.
+		if (LayerMask.NameToLayer("Wall") == -1)
         {
             Debug.LogError("Wall layer does not exist. Please create it in Unity's Layer settings.");
         }
@@ -25,25 +29,28 @@ public class WallBuilder : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (photonView.IsMine)
         {
-            ToggleBuildMode();
-        }
+			if (Input.GetKeyDown(KeyCode.B))
+			{
+				ToggleBuildMode();
+			}
 
-        if (isBuildingEnabled)
-        {
-            UpdatePreview();
+			if (isBuildingEnabled)
+			{
+				UpdatePreview();
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                BuildWall();
-            }
-        }
-        else if (currentPreview != null)
-        {
-            Destroy(currentPreview);
-            currentPreview = null;
-        }
+				if (Input.GetMouseButtonDown(0))
+				{
+					BuildWall();
+				}
+			}
+			else if (currentPreview != null)
+			{
+				Destroy(currentPreview);
+				currentPreview = null;
+			}
+		}
     }
 
     void ToggleBuildMode()
@@ -70,7 +77,7 @@ public class WallBuilder : MonoBehaviour
             {
                 currentPreview = Instantiate(wallPreviewPrefab, buildPosition, Quaternion.identity);
                 // Preview의 레이어를 Default로 설정 (또는 다른 적절한 레이어)
-                currentPreview.layer = LayerMask.NameToLayer("Default");
+                currentPreview.layer = LayerMask.NameToLayer("PreviewWall");
             }
 
             bool canBuild = !IsOverlapping(buildPosition);
@@ -98,13 +105,13 @@ public class WallBuilder : MonoBehaviour
     {
         if (currentPreview != null && !IsOverlapping(currentPreview.transform.position))
         {
-            GameObject newWall = Instantiate(wallPrefab, currentPreview.transform.position, Quaternion.identity);
+            GameObject newWall = PhotonNetwork.Instantiate(wallPrefab.name, currentPreview.transform.position, Quaternion.identity);
             newWall.layer = LayerMask.NameToLayer("Wall");
 
             if (builtWalls.Count >= maxWalls)
             {
                 GameObject oldestWall = builtWalls.Dequeue();
-                Destroy(oldestWall);
+                PhotonNetwork.Destroy(oldestWall);
             }
 
             builtWalls.Enqueue(newWall);
