@@ -8,7 +8,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	public GameObject player;
 	public GameObject zombie;
 	[Space]
-	public Transform spawnPoint;
+	public Transform playerSpawnPoint;
+	public Transform[] enemySpanwPoint;
 
 
     // Start is called before the first frame update
@@ -18,7 +19,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
 
 		PhotonNetwork.ConnectUsingSettings();
-    }
+	}
 
 	public override void OnConnectedToMaster()
 	{
@@ -44,11 +45,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 		Debug.Log("We're connected and in a room!!!");
 
-		GameObject _player = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
+		GameObject _player = PhotonNetwork.Instantiate(player.name, playerSpawnPoint.position, Quaternion.identity);
 		_player.GetComponentInChildren<PlayerSetup>().IsLocalPlayer();
 
-		/*GameObject _zombie = PhotonNetwork.Instantiate(zombie.name, spawnPoint.position + new Vector3(10, 0, 10), Quaternion.identity);
-		_zombie.GetComponent<EnemyHealth>().Target = _player.transform;*/
+
+		for (int i = 0; i < 5; i++)
+		{
+			PhotonNetwork.Instantiate(zombie.name, transform.position, Quaternion.identity);
+		}
 	}
 
 	

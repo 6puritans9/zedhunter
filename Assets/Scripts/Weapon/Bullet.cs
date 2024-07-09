@@ -23,12 +23,11 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponentInParent<EnemyHealth>())
         {
             EnemyHealth enemyHealth = collision.gameObject.GetComponentInParent<EnemyHealth>();
-            enemyHealth.TakeDamage(weapon.damage);
+            PhotonView enemyPhotonView = enemyHealth.gameObject.GetComponent<PhotonView>();
+            enemyPhotonView.RPC("TakeDamage", RpcTarget.All, weapon.damage);
 
             if(enemyHealth.health <= 0 && !enemyHealth.isDead)
             {
-                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-                rb.AddForce(dir * weapon.enemyKickbackForce, ForceMode.Impulse);
                 enemyHealth.isDead = true;
             }
         }
