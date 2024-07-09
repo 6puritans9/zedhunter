@@ -12,11 +12,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	public Transform[] enemySpanwPoint;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Connecting...");
-        PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
+	// Start is called before the first frame update
+	void Start()
+	{
+		Debug.Log("Connecting...");
+		PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
 
 		PhotonNetwork.ConnectUsingSettings();
 	}
@@ -25,9 +25,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	{
 		base.OnConnectedToMaster();
 
-        Debug.Log("Connected to Server");
+		Debug.Log("Connected to Server");
 
-        PhotonNetwork.JoinLobby();
+		PhotonNetwork.JoinLobby();
 	}
 
 	public override void OnJoinedLobby()
@@ -47,13 +47,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 		GameObject _player = PhotonNetwork.Instantiate(player.name, playerSpawnPoint.position, Quaternion.identity);
 		_player.GetComponentInChildren<PlayerSetup>().IsLocalPlayer();
-
-
-		for (int i = 0; i < 5; i++)
-		{
-			PhotonNetwork.Instantiate(zombie.name, transform.position, Quaternion.identity);
-		}
 	}
 
-	
+	private void Update()
+	{
+		if(PhotonNetwork.IsMasterClient)
+			enemySpanwPoint[0].GetComponent<EnemySpawnTemp>().SyncStateWithNewPlayer();
+	}
+
 }

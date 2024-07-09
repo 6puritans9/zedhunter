@@ -6,20 +6,28 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviourPun
 {
+	public delegate void EnemyKilledHandler(EnemyHealth enemy);
+	public event EnemyKilledHandler OnEnemyKilled;
+
 	public LayerMask whatIsTarget; // 공격 대상 레이어
 
 	public float health = 100;
 	[HideInInspector] public bool isDead;
+	public float attackDistance = 3.3f;  // 공격 거리 설정
+	private bool isAttacking = false;
+	private bool canAttack = true;
 
 	private Transform Target;
 	public bool isChase;
-
 	NavMeshAgent nav;
+
+	Animator anim;
 
 	private void Awake()
 	{
 		isDead = false;
 		nav = GetComponent<NavMeshAgent>();
+		anim = GetComponent<Animator>();
 	}
 
 	private void Start()
@@ -36,6 +44,19 @@ public class EnemyHealth : MonoBehaviourPun
 			{
 				// 추적 대상 존재 : 경로를 갱신하고 AI 이동을 계속 진행
 				nav.isStopped = false;
+				float speed = nav.velocity.magnitude;
+
+				if (speed > 0.1f)
+				{
+					anim.SetBool("isWalking", true);
+					anim.SetFloat("speed", speed);
+				}
+				else
+				{
+					anim.SetBool("isWalking", false);
+					anim.SetFloat("speed", 0f);
+				}
+
 				nav.SetDestination(Target.transform.position);
 			}
 			else
@@ -55,14 +76,19 @@ public class EnemyHealth : MonoBehaviourPun
 					// 콜라이더로부터 LivingEntity 컴포넌트 가져오기
 					GameObject livingEntity = colliders[i].gameObject;
 
-					// LivingEntity 컴포넌트가 존재하며, 해당 LivingEntity가 살아있다면,
+					// LivingEntity 컴포넌트가 존재
 					if (livingEntity.layer == 7)
 					{
-						// 추적 대상을 해당 LivingEntity로 설정
-						Target = livingEntity.transform;
-
-						// for문 루프 즉시 정지
-						break;
+						/*
+                         * 플레이어를 타겟으로 설정
+                         * Photon의 RPC 호출을 통해 모든 클라이언트에서
+                         * SetTarget함수를 호출
+                         * ViewID로 타깃 동기화
+                         */
+						photonView.RPC(
+							"SetTarget",
+							RpcTarget.AllBuffered,
+							livingEntity.GetComponent<PhotonView>().ViewID);
 					}
 				}
 			}
@@ -96,15 +122,31 @@ public class EnemyHealth : MonoBehaviourPun
 	[PunRPC]
 	void EnemyDeath()
 	{
+		if (isDead) return;
+
+		isDead = true;
 		nav.isStopped = true;
 		isChase = false;
 		nav.enabled = false;
 
 		Debug.Log("Death");
 
+		// OnEnemyKilled 이벤트 호출
+		OnEnemyKilled?.Invoke(this);
+
 		if (photonView.IsMine)
 		{
 			PhotonNetwork.Destroy(gameObject);
+		}
+	}
+
+	[PunRPC]
+	void SetTarget(int targetViewID)
+	{
+		PhotonView targetPhotonView = PhotonView.Find(targetViewID);
+		if (targetPhotonView != null)
+		{
+			Target = targetPhotonView.transform;
 		}
 	}
 }
