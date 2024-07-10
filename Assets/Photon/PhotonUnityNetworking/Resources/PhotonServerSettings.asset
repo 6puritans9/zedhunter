@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: ea50e698-2782-48ab-8992-84159980bf99
+    AppIdRealtime: b4bd854e-633a-4350-b286-465561a05d3c
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -49,6 +49,11 @@ MonoBehaviour:
   - ChangeScene
   - RemovePlayer
   - ReplaceComputerWithCylinder
+  - Jump
+  - OnAttackAnimationComplete
+  - StartAttack
+  - StopAttack
+  - UpdateAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
