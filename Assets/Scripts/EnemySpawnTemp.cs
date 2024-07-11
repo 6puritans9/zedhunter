@@ -11,7 +11,7 @@ public class EnemySpawnTemp : MonoBehaviourPun
 	public GameObject enemyPrefab;
 	public List<EnemyHealth> enemyList = new List<EnemyHealth>();
 	private const string EnemyCountKey = "EnemyCount";
-	private int wave = 1; // 현재 웨이브
+	private int wave = 0; // 현재 웨이브
 
 	private void Awake()
 	{

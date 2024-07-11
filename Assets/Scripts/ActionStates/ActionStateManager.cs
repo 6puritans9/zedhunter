@@ -36,6 +36,9 @@ public class ActionStateManager : MonoBehaviourPun
 
 	public PhotonView playerSetipView;
 
+	private float aimOffsetY = 0f; // 현재 y축 offset 값
+	private float aimSpeed = 35f;  // 움직임 속도
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -69,6 +72,27 @@ public class ActionStateManager : MonoBehaviourPun
 			//gunRig.weight = 1;
 			SetLayerWeight(1, 1);  // 총
 		}
+
+		// A 키를 눌렀을 때 offset의 y축 값을 감소
+		if (Input.GetKey(KeyCode.A))
+		{
+			aimOffsetY = Mathf.Clamp(aimOffsetY - aimSpeed, -35f, 35f);
+		}
+		// D 키를 눌렀을 때 offset의 y축 값을 증가
+		else if (Input.GetKey(KeyCode.D))
+		{
+			aimOffsetY = Mathf.Clamp(aimOffsetY + aimSpeed, -35f, 35f);
+		}
+		// 아무것도 안 눌렀을 때 y축 값을 0으로 되돌리기
+		else
+		{
+			aimOffsetY = Mathf.Lerp(aimOffsetY, 0f, aimSpeed);
+		}
+
+		// MultiAimConstraint의 offset 적용
+		var data = rHandAim.data;
+		data.offset = new Vector3(data.offset.x, aimOffsetY, data.offset.z);
+		rHandAim.data = data;
 
 		currentState.UpdateState(this);
     }
