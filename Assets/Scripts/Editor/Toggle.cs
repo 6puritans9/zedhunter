@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class PlayModeToggle
+public class Toggle
 {
     [MenuItem("Tools/Toggle Play Mode _%t")] // Ctrl + T or Cmd + T
     // MenuItem을 통해 에디터 내 Tools 메뉴에 하위 항목 생성
