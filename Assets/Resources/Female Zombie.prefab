@@ -2414,8 +2414,9 @@ GameObject:
   - component: {fileID: 5977482834180478682}
   - component: {fileID: 502397138749100126}
   - component: {fileID: 6886943584081543133}
-  - component: {fileID: 4400407615996974709}
   - component: {fileID: 1409676124763761218}
+  - component: {fileID: 3906087811635310338}
+  - component: {fileID: 4400407615996974709}
   m_Layer: 8
   m_Name: Female Zombie
   m_TagString: Untagged
@@ -2530,6 +2531,32 @@ MonoBehaviour:
   isDead: 0
   attackDistance: 3.3
   isChase: 0
+  colliders: []
+--- !u!114 &1409676124763761218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072709498404082053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6666cbfc1b9dcec4d8dde14df8e4f35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: {fileID: 6886943584081543133}
+--- !u!114 &3906087811635310338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072709498404082053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4d6eab0a362f1408ca27a2c834cc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4400407615996974709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,23 +2575,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3906087811635310338}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1409676124763761218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7072709498404082053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6666cbfc1b9dcec4d8dde14df8e4f35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 6886943584081543133}
 --- !u!1 &7074213865592481280
 GameObject:
   m_ObjectHideFlags: 0

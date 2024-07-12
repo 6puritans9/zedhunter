@@ -47,12 +47,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 		GameObject _player = PhotonNetwork.Instantiate(player.name, playerSpawnPoint.position, Quaternion.identity);
 		_player.GetComponentInChildren<PlayerSetup>().IsLocalPlayer();
+		if (PhotonNetwork.IsMasterClient)
+			enemySpanwPoint[0].GetComponent<EnemySpawnTemp>().SyncStateWithNewPlayer();
 	}
 
 	private void Update()
 	{
-		if(PhotonNetwork.IsMasterClient)
-			enemySpanwPoint[0].GetComponent<EnemySpawnTemp>().SyncStateWithNewPlayer();
+		
 	}
 
 }

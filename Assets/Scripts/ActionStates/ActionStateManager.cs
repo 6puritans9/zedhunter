@@ -74,12 +74,14 @@ public class ActionStateManager : MonoBehaviourPun
 		}
 
 		// A 키를 눌렀을 때 offset의 y축 값을 감소
-		if (Input.GetKey(KeyCode.A))
+		if (Input.GetKey(KeyCode.A)
+			|| Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
 		{
 			aimOffsetY = Mathf.Clamp(aimOffsetY - aimSpeed, -35f, 35f);
 		}
 		// D 키를 눌렀을 때 offset의 y축 값을 증가
-		else if (Input.GetKey(KeyCode.D))
+		else if (Input.GetKey(KeyCode.D)
+				|| Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
 		{
 			aimOffsetY = Mathf.Clamp(aimOffsetY + aimSpeed, -35f, 35f);
 		}
@@ -88,6 +90,11 @@ public class ActionStateManager : MonoBehaviourPun
 		{
 			aimOffsetY = Mathf.Lerp(aimOffsetY, 0f, aimSpeed);
 		}
+
+		/*if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+			aimOffsetY = 60;
+		}*/
 
 		// MultiAimConstraint의 offset 적용
 		var data = rHandAim.data;
