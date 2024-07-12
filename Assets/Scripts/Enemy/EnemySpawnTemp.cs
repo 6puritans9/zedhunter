@@ -9,9 +9,9 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
     public GameObject enemyPrefab;
     public List<EnemyHealth> enemyPool = new List<EnemyHealth>();
     private const string EnemyCountKey = "EnemyCount";
-    private int wave = 200; // 현재 웨이브
+    private int wave = 3; // 현재 웨이브
 
-    public int poolSize = 200;
+    public int poolSize = 3;
 
     private void Start()
     {
@@ -21,7 +21,8 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // 클라이언트가 방에 들어갔을 때 호출됩니다.
-        InitializeEnemyPool();
+        if (PhotonNetwork.IsMasterClient)
+            InitializeEnemyPool();
     }
 
     private void Update()
@@ -47,7 +48,7 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
             GameObject enemy = PhotonNetwork.Instantiate(enemyPrefab.name, transform.position, Quaternion.identity);
             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
             enemyPool.Add(enemyHealth);
-            enemy.SetActive(false);
+            enemy.SetActive(true);
         }
     }
 
@@ -83,7 +84,7 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
 
     private void UpdateRoomProperties()
     {
-        Hashtable properties = new Hashtable();
+        /*Hashtable properties = new Hashtable();
         for (int i = enemyPool.Count - 1; i >= 0; i--)
         {
             if (enemyPool[i] == null || !enemyPool[i].gameObject.activeInHierarchy)
@@ -95,7 +96,7 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
             properties[$"enemyRotation_{i}"] = enemyPool[i].transform.rotation;
         }
         properties[EnemyCountKey] = enemyPool.Count; // 생성된 enemy 수를 방 속성에 저장
-        PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(properties);*/
     }
 
     public void SyncStateWithNewPlayer()

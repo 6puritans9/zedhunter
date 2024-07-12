@@ -73,40 +73,9 @@ public class ActionStateManager : MonoBehaviourPun
 			SetLayerWeight(1, 1);  // 총
 		}
 
-		// A 키를 눌렀을 때 offset의 y축 값을 감소
-		if (Input.GetKey(KeyCode.A)
-			|| Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
-		{
-			aimOffsetY = Mathf.Clamp(aimOffsetY - aimSpeed, -35f, 35f);
-		}
-		// D 키를 눌렀을 때 offset의 y축 값을 증가
-		else if (Input.GetKey(KeyCode.D)
-				|| Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
-		{
-			aimOffsetY = Mathf.Clamp(aimOffsetY + aimSpeed, -35f, 35f);
-		}
-		// 아무것도 안 눌렀을 때 y축 값을 0으로 되돌리기
-		else
-		{
-			aimOffsetY = Mathf.Lerp(aimOffsetY, 0f, aimSpeed);
-		}
-
-		/*if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-			aimOffsetY = 60;
-		}*/
-
-		// MultiAimConstraint의 offset 적용
-		var data = rHandAim.data;
-		data.offset = new Vector3(data.offset.x, aimOffsetY, data.offset.z);
-		rHandAim.data = data;
 
 		currentState.UpdateState(this);
     }
-
-	private void FixedUpdate()
-	{
-	}
 
 	public void OnClick()
 	{
@@ -164,8 +133,8 @@ public class ActionStateManager : MonoBehaviourPun
 
     public void Magout()
     {
-        audioSource.PlayOneShot(ammo.magOutSound);
-    }
+		audioSource.PlayOneShot(ammo.magOutSound);
+	}
 
     public void MagIn()
     {
@@ -174,6 +143,6 @@ public class ActionStateManager : MonoBehaviourPun
 
     public void ReleaseSlide()
     {
-        audioSource.PlayOneShot(ammo.releaseSlideSound);
-    }
+		audioSource.PlayOneShot(ammo.releaseSlideSound);
+	}
 }

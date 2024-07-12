@@ -11,12 +11,15 @@ public class WeaponManager : MonoBehaviour
     float fireRateTimer;
 
     [Header("Bullet Properties")]
-    [SerializeField] GameObject bullet;
+    //[SerializeField] GameObject bullet;
+    [SerializeField] GameObject hitParticle;
     [SerializeField] Transform barrelPos;
     [SerializeField] float bulletVelocity;
     [SerializeField] int bulletPerShot;
     public float damage = 20;
     AimStateManager aim;
+
+    private int layerMask;
 
     [SerializeField] AudioClip gunShot;
     AudioSource audioSource;
@@ -35,6 +38,8 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //7번(Player)레이어 제외 
+        layerMask = ~((1 << 7) | (1 << 11));
         recoil = GetComponent<WeaponRecoil>();
 		audioSource = GetComponent<AudioSource>();
 		aim = GetComponentInParent<AimStateManager>();  
@@ -80,15 +85,29 @@ public class WeaponManager : MonoBehaviour
         ammo.currentAmmo--;
         for(int i = 0; i < bulletPerShot; i++)
         {
-            GameObject currentBullet = Instantiate(bullet, barrelPos.position, barrelPos.rotation);
-            
-            Bullet bulletScript = currentBullet.GetComponent<Bullet>();
-            bulletScript.weapon = this;
+            ShootRay();
+        }
+    }
 
-            bulletScript.dir = barrelPos.transform.forward;
+    void ShootRay()
+    {
+        Ray ray = new Ray(barrelPos.position, barrelPos.forward);
+        RaycastHit hit;
 
-			Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
-            rb.AddForce(barrelPos.forward * bulletVelocity, ForceMode.Impulse);
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            //맞은 지점 파티클 생성
+            GameObject hitEffect = PhotonNetwork.Instantiate(hitParticle.name, hit.point, Quaternion.LookRotation(hit.normal));
+            //PhotonNetwork.Destroy(hitEffect);
+
+            if(hit.collider.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                PhotonView enemyPhotonView = enemyHealth.GetComponent<PhotonView>();
+                enemyPhotonView.RPC("TakeDamage", RpcTarget.All, damage);
+
+                if(enemyHealth.health <= 0 && !enemyHealth.isDead)
+                    enemyHealth.isDead = true;
+            }
         }
     }
 

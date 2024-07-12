@@ -16,8 +16,8 @@ TagManager:
   - Enemy
   - Wall
   - PreviewWall
-  - Bullet
-  - 
+  - AttackBox
+  - Gun
   - 
   - 
   - 

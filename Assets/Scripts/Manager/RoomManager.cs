@@ -50,10 +50,4 @@ public class RoomManager : MonoBehaviourPunCallbacks
 		if (PhotonNetwork.IsMasterClient)
 			enemySpanwPoint[0].GetComponent<EnemySpawnTemp>().SyncStateWithNewPlayer();
 	}
-
-	private void Update()
-	{
-		
-	}
-
 }

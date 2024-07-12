@@ -6,28 +6,28 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviourPun
 {
-    public delegate void EnemyKilledHandler(EnemyHealth enemy);
-    public event EnemyKilledHandler OnEnemyKilled;
-
     public LayerMask whatIsTarget; // 공격 대상 레이어
 
-    public float health = 20;
-    [HideInInspector] public bool isDead;
-    public float attackDistance = 3.3f;  // 공격 거리 설정
-    private bool isAttacking = false;
-    private bool canAttack = true;
+    Animator anim;
 
     private Transform Target;
     public bool isChase;
     NavMeshAgent nav;
 
-    Animator anim;
-
     public Collider[] colliders;
+    float closestDistance = Mathf.Infinity;
+
+
+    public delegate void EnemyKilledHandler(EnemyHealth enemy);
+    public event EnemyKilledHandler OnEnemyKilled;
+
+    public BoxCollider attackRange;
+
+    public float health = 20;
+    [HideInInspector] public bool isDead;
 
     private void Awake()
     {
-        isDead = false;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
@@ -35,6 +35,7 @@ public class EnemyHealth : MonoBehaviourPun
     private void Start()
     {
         isChase = true;
+        isDead = false;
         StartCoroutine(UpdateTarget());
     }
 
@@ -44,7 +45,41 @@ public class EnemyHealth : MonoBehaviourPun
         {
             // 20 유닛의 반지름을 가진 가상의 구를 그렸을때, 구와 겹치는 모든 콜라이더를 가져옴
             // 단, targetLayers에 해당하는 레이어를 가진 콜라이더만 가져오도록 필터링
-            colliders = Physics.OverlapSphere(transform.position, 5, whatIsTarget);
+            colliders = Physics.OverlapSphere(transform.position, 20, whatIsTarget);
+            GameObject closestTarget = null;
+
+            // 모든 콜라이더들을 순회하면서, 살아있는 플레이어를 찾기
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                // 콜라이더로부터 LivingEntity 컴포넌트 가져오기
+                GameObject livingEntity = colliders[i].gameObject;
+
+                // LivingEntity 컴포넌트가 존재
+                if (livingEntity.layer == 7)
+                {
+                    float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
+                    if (distanceToTarget < closestDistance)
+                    {
+                        closestDistance = distanceToTarget;
+                        closestTarget = livingEntity;
+                    }
+
+                    /*
+                    * 플레이어를 타겟으로 설정
+                    * Photon의 RPC 호출을 통해 모든 클라이언트에서
+                    * SetTarget함수를 호출
+                    * ViewID로 타깃 동기화
+                    */
+                    if (closestTarget != null)
+                    {
+                        photonView.RPC(
+                            "SetTarget",
+                            RpcTarget.AllBuffered,
+                            closestTarget.GetComponent<PhotonView>().ViewID);
+                    }
+                }
+            }
+
             if (colliders.Length <= 0)
             {
                 isChase = false;
@@ -71,46 +106,7 @@ public class EnemyHealth : MonoBehaviourPun
                 nav.SetDestination(Target.transform.position);
             }
             else
-            {
-                Debug.Log("else로 왔어!");
-                // 추적 대상 없음 : AI 이동 중지
-                nav.isStopped = true;
-
-                GameObject closestTarget = null;
-                float closestDistance = Mathf.Infinity;
-
-
-                // 모든 콜라이더들을 순회하면서, 살아있는 플레이어를 찾기
-                for (int i = 0; i < colliders.Length; i++)
-                {
-                    // 콜라이더로부터 LivingEntity 컴포넌트 가져오기
-                    GameObject livingEntity = colliders[i].gameObject;
-
-                    // LivingEntity 컴포넌트가 존재
-                    if (livingEntity.layer == 7)
-                    {
-                        float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
-                        if (distanceToTarget < closestDistance)
-                        {
-                            closestDistance = distanceToTarget;
-                            closestTarget = livingEntity;
-                        }
-                    }
-                }
-                /*
-                 * 플레이어를 타겟으로 설정
-                 * Photon의 RPC 호출을 통해 모든 클라이언트에서
-                 * SetTarget함수를 호출
-                 * ViewID로 타깃 동기화
-                 */
-                if (closestTarget != null)
-                {
-                    photonView.RPC(
-                        "SetTarget",
-                        RpcTarget.AllBuffered,
-                        closestTarget.GetComponent<PhotonView>().ViewID);
-                }
-            }
+                nav.isStopped = true;// 추적 대상 없음 : AI 이동 중지
 
             // 0.25초 주기로 처리 반복
             yield return new WaitForSeconds(0.25f);
@@ -123,6 +119,16 @@ public class EnemyHealth : MonoBehaviourPun
         {
             nav.SetDestination(Target.position);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
     }
 
     [PunRPC]
