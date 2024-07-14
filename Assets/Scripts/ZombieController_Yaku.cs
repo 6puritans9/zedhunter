@@ -16,8 +16,8 @@ public class ZombieController_Yaku : MonoBehaviour
     private bool canAttack = true;
     private bool isJumping = false;
     private bool canJump = true;
-    public float jumpHeight = 4f;
-    public float jumpDistance = 4f;
+    public float jumpHeight = 3f;
+    public float jumpDistance = 2f;
 
     void Start()
     {
@@ -132,27 +132,80 @@ public class ZombieController_Yaku : MonoBehaviour
         StartCoroutine(PerformJump());
     }
 
+    // IEnumerator PerformJump()
+    // {
+    //     isJumping = true;
+    //     canJump = false;
+    //     navAgent.enabled = false;
+        
+    //     animator.SetTrigger("jump");
+    //     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+    //     yield return new WaitForSeconds(0.5f); // 점프 지속 시간
+
+    //     while (!IsGrounded())
+    //     {
+    //         yield return null;
+    //     }
+
+    //     navAgent.enabled = true;
+    //     isJumping = false;
+
+    //     yield return new WaitForSeconds(jumpCooldown);
+    //     canJump = true;
+    // }
+
     IEnumerator PerformJump()
     {
         isJumping = true;
         canJump = false;
         navAgent.enabled = false;
-        
-        animator.SetTrigger("jump");
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(0.5f); // 점프 지속 시간
+        animator.SetTrigger("prepareJump");
+
+        yield return new WaitForSeconds(0.2f);
+
+        animator.SetTrigger("jump");
+
+        // 실제 점프 동작은 애니메이션 이벤트에 의해 트리거됩니다.
+        // OnJumpAnimationStart 메서드가 애니메이션에 의해 호출될 것입니다.
 
         while (!IsGrounded())
         {
             yield return null;
         }
 
+        animator.SetTrigger("land");
+
         navAgent.enabled = true;
         isJumping = false;
 
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
+    }
+
+    IEnumerator PerformJumpMovement()
+    {
+        float jumpDuration = 0.5f;
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+        Vector3 jumpPeak = startPosition + transform.forward * (jumpDistance / 2) + Vector3.up * jumpHeight;
+        Vector3 endPosition = startPosition + transform.forward * jumpDistance;
+        
+        while (elapsedTime < jumpDuration)
+        {
+            float normalizedTime = elapsedTime / jumpDuration;
+            
+            // 포물선 움직임을 위한 2차 베지어 곡선
+            Vector3 m1 = Vector3.Lerp(startPosition, jumpPeak, normalizedTime);
+            Vector3 m2 = Vector3.Lerp(jumpPeak, endPosition, normalizedTime);
+            transform.position = Vector3.Lerp(m1, m2, normalizedTime);
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        transform.position = endPosition;
     }
 
     bool IsGrounded()
