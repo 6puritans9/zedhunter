@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.XR;
 
-public class MovementStateManager : MonoBehaviourPun {
+public class MovementStateManager : MonoBehaviourPun, IPunObservable {
     public float currentMoveSpeed;
     public float walkSpeed = 3, walkBackSpeed = 2;
     public float runSpeed = 7, runBackSpeed = 5;
@@ -32,6 +32,12 @@ public class MovementStateManager : MonoBehaviourPun {
 
     [HideInInspector] public Animator anim;
 
+    Vector3 targetPosition;
+    Quaternion targetRotation;
+
+    float moveSmoothTime = 0.1f;
+    float rotationSmoothTime = 0.1f;
+    float lastReceivedTime;
 
     #region Init_and_Update
 
@@ -44,23 +50,39 @@ public class MovementStateManager : MonoBehaviourPun {
         // Cursor settings
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PhotonNetwork.SerializationRate = 5; // 초당 패킷 전송 횟수 조정
+        PhotonNetwork.SendRate = 10;          // 초당 네트워크 업데이트 횟수 조정
+
+        targetPosition = transform.position;
+        targetRotation = transform.rotation;
     }
 
     void Update() {
-        hzInput = Input.GetAxis("Horizontal");
-        vInput = Input.GetAxis("Vertical");
+        if (photonView.IsMine)
+        {
+            hzInput = Input.GetAxis("Horizontal");
+            vInput = Input.GetAxis("Vertical");
 
-        dir = (transform.forward * vInput) + (transform.right * hzInput);
-        dir.y = 0;
+            dir = (transform.forward * vInput) + (transform.right * hzInput);
+            dir.y = 0;
 
-        anim.SetFloat("hzInput", hzInput);
-        anim.SetFloat("vInput", vInput);
+            anim.SetFloat("hzInput", hzInput);
+            anim.SetFloat("vInput", vInput);
 
-        currentState.UpdateState(this);
+            currentState.UpdateState(this);
+        }
+        else
+        {
+            float lerpFactor = (Time.time - lastReceivedTime) * PhotonNetwork.SerializationRate;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, lerpFactor);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lerpFactor);
+        }
     }
 
     void FixedUpdate() {
-        Move();
+        if(photonView.IsMine)
+            Move();
     }
 
     #endregion
@@ -77,10 +99,23 @@ public class MovementStateManager : MonoBehaviourPun {
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
 
-    bool IsGrounded() {
-        spherePos = transform.position + Vector3.down * groundYOffset;
-        return Physics.CheckSphere(spherePos, capsuleCollider.radius, groundMask, QueryTriggerInteraction.Ignore);
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            //현재 위치와 회전 전송
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            //위치와 회전 데이터를 수신하여 목표위치와 회전으로 설정
+            targetPosition = (Vector3)stream.ReceiveNext();
+            targetRotation = (Quaternion)stream.ReceiveNext();
+            lastReceivedTime = Time.time;
+        }
     }
+
 
 
 

@@ -167,21 +167,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102926515698171487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf0c57833ebfab34eb40273018401556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 5779119290696472647}
   fireRate: 0.12
   semiAuto: 0
-  bullet: {fileID: 2326689336570445375, guid: 7be2188f41ff7d047a1a72c64a2c8c2e, type: 3}
+  hitParticle: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af,
+    type: 3}
   barrelPos: {fileID: 5162585066618421704}
-  bulletVelocity: 500
+  bulletVelocity: 0
   bulletPerShot: 1
   damage: 20
   gunShot: {fileID: 8300000, guid: d1d08ebfa4c9c85428efb3dfbb5887c5, type: 3}
   lightReturnSpeed: 20
   enemyKickbackForce: 100
+  iniialParticlePoolSize: 10
 --- !u!114 &3777226479938405376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +192,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102926515698171487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b92d6f8a86bb0645b2aef4139ca3e29, type: 3}
   m_Name: 
@@ -207,7 +210,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102926515698171487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3832b015458edc48b770696bf9bbec5, type: 3}
   m_Name: 
@@ -223,7 +226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102926515698171487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b01a349c7e99924db862ac5a85abdbf, type: 3}
   m_Name: 
@@ -2871,6 +2874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98f59bffc79ea845afac36d8eed61ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
+  playerHealth: 500
   currentWeapon: {fileID: 102926515698171487}
   ammo: {fileID: 0}
   anim: {fileID: 0}
@@ -2882,7 +2887,6 @@ MonoBehaviour:
   nextFireTime: 0
   lastClickedTime: 0
   maxComboDelay: 1
-  swordRangeBox: {fileID: 1483743839530849552}
   playerSetipView: {fileID: 3258976892097752592}
 --- !u!114 &8995276241006279050
 MonoBehaviour:
@@ -2926,6 +2930,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 1434270006213678360}
   - {fileID: 2420008733966145614}
   - {fileID: 5877787245656161687}
   - {fileID: 2880074762113699685}
@@ -5060,6 +5065,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MuzzleFlashParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476708005871032941, guid: 48ac0063338b13d4da7f82596417378d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
