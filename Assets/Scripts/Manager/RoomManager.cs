@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -11,6 +12,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	public Transform playerSpawnPoint;
 	public Transform[] enemySpanwPoint;
 
+
+	[SerializeField] public List<Player> players = new List<Player>();
+	[SerializeField] public Dictionary<Player, GameObject> playerGameObjects = new Dictionary<Player, GameObject>();
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,7 +51,34 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 		GameObject _player = PhotonNetwork.Instantiate(player.name, playerSpawnPoint.position, Quaternion.identity);
 		_player.GetComponentInChildren<PlayerSetup>().IsLocalPlayer();
-		if (PhotonNetwork.IsMasterClient)
-			enemySpanwPoint[0].GetComponent<EnemySpawnTemp>().SyncStateWithNewPlayer();
+
+		players.Clear();
+		playerGameObjects.Clear();
+
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+			players.Add(p);
+
+			GameObject playerObject = GetPlayerGameObject(p);
+			if(playerGameObjects != null)
+            {
+				playerGameObjects.Add(p, playerObject);
+            }
+        }
+		
+		/*if (PhotonNetwork.IsMasterClient)
+			enemySpanwPoint[0].GetComponent<EnemySpawnPool>().SyncStateWithNewPlayer();*/
 	}
+
+    private GameObject GetPlayerGameObject(Player player)
+    {
+        foreach (var go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+			PhotonView photonView = go.GetComponent<PhotonView>();
+
+			if (photonView != null && photonView.Owner == player)
+				return go;
+        }
+		return null;
+    }
 }

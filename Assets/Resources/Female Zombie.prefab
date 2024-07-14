@@ -1606,7 +1606,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1624,6 +1624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baed81957606a8444b6471b222db92f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAD: 10
+  canAttack: 0
 --- !u!1 &5303808165141027727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,7 +2500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7072709498404082053}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.92784935, z: -0, w: 0.37295544}
+  m_LocalRotation: {x: 0, y: -0.92784923, z: 0, w: 0.37295547}
   m_LocalPosition: {x: -3.455214, y: 0.00000011920929, z: 2.9092927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2578,7 +2580,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &6886943584081543133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,7 +2596,10 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 0}
+  Target: {fileID: 0}
   isChase: 0
+  nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 3929473598535820894}
   health: 25
@@ -2646,7 +2651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6666cbfc1b9dcec4d8dde14df8e4f35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 6886943584081543133}
 --- !u!1 &7074213865592481280
 GameObject:
   m_ObjectHideFlags: 0

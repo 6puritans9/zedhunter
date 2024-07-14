@@ -4,17 +4,27 @@ using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine;
 
-public class EnemySpawnTemp : MonoBehaviourPunCallbacks
+public class EnemySpawnPool : MonoBehaviourPunCallbacks
 {
+    public static EnemySpawnPool Instance;
     public GameObject enemyPrefab;
-    public List<EnemyHealth> enemyPool = new List<EnemyHealth>();
-    private const string EnemyCountKey = "EnemyCount";
+    public Queue<EnemyHealth> enemyPool = new Queue<EnemyHealth>();
+    private EnemyHealth enemyHealth;
     private int wave = 3; // 현재 웨이브
 
-    public int poolSize = 3;
+    public int poolSize;
 
+    PhotonView photonView;
+
+    private void Awake()
+    {
+        Instance = this;
+        photonView = GetComponent<PhotonView>();
+        enemyHealth = GetComponent<EnemyHealth>();
+    }
     private void Start()
     {
+        
         // 클라이언트가 방에 들어가면 InitializeEnemyPool이 호출될 것입니다.
     }
 
@@ -22,7 +32,9 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
     {
         // 클라이언트가 방에 들어갔을 때 호출됩니다.
         if (PhotonNetwork.IsMasterClient)
+        {
             InitializeEnemyPool();
+        }
     }
 
     private void Update()
@@ -32,9 +44,10 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             // 적을 모두 물리친 경우 다음 스폰 실행
-            if (enemyPool.Count <= 0)
+            if (enemyPool.Count <= poolSize)
             {
                 SpawnWave();
+                //photonView.RPC("SpawnWave", RpcTarget.All);
             }
             UpdateRoomProperties();
         }
@@ -47,30 +60,32 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
         {
             GameObject enemy = PhotonNetwork.Instantiate(enemyPrefab.name, transform.position, Quaternion.identity);
             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-            enemyPool.Add(enemyHealth);
-            enemy.SetActive(true);
+            enemyPool.Enqueue(enemyHealth);
+            EnemyHealth.Instance.OnEnemyKilled += OnEnemyKilled;
+            enemy.SetActive(false);
         }
     }
 
+
+    [PunRPC]
     // 현재 웨이브에 맞춰 적을 생성
     private void SpawnWave()
     {
-        /*// 웨이브 1 증가
-        wave++;
 
-        // 현재 웨이브 * 1.5에 반올림 한 개수 만큼 적을 활성화
-        int spawnCount = Mathf.RoundToInt(wave * 1.5f);*/
-
-        for (int i = 0; i < poolSize; i++)
+        int enemiesToSpawn = poolSize;
+        while (enemiesToSpawn > 0 && enemyPool.Count > 0)
         {
-            foreach (var enemy in enemyPool)
+            EnemyHealth enemy = enemyPool.Dequeue();
+            if (!enemy.gameObject.activeInHierarchy)
             {
-                if (!enemy.gameObject.activeInHierarchy)
-                {
-                    enemy.transform.position = transform.position;
-                    enemy.gameObject.SetActive(true);
-                    break;
-                }
+                enemy.transform.position = transform.position;
+                enemy.gameObject.SetActive(true);
+                enemiesToSpawn--;
+            }
+            else
+            {
+                // 다시 큐에 넣어 비활성화된 적을 찾을 때까지 반복
+                enemyPool.Enqueue(enemy);
             }
         }
     }
@@ -78,6 +93,7 @@ public class EnemySpawnTemp : MonoBehaviourPunCallbacks
     // 적 객체가 파괴되었을 때 호출될 메서드
     private void OnEnemyKilled(EnemyHealth enemy)
     {
+        //Debug.Log("나 호출됐어!");
         enemy.gameObject.SetActive(false);
         UpdateRoomProperties();
     }

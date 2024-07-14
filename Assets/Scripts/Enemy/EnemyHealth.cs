@@ -6,13 +6,17 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviourPun
 {
+    public static EnemyHealth Instance;
+
     public LayerMask whatIsTarget; // 공격 대상 레이어
 
-    Animator anim;
+    public Coroutine UpdateTargetCorutine;
 
-    private Transform Target;
+    public Animator anim;
+
+    [HideInInspector]public Transform Target;
     public bool isChase;
-    NavMeshAgent nav;
+    [HideInInspector]public NavMeshAgent nav;
 
     public Collider[] colliders;
     float closestDistance = Mathf.Infinity;
@@ -26,8 +30,12 @@ public class EnemyHealth : MonoBehaviourPun
     public float health = 20;
     [HideInInspector] public bool isDead;
 
+    EnemyAttack enemyAttack;
+
     private void Awake()
     {
+        Instance = this;
+        enemyAttack = GetComponentInChildren<EnemyAttack>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
@@ -43,9 +51,11 @@ public class EnemyHealth : MonoBehaviourPun
     {
         while (!isDead)
         {
+            // 매 루프 시작 시 closestDistance를 초기화
+            closestDistance = Mathf.Infinity;
             // 20 유닛의 반지름을 가진 가상의 구를 그렸을때, 구와 겹치는 모든 콜라이더를 가져옴
             // 단, targetLayers에 해당하는 레이어를 가진 콜라이더만 가져오도록 필터링
-            colliders = Physics.OverlapSphere(transform.position, 20, whatIsTarget);
+            colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
             GameObject closestTarget = null;
 
             // 모든 콜라이더들을 순회하면서, 살아있는 플레이어를 찾기
@@ -72,6 +82,7 @@ public class EnemyHealth : MonoBehaviourPun
                     */
                     if (closestTarget != null)
                     {
+                        Target = closestTarget.transform;
                         photonView.RPC(
                             "SetTarget",
                             RpcTarget.AllBuffered,
@@ -80,17 +91,32 @@ public class EnemyHealth : MonoBehaviourPun
                 }
             }
 
+
             if (colliders.Length <= 0)
             {
                 isChase = false;
                 Target = null;
             }
+            else
+                isChase = true;
 
             if (Target)
             {
                 // 추적 대상 존재 : 경로를 갱신하고 AI 이동을 계속 진행
-                nav.isStopped = false;
-                float speed = nav.velocity.magnitude;
+                float speed = 0;
+                if (!enemyAttack.canAttack)
+                {
+                    AnimatorStateInfo animatorStateInfo = anim.GetCurrentAnimatorStateInfo(0);
+                    if (animatorStateInfo.IsName("2-attack_inversed_horizontal_right_hand") && animatorStateInfo.normalizedTime >= 0.7f)
+                        anim.SetBool("isAttack", false);
+                    nav.isStopped = false;
+                    speed = nav.velocity.magnitude;
+                }
+                else
+                {
+                    nav.isStopped = true;
+                    anim.SetBool("isAttack", true);
+                }
 
                 if (speed > 0.1f)
                 {
@@ -106,29 +132,55 @@ public class EnemyHealth : MonoBehaviourPun
                 nav.SetDestination(Target.transform.position);
             }
             else
+            {
                 nav.isStopped = true;// 추적 대상 없음 : AI 이동 중지
-
+                SetRandomDestination();
+            }
             // 0.25초 주기로 처리 반복
             yield return new WaitForSeconds(0.25f);
         }
     }
 
-    private void Update()
+    public void Attack()
     {
-        if (isChase && Target != null)
+        if(enemyAttack.canAttack && Target)
         {
-            nav.SetDestination(Target.position);
+            enemyAttack.DoAttack(Target.gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void StopUpdateTargetCorutine()
     {
-        Debug.Log(collision.gameObject.name);
+        if(UpdateTargetCorutine != null)
+        {
+            StopCoroutine(UpdateTarget());
+            UpdateTargetCorutine = null;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void StartUpdateTargetCorutine()
     {
-        Debug.Log(other.gameObject.name);
+        if(UpdateTargetCorutine == null)
+        {
+            UpdateTargetCorutine = StartCoroutine(UpdateTarget());
+        }
+    }
+
+
+
+    private void SetRandomDestination()
+    {
+        anim.SetBool("isWalking", true);
+        anim.SetFloat("speed", nav.velocity.magnitude);
+
+
+        Vector3 randomDir = Random.insideUnitCircle * 2;
+        randomDir += transform.position;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randomDir, out navHit, 1, NavMesh.AllAreas);
+
+        nav.SetDestination(navHit.position);
+        nav.isStopped = false;
     }
 
     [PunRPC]
@@ -137,10 +189,17 @@ public class EnemyHealth : MonoBehaviourPun
         if (health > 0)
         {
             health -= damage;
-            if (health <= 0)
-                EnemyDeath();
-            else
-                Debug.Log("Hit!");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //죽으면 RPC로 EnemyDeath()호출후 EnemyPool에 집어넣기
+                if (health <= 0)
+                {
+                    photonView.RPC("EnemyDeath", RpcTarget.All);
+                    EnemySpawnPool.Instance.enemyPool.Enqueue(this);
+                }
+            }
+            /*else
+                Debug.Log("Hit!");*/
         }
     }
 
@@ -149,20 +208,39 @@ public class EnemyHealth : MonoBehaviourPun
     {
         if (isDead) return;
 
-        isDead = true;
-        nav.isStopped = true;
-        isChase = false;
-        nav.enabled = false;
-
-        Debug.Log("Death");
-
-        // OnEnemyKilled 이벤트 호출
-        OnEnemyKilled?.Invoke(this);
-
         if (photonView.IsMine)
         {
-            PhotonNetwork.Destroy(gameObject);
+            photonView.RPC("StopAction", RpcTarget.All);
+
+            // OnEnemyKilled 이벤트 호출
+            OnEnemyKilled?.Invoke(this);
         }
+    }
+
+    [PunRPC]
+    public void StopAction()
+    {
+        isDead = true;
+        isChase = false;
+
+        nav.enabled = false;
+        anim.enabled = false;
+        
+        UpdateTargetCorutine = null;
+    }
+
+    [PunRPC]
+    public void ReStartAction()
+    {
+        if(nav.enabled == false)
+            nav.enabled = true;
+        anim.enabled = true;
+
+        isDead = false;
+        isChase = true;
+        health = 25;
+
+        StartUpdateTargetCorutine();
     }
 
     [PunRPC]

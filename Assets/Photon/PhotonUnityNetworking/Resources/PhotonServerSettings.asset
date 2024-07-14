@@ -49,6 +49,11 @@ MonoBehaviour:
   - ChangeScene
   - RemovePlayer
   - ReplaceComputerWithCylinder
+  - PlayerDeath
+  - ReStartAction
+  - StopAction
+  - SpawnWave
+  - GetHitParticle
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

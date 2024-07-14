@@ -12,6 +12,8 @@ public class ActionStateManager : MonoBehaviourPun
 	public DefaultState Default = new DefaultState();
     public SwordAction SwordAction = new SwordAction();
 
+	public bool isDead;
+	public int playerHealth = 100;
 	public GameObject currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;
@@ -31,22 +33,25 @@ public class ActionStateManager : MonoBehaviourPun
 	public static int noOfClicks = 0;
 	public float lastClickedTime = 0;
 	public float maxComboDelay = 1;
-	public BoxCollider swordRangeBox;
 	//SwordAction
 
 	public PhotonView playerSetipView;
 
-	private float aimOffsetY = 0f; // 현재 y축 offset 값
-	private float aimSpeed = 35f;  // 움직임 속도
 
-	// Start is called before the first frame update
-	void Start()
+    private void Awake()
+    {
+		ammo = currentWeapon.GetComponent<WeaponAmmo>();
+		anim = GetComponent<Animator>();
+		audioSource = currentWeapon.GetComponent<AudioSource>();
+	}
+
+    // Start is called before the first frame update
+    void Start()
     {
 		SwitchState(Default);
-        ammo = currentWeapon.GetComponent<WeaponAmmo>();
-		anim = GetComponent<Animator>();
-        audioSource = currentWeapon.GetComponent<AudioSource>();
-		swordRangeBox.enabled = false;
+       
+
+		isDead = false;
 
 		gun.SetActive(false);
 		gunRig.weight = 0;
@@ -98,7 +103,28 @@ public class ActionStateManager : MonoBehaviourPun
 		}
 	}
 
-    public void SwitchState(ActionBaseState state)
+	[PunRPC]
+	public void TakeDamage(int damage)
+    {
+		if(playerHealth > 0)
+        {
+			playerHealth -= damage;
+			if (playerHealth <= 0)
+				PlayerDeath();
+			else
+				Debug.Log("Player Hit!!");
+        }
+    }
+
+	[PunRPC]
+	void PlayerDeath()
+    {
+		Debug.Log("Player Death");
+	}
+
+
+
+	public void SwitchState(ActionBaseState state)
     {
         currentState = state;
         currentState.EnterState(this);
@@ -114,35 +140,28 @@ public class ActionStateManager : MonoBehaviourPun
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 
-	public void OnBoxCollider()
-	{
-		swordRangeBox.enabled = true;
-	}
-
-	public void OffBoxCollider()
-	{
-		swordRangeBox.enabled = false;
-	}
-
-
 	public void ReloadWeapon()
     {
-        ammo.Reload();
+		if(ammo != null)
+			ammo.Reload();
         SwitchState(Default);
     }
 
     public void Magout()
     {
-		audioSource.PlayOneShot(ammo.magOutSound);
+		if(ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.magOutSound);
 	}
 
     public void MagIn()
     {
-		audioSource.PlayOneShot(ammo.magInSound);
+		if (ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.magInSound);
 	}
 
     public void ReleaseSlide()
     {
-		audioSource.PlayOneShot(ammo.releaseSlideSound);
+		if (ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.releaseSlideSound);
 	}
 }

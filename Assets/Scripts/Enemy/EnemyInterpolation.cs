@@ -51,13 +51,11 @@ public class EnemyInterpolation : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // 데이터 전송 (압축된 데이터)
             stream.SendNext((transform.position));
             stream.SendNext((transform.rotation));
         }
         else
         {
-            // 데이터 수신 및 압축 해제
             lastPosition = targetPosition;
             lastRotation = targetRotation;
             targetPosition = ((Vector3)stream.ReceiveNext());
