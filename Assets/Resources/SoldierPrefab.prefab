@@ -184,7 +184,7 @@ MonoBehaviour:
   gunShot: {fileID: 8300000, guid: d1d08ebfa4c9c85428efb3dfbb5887c5, type: 3}
   lightReturnSpeed: 20
   enemyKickbackForce: 100
-  iniialParticlePoolSize: 10
+  initialParticlePoolSize: 10
 --- !u!114 &3777226479938405376
 MonoBehaviour:
   m_ObjectHideFlags: 0
