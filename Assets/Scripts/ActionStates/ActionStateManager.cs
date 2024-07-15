@@ -62,6 +62,7 @@ public class ActionStateManager : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
+
 		// 입력에 따라 레이어 가중치 조절
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
@@ -103,6 +104,8 @@ public class ActionStateManager : MonoBehaviourPun
 		}
 	}
 
+
+
 	[PunRPC]
 	public void TakeDamage(int damage)
     {
@@ -110,18 +113,56 @@ public class ActionStateManager : MonoBehaviourPun
         {
 			playerHealth -= damage;
 			if (playerHealth <= 0)
-				PlayerDeath();
+            {
+				photonView.RPC("PlayerDeath", RpcTarget.All, photonView.ViewID);
+			}
 			else
 				Debug.Log("Player Hit!!");
         }
     }
 
 	[PunRPC]
-	void PlayerDeath()
-    {
-		Debug.Log("Player Death");
+	void PlayerDeath(int viewID)
+	{
+		PhotonView targetView = PhotonView.Find(viewID);
+			targetView.gameObject.SetActive(false);
+		if (targetView == photonView.IsMine)
+		{
+			isDead = true;
+			Invoke("RespawnPlayer", 5f); // 5초 후에 재생성
+		}
 	}
 
+	[PunRPC]
+	void RPC_PlayerDeath(int viewID)
+    {
+		PhotonView targetView = PhotonView.Find(viewID);
+		if(targetView != null)
+        {
+			targetView.gameObject.SetActive(false);
+		}
+    }
+
+	public void RespawnPlayer()
+    {
+		if(photonView.IsMine)
+        {
+			transform.position = RoomManager.Instance.playerSpawnPoint.position;
+			isDead = false;
+			playerHealth = 30;
+        }
+		photonView.RPC("RPC_RespawnPlayer", RpcTarget.All, photonView.ViewID);
+	}
+
+	[PunRPC]
+	public void RPC_RespawnPlayer(int viewID)
+    {
+		PhotonView targetView = PhotonView.Find(viewID);
+		if (targetView != null)
+		{
+			targetView.gameObject.SetActive(true);
+		}
+	}
 
 
 	public void SwitchState(ActionBaseState state)

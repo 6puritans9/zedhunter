@@ -14,12 +14,10 @@ public class EnemySpawnPool : MonoBehaviourPunCallbacks
 
     public int poolSize;
 
-    PhotonView photonView;
 
     private void Awake()
     {
         Instance = this;
-        photonView = GetComponent<PhotonView>();
         enemyHealth = GetComponent<EnemyHealth>();
     }
     private void Start()

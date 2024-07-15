@@ -31,6 +31,7 @@ public class EnemyHealth : MonoBehaviourPun
     [HideInInspector] public bool isDead;
 
     EnemyAttack enemyAttack;
+    bool isAttack;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class EnemyHealth : MonoBehaviourPun
 
     private void Start()
     {
+        isAttack = false;
         isChase = true;
         isDead = false;
         StartCoroutine(UpdateTarget());
@@ -91,7 +93,7 @@ public class EnemyHealth : MonoBehaviourPun
                 }
             }
 
-
+            //감지여부판별
             if (colliders.Length <= 0)
             {
                 isChase = false;
@@ -102,21 +104,36 @@ public class EnemyHealth : MonoBehaviourPun
 
             if (Target)
             {
-                // 추적 대상 존재 : 경로를 갱신하고 AI 이동을 계속 진행
                 float speed = 0;
-                if (!enemyAttack.canAttack)
+
+                float targetRadius = 0.5f;
+                float targetRange = 0.5f;
+                RaycastHit[] rayHits = Physics.SphereCastAll(transform.position,
+                                                         targetRadius, transform.forward,
+                                                         targetRange, LayerMask.GetMask("Player"));
+                
+                if (rayHits.Length > 0 && !isAttack)
                 {
-                    AnimatorStateInfo animatorStateInfo = anim.GetCurrentAnimatorStateInfo(0);
-                    if (animatorStateInfo.IsName("2-attack_inversed_horizontal_right_hand") && animatorStateInfo.normalizedTime >= 0.7f)
-                        anim.SetBool("isAttack", false);
+                    foreach (RaycastHit hit in rayHits)
+                    {
+                        GameObject hitObject = hit.collider.gameObject;
+                        if(hitObject.TryGetComponent(out ActionStateManager player))
+                        {
+                            enemyAttack.targetPlayer = player.gameObject;
+                            break;
+                        }
+                    }
+                    StartCoroutine(Attack());
+                }
+
+                //공격중이면 잠시 nav잠시 멈춤
+                if(!isAttack)
+                {
                     nav.isStopped = false;
                     speed = nav.velocity.magnitude;
                 }
                 else
-                {
                     nav.isStopped = true;
-                    anim.SetBool("isAttack", true);
-                }
 
                 if (speed > 0.1f)
                 {
@@ -141,12 +158,23 @@ public class EnemyHealth : MonoBehaviourPun
         }
     }
 
-    public void Attack()
+    IEnumerator Attack()
     {
-        if(enemyAttack.canAttack && Target)
-        {
-            enemyAttack.DoAttack(Target.gameObject);
-        }
+        isChase = false;
+        isAttack = true;
+        anim.SetBool("isAttack", true);
+
+        yield return new WaitForSeconds(1f);
+
+        isChase = true;
+        isAttack = false;
+        anim.SetBool("isAttack", false);
+    }
+
+    public void DoAttack()
+    {
+        if (enemyAttack != null)
+            enemyAttack.DoAttack();
     }
 
     public void StopUpdateTargetCorutine()
