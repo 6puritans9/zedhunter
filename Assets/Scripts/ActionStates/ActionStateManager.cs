@@ -13,6 +13,7 @@ public class ActionStateManager : MonoBehaviourPun
     public SwordAction SwordAction = new SwordAction();
 
 	public bool isDead;
+	int playerMaxHP = 100;
 	public int playerHealth = 100;
 	public GameObject currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
@@ -149,7 +150,7 @@ public class ActionStateManager : MonoBehaviourPun
         {
 			transform.position = RoomManager.Instance.playerSpawnPoint.position;
 			isDead = false;
-			playerHealth = 30;
+			playerHealth = playerMaxHP;
         }
 		photonView.RPC("RPC_RespawnPlayer", RpcTarget.All, photonView.ViewID);
 	}

@@ -12,7 +12,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	public GameObject zombie;
 	[Space]
 	public Transform playerSpawnPoint;
-	public Transform[] enemySpanwPoint;
 	public Vector2 spawnAreaSize = new Vector2(2f, 2f); // 스폰할 영역의 크기
 
 	[SerializeField] public List<Player> players = new List<Player>();

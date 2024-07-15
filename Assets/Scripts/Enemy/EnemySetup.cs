@@ -22,12 +22,12 @@ public class EnemySetup : MonoBehaviourPunCallbacks
         base.OnEnable();
         if (!PhotonNetwork.IsConnected)
         {
-            Debug.LogError("Photon network is not connected!");
+            Debug.Log("¿¬°á²÷±è");
             return;
         }
-            photonView.RPC("ReStartAction", RpcTarget.All);
         if (PhotonNetwork.IsMasterClient)
         {
+            photonView.RPC("ReStartAction", RpcTarget.All);
         }
     }
 
@@ -36,12 +36,14 @@ public class EnemySetup : MonoBehaviourPunCallbacks
         base.OnDisable();
         if (!PhotonNetwork.IsConnected)
         {
-            Debug.LogError("Photon network is not connected!");
+            Debug.Log("¿¬°á²÷±è");
             return;
         }
-            photonView.RPC("StopAction", RpcTarget.All);
+
         if (PhotonNetwork.IsMasterClient)
         {
+            /*if(enemyHealth.isDead)
+                photonView.RPC("StopAction", RpcTarget.All);*/
         }
     }
 }

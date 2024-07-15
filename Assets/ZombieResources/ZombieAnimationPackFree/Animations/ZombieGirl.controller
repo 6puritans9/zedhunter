@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ZombieDemo
+  m_Name: ZombieGirl
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: speed
@@ -422,7 +422,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6ff84b2de0b0a4343b04ef9e8d358664, type: 3}
+  m_Motion: {fileID: 7400000, guid: c620fa079693e7846b8083d48009b8de, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

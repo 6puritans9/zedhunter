@@ -8,6 +8,9 @@ public class EnemyHealth : MonoBehaviourPun
 {
     public static EnemyHealth Instance;
 
+    public enum ZombieType { Male, Female}
+    public ZombieType zombieType;
+
     public LayerMask whatIsTarget; // 공격 대상 레이어
 
     public Coroutine UpdateTargetCorutine;
@@ -36,6 +39,9 @@ public class EnemyHealth : MonoBehaviourPun
     private void Awake()
     {
         Instance = this;
+
+        isDead = false;
+
         enemyAttack = GetComponentInChildren<EnemyAttack>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -45,11 +51,148 @@ public class EnemyHealth : MonoBehaviourPun
     {
         isAttack = false;
         isChase = true;
-        isDead = false;
+        
         StartCoroutine(UpdateTarget());
     }
 
     IEnumerator UpdateTarget()
+    {
+        while (!isDead)
+        {
+            closestDistance = Mathf.Infinity;
+            colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
+            GameObject closestTarget = null;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                GameObject targetObject = colliders[i].gameObject;
+
+                if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
+                    if (distanceToTarget < closestDistance)
+                    {
+                        closestDistance = distanceToTarget;
+                        closestTarget = targetObject;
+                    }
+                }
+                else if (zombieType == ZombieType.Male && (targetObject.layer == LayerMask.NameToLayer("Player") || targetObject.layer == LayerMask.NameToLayer("Wall")))
+                {
+                    float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
+                    if (distanceToTarget < closestDistance)
+                    {
+                        closestDistance = distanceToTarget;
+                        closestTarget = targetObject;
+                    }
+                }
+
+                if (closestTarget != null)
+                {
+                    Target = closestTarget.transform;
+                    photonView.RPC("SetTarget", RpcTarget.AllBuffered, closestTarget.GetComponent<PhotonView>().ViewID);
+                }
+            }
+
+            if (colliders.Length <= 0)
+            {
+                isChase = false;
+                Target = null;
+            }
+            else
+            {
+                isChase = true;
+            }
+
+            if (Target)
+            {
+                float speed = 0;
+                float targetRadius = 0.5f;
+                float targetRange = 0.5f;
+                if(zombieType == ZombieType.Female)
+                {
+                    RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+
+                    if (rayHits.Length > 0 && !isAttack)
+                    {
+                        foreach (RaycastHit hit in rayHits)
+                        {
+                            GameObject hitObject = hit.collider.gameObject;
+                            if (hitObject.TryGetComponent(out ActionStateManager player))
+                            {
+                                enemyAttack.target = player.gameObject;
+                                break;
+                            }
+                        }
+                        StartCoroutine(Attack());
+                    }
+                }
+                else if(zombieType == ZombieType.Male)
+                {
+                    RaycastHit[] rayHits = Physics.SphereCastAll(
+                        transform.position, 
+                        targetRadius, 
+                        transform.forward, 
+                        targetRange, 
+                        LayerMask.GetMask("Player") | LayerMask.GetMask("Wall"));
+
+                    if (rayHits.Length > 0 && !isAttack)
+                    {
+                        foreach (RaycastHit hit in rayHits)
+                        {
+                            GameObject hitObject = hit.collider.gameObject;
+                            if (hitObject.TryGetComponent(out ActionStateManager player))
+                            {
+                                enemyAttack.target = player.gameObject;
+                                break;
+                            }
+                            else if(hitObject.TryGetComponent(out WallHP wall))
+                            {
+                                enemyAttack.target = wall.gameObject;
+                                break;
+                            }
+                        }
+                        StartCoroutine(Attack());
+                    }
+                }
+
+                
+
+                if (!isAttack)
+                {
+                    nav.isStopped = false;
+                    speed = nav.velocity.magnitude;
+                }
+                else
+                {
+                    nav.isStopped = true;
+                }
+
+                if (speed > 0.1f)
+                {
+                    anim.SetBool("isWalking", true);
+                    anim.SetFloat("speed", speed);
+                }
+                else
+                {
+                    anim.SetBool("isWalking", false);
+                    anim.SetFloat("speed", 0f);
+                }
+
+                if (isChase)
+                {
+                    nav.SetDestination(Target.transform.position);
+                }
+            }
+            else
+            {
+                nav.isStopped = true;
+            }
+
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    /*IEnumerator UpdateTarget()
     {
         while (!isDead)
         {
@@ -76,12 +219,12 @@ public class EnemyHealth : MonoBehaviourPun
                         closestTarget = livingEntity;
                     }
 
-                    /*
+                    *//*
                     * 플레이어를 타겟으로 설정
                     * Photon의 RPC 호출을 통해 모든 클라이언트에서
                     * SetTarget함수를 호출
                     * ViewID로 타깃 동기화
-                    */
+                    *//*
                     if (closestTarget != null)
                     {
                         Target = closestTarget.transform;
@@ -127,13 +270,15 @@ public class EnemyHealth : MonoBehaviourPun
                 }
 
                 //공격중이면 잠시 nav잠시 멈춤
-                if(!isAttack)
+                if (!isAttack)
                 {
                     nav.isStopped = false;
                     speed = nav.velocity.magnitude;
                 }
                 else
+                {
                     nav.isStopped = true;
+                }
 
                 if (speed > 0.1f)
                 {
@@ -146,17 +291,18 @@ public class EnemyHealth : MonoBehaviourPun
                     anim.SetFloat("speed", 0f);
                 }
 
-                nav.SetDestination(Target.transform.position);
+                if(isChase)
+                    nav.SetDestination(Target.transform.position);
             }
             else
             {
                 nav.isStopped = true;// 추적 대상 없음 : AI 이동 중지
-                SetRandomDestination();
+                //SetRandomDestination();
             }
             // 0.25초 주기로 처리 반복
             yield return new WaitForSeconds(0.25f);
         }
-    }
+    }*/
 
     IEnumerator Attack()
     {
@@ -217,13 +363,16 @@ public class EnemyHealth : MonoBehaviourPun
         if (health > 0)
         {
             health -= damage;
-            if (PhotonNetwork.IsMasterClient)
+
+            //죽으면 RPC로 EnemyDeath()호출후 EnemyPool에 집어넣기
+            if (health <= 0)
             {
-                //죽으면 RPC로 EnemyDeath()호출후 EnemyPool에 집어넣기
-                if (health <= 0)
+                if (PhotonNetwork.IsMasterClient || photonView.IsMine)
                 {
                     photonView.RPC("EnemyDeath", RpcTarget.All);
-                    EnemySpawnPool.Instance.enemyPool.Enqueue(this);
+
+                    // OnEnemyKilled 이벤트 호출
+                    OnEnemyKilled?.Invoke(this);
                 }
             }
             /*else
@@ -234,27 +383,34 @@ public class EnemyHealth : MonoBehaviourPun
     [PunRPC]
     void EnemyDeath()
     {
-        if (isDead) return;
-
+        isDead = true;
         if (photonView.IsMine)
-        {
             photonView.RPC("StopAction", RpcTarget.All);
-
-            // OnEnemyKilled 이벤트 호출
-            OnEnemyKilled?.Invoke(this);
-        }
     }
 
     [PunRPC]
     public void StopAction()
     {
-        isDead = true;
         isChase = false;
-
         nav.enabled = false;
         anim.enabled = false;
         
         UpdateTargetCorutine = null;
+        if(isDead)
+        {
+            if (zombieType == EnemyHealth.ZombieType.Male)
+            {
+                EnemySpawnPool.Instance.maleZombiePool.Enqueue(this);
+                EnemySpawnPool.Instance.maleEnemiesToSpawn -= 1;
+            }
+            else if (zombieType == EnemyHealth.ZombieType.Female)
+            {
+                Debug.Log(EnemySpawnPool.Instance.femaleEnemiesToSpawn);
+                EnemySpawnPool.Instance.femaleZombiePool.Enqueue(this);
+                EnemySpawnPool.Instance.femaleEnemiesToSpawn -= 1;
+            }
+        }
+        gameObject.SetActive(false);
     }
 
     [PunRPC]

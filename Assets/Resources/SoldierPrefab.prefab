@@ -2875,7 +2875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  playerHealth: 30
+  playerHealth: 100
   currentWeapon: {fileID: 102926515698171487}
   ammo: {fileID: 0}
   anim: {fileID: 0}
