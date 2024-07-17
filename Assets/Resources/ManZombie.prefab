@@ -3172,7 +3172,7 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 5660792536603426533}
-  health: 50
+  health: 80
   isDead: 0
 --- !u!114 &4991871911626703096
 MonoBehaviour:

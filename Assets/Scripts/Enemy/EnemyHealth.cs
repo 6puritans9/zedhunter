@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviourPun
 {
     public static EnemyHealth Instance;
 
-    public enum ZombieType { Male, Female}
+    public enum ZombieType { Male, Female, Boss}
     public ZombieType zombieType;
 
     public LayerMask whatIsTarget; // 공격 대상 레이어
@@ -36,6 +36,22 @@ public class EnemyHealth : MonoBehaviourPun
     EnemyAttack enemyAttack;
     bool isAttack;
 
+    // === BossParam === 
+    public float chaseDistance = 5f;
+    public float minJumpDistance = 4f;
+    public float maxJumpDistance = 8f;
+    public float jumpSpeed = 2f;
+    public float jumpHeight = 2f;
+    public float jumpCooldown = 3f; // 점프 쿨타임 (초 단위)
+
+    private Vector3 jumpStartPosition;
+    private Vector3 jumpTargetPosition;
+    private float jumpStartTime;
+    private float lastJumpTime; // 마지막 점프 시간
+    private bool isJumping = false;
+    private bool isJumpAnimating = false;
+    // === BossParam === 
+
     private void Awake()
     {
         Instance = this;
@@ -55,18 +71,32 @@ public class EnemyHealth : MonoBehaviourPun
         StartCoroutine(UpdateTarget());
     }
 
+    
+
     IEnumerator UpdateTarget()
     {
         while (!isDead)
         {
             closestDistance = Mathf.Infinity;
-            colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
             GameObject closestTarget = null;
+            switch (zombieType)
+            {
+                case ZombieType.Female:
+                    colliders = Physics.OverlapSphere(transform.position, 10, whatIsTarget);
+                    break;
+                case ZombieType.Male:
+                    colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
+                    break;
+                case ZombieType.Boss:
+                    colliders = Physics.OverlapSphere(transform.position, 25, whatIsTarget);
+                    break;
+            }
 
             for (int i = 0; i < colliders.Length; i++)
             {
                 GameObject targetObject = colliders[i].gameObject;
 
+                //좀비 타입에 따라 다르게 타겟팅
                 if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Player"))
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
@@ -85,6 +115,16 @@ public class EnemyHealth : MonoBehaviourPun
                         closestTarget = targetObject;
                     }
                 }
+                else if (zombieType == ZombieType.Boss && targetObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
+
+                    if (distanceToTarget < closestDistance)
+                    {
+                        closestDistance = distanceToTarget;
+                        closestTarget = targetObject;
+                    }
+                }
 
                 if (closestTarget != null)
                 {
@@ -92,6 +132,22 @@ public class EnemyHealth : MonoBehaviourPun
                     photonView.RPC("SetTarget", RpcTarget.AllBuffered, closestTarget.GetComponent<PhotonView>().ViewID);
                 }
             }
+
+            /*if (zombieType == ZombieType.Boss)
+            {
+                if (closestDistance >= minJumpDistance
+                        && closestDistance <= maxJumpDistance
+                        && !isJumping && Target != null
+                        && Time.time >= lastJumpTime + jumpCooldown)
+                {
+                    // 플레이어가 점프 거리 내에 있으면 점프
+                    StartJump();
+                }
+                if (isJumping)
+                {
+                    PerformJump();
+                }
+            }*/
 
             if (colliders.Length <= 0)
             {
@@ -154,10 +210,27 @@ public class EnemyHealth : MonoBehaviourPun
                         StartCoroutine(Attack());
                     }
                 }
+                else if (zombieType == ZombieType.Boss)
+                {
+                    RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-                
+                    if (rayHits.Length > 0 && !isAttack)
+                    {
+                        foreach (RaycastHit hit in rayHits)
+                        {
+                            GameObject hitObject = hit.collider.gameObject;
+                            if (hitObject.TryGetComponent(out ActionStateManager player))
+                            {
+                                enemyAttack.target = player.gameObject;
+                                break;
+                            }
+                        }
+                        StartCoroutine(Attack());
+                    }
+                }
 
-                if (!isAttack)
+
+                if (!isAttack && !isJumping)
                 {
                     nav.isStopped = false;
                     speed = nav.velocity.magnitude;
@@ -167,7 +240,7 @@ public class EnemyHealth : MonoBehaviourPun
                     nav.isStopped = true;
                 }
 
-                if (speed > 0.1f)
+                if (speed > 0.1f && !isJumping)
                 {
                     anim.SetBool("isWalking", true);
                     anim.SetFloat("speed", speed);
@@ -178,7 +251,7 @@ public class EnemyHealth : MonoBehaviourPun
                     anim.SetFloat("speed", 0f);
                 }
 
-                if (isChase)
+                if (isChase & !isJumping)
                 {
                     nav.SetDestination(Target.transform.position);
                 }
@@ -191,6 +264,7 @@ public class EnemyHealth : MonoBehaviourPun
             yield return new WaitForSeconds(0.25f);
         }
     }
+
 
     /*IEnumerator UpdateTarget()
     {
@@ -306,6 +380,7 @@ public class EnemyHealth : MonoBehaviourPun
 
     IEnumerator Attack()
     {
+        
         isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
@@ -405,9 +480,13 @@ public class EnemyHealth : MonoBehaviourPun
             }
             else if (zombieType == EnemyHealth.ZombieType.Female)
             {
-                Debug.Log(EnemySpawnPool.Instance.femaleEnemiesToSpawn);
                 EnemySpawnPool.Instance.femaleZombiePool.Enqueue(this);
                 EnemySpawnPool.Instance.femaleEnemiesToSpawn -= 1;
+            }
+            else if (zombieType == EnemyHealth.ZombieType.Boss)
+            {
+                EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
+                EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
             }
         }
         gameObject.SetActive(false);
@@ -419,10 +498,21 @@ public class EnemyHealth : MonoBehaviourPun
         if(nav.enabled == false)
             nav.enabled = true;
         anim.enabled = true;
-
         isDead = false;
         isChase = true;
-        health = 25;
+
+        switch(zombieType)
+        {
+            case ZombieType.Female:
+                health = 25;
+                break;
+            case ZombieType.Male:
+                health = 80;
+                break;
+            case ZombieType.Boss:
+                health = 300;
+                break;
+        }
 
         StartUpdateTargetCorutine();
     }
@@ -436,4 +526,57 @@ public class EnemyHealth : MonoBehaviourPun
             Target = targetPhotonView.transform;
         }
     }
+
+    /*[PunRPC]
+    void StartJump()
+    {
+        isJumping = true;
+        isJumpAnimating = true;
+        nav.isStopped = true;
+        jumpStartPosition = transform.position;
+        jumpTargetPosition = Target.position;
+        jumpStartTime = Time.time;
+
+        // 점프 높이를 고려한 포물선 궤적 계산
+        Vector3 jumpDirection = (jumpTargetPosition - jumpStartPosition).normalized;
+        float jumpDistance = Mathf.Min(Vector3.Distance(jumpStartPosition, jumpTargetPosition), maxJumpDistance);
+        jumpTargetPosition = jumpStartPosition + jumpDirection * chaseDistance;
+        jumpTargetPosition.y = jumpStartPosition.y;
+
+        anim.SetBool("isJumping", isJumpAnimating);
+        anim.SetBool("isWalking", false);
+    }
+
+    [PunRPC]
+    void PerformJump()
+    {
+        float elapsedTime = Time.time - jumpStartTime;
+        float jumpProgress = elapsedTime / jumpSpeed;
+
+        if (jumpProgress < 1f)
+        {
+            // 포물선 운동 계산
+            Vector3 currentPosition = Vector3.Lerp(jumpStartPosition, jumpTargetPosition, jumpProgress);
+            currentPosition.y = jumpStartPosition.y + Mathf.Sin(jumpProgress * Mathf.PI) * jumpHeight;
+
+            transform.position = currentPosition;
+        }
+        else
+        {
+            LandJump();
+        }
+    }
+
+    [PunRPC]
+    void LandJump()
+    {
+        isJumping = false;
+        nav.isStopped = false;
+
+        isJumpAnimating = false;
+        anim.SetBool("isJumping", isJumpAnimating);
+
+        // 마지막 점프 시간을 현재 시간으로 설정
+        lastJumpTime = Time.time;
+    }*/
 }

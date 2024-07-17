@@ -48,6 +48,18 @@ public class EnemyAttack : MonoBehaviourPun
                 enemyHealth.transform.rotation = Quaternion.Slerp(enemyHealth.transform.rotation, lookRotation, 1);
             }
         }
+        else if (enemyHealth.zombieType == EnemyHealth.ZombieType.Boss)
+        {
+            if (other.CompareTag("Player") && enemyHealth.Target != null)
+            {
+                target = other.gameObject;
+                canAttack = true;
+                Vector3 dir = (enemyHealth.Target.transform.position - enemyHealth.transform.position).normalized;
+                dir.y = 0;
+                Quaternion lookRotation = Quaternion.LookRotation(dir);
+                enemyHealth.transform.rotation = Quaternion.Slerp(enemyHealth.transform.rotation, lookRotation, 1);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

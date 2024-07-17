@@ -61,6 +61,11 @@ MonoBehaviour:
   - FemaleZombieSpawnWave
   - MaleZombieSpawnWave
   - DestroyBlock
+  - BossZombieSpawnWave
+  - StartJump
+  - PerformJump
+  - LandJump
+  - SyncStartJump
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
