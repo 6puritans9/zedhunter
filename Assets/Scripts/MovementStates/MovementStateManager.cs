@@ -46,8 +46,8 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        PhotonNetwork.SerializationRate = 30; // 초당 패킷 전송 횟수 조정
-        PhotonNetwork.SendRate = 60;          // 초당 네트워크 업데이트 횟수 조정
+        PhotonNetwork.SerializationRate = 5; // 초당 패킷 전송 횟수 조정
+        PhotonNetwork.SendRate = 10;          // 초당 네트워크 업데이트 횟수 조정
 
         targetPosition = transform.position;
         targetRotation = transform.rotation;

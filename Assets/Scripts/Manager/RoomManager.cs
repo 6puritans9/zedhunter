@@ -27,7 +27,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void Start()
 	{
 		Debug.Log("Connecting...");
-		PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
+		//PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
 
 		PhotonNetwork.ConnectUsingSettings();
 	}
