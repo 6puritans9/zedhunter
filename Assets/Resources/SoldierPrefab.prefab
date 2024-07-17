@@ -2944,7 +2944,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5665432962039639041}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
@@ -3003,20 +3003,20 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Aiming
   - Type: 9
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: Reload
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: SwordAction1
   - Type: 4
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: SwordAction2
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
-  - SynchronizeType: 1
+  - SynchronizeType: 0
     LayerIndex: 2
 --- !u!114 &7190924473076582110
 MonoBehaviour:

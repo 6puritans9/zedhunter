@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrounCheck : MonoBehaviour
 {
-    EnemyController enemyController;
+    public EnemyController enemyController;
 
     private void Awake()
     {
@@ -17,9 +17,10 @@ public class GrounCheck : MonoBehaviour
         {
             enemyController.isJumpAnimating = false;
             enemyController.isJumping = false;
-            enemyController.agent.isStopped = false;
-
-            enemyController.animator.SetBool("isJumping", false);
+            if(enemyController.agent)
+                enemyController.agent.isStopped = false;
+            if(enemyController.animator)
+                enemyController.animator.SetBool("isJumping", false);
         }
         if (other.TryGetComponent(out WallHP wall))
         {
@@ -33,9 +34,10 @@ public class GrounCheck : MonoBehaviour
         {
             enemyController.isJumpAnimating = false;
             enemyController.isJumping = false;
-            enemyController.agent.isStopped = false;
-
-            enemyController.animator.SetBool("isJumping", false);
+            if (enemyController.agent)
+                enemyController.agent.isStopped = false;
+            if (enemyController.animator)
+                enemyController.animator.SetBool("isJumping", false);
         }
     }
 }

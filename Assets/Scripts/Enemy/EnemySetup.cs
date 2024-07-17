@@ -42,7 +42,7 @@ public class EnemySetup : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
-            /*if(enemyHealth.isDead)
+            /*if (enemyHealth.isDead)
                 photonView.RPC("StopAction", RpcTarget.All);*/
         }
     }

@@ -69,6 +69,7 @@ public class EnemyHealth : MonoBehaviourPun
         isAttack = false;
         isChase = true;
 
+
         StartCoroutine(UpdateTarget());
     }
 
@@ -484,6 +485,9 @@ public class EnemyHealth : MonoBehaviourPun
         if(nav.enabled == false)
             nav.enabled = true;
         anim.enabled = true;
+        if(isDead)
+            if (zombieType == ZombieType.Boss)
+                EnemyController.Instance.ReStartTarget();
         isDead = false;
         isChase = true;
 
@@ -501,6 +505,8 @@ public class EnemyHealth : MonoBehaviourPun
         }
 
         StartUpdateTargetCorutine();
+        /*if (zombieType == EnemyHealth.ZombieType.Boss)
+            enemyJump.RestartCorutine();*/
     }
 
     [PunRPC]

@@ -5,6 +5,8 @@ using Photon.Pun;
 
 public class EnemyController : MonoBehaviourPunCallbacks
 {
+    public static EnemyController Instance;
+
     public float jumpHeight = 2f;
     public float jumpSpeed = 2f;
     public float chaseDistance = 5f;
@@ -29,6 +31,8 @@ public class EnemyController : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        Instance = this;
+
         photonView = GetComponentInParent<PhotonView>();
     }
 
@@ -37,26 +41,39 @@ public class EnemyController : MonoBehaviourPunCallbacks
         enemyHealth = GetComponentInParent<EnemyHealth>();
         agent = GetComponentInParent<NavMeshAgent>();
         animator = GetComponentInParent<Animator>();
+
+        StartCoroutine(Target());
     }
 
-    void Update()
+    public void ReStartTarget()
     {
-        if (enemyHealth.Target)
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, enemyHealth.Target.position);
+        StartCoroutine(Target());
+    }
 
-            if (distanceToPlayer >= minJumpDistance && distanceToPlayer <= maxJumpDistance && !isJumping && Time.time >= lastJumpTime + jumpCooldown)
+    IEnumerator Target()
+    {
+        while(gameObject.activeSelf)
+        {
+            if (enemyHealth.Target)
             {
-                // 플레이어가 점프 거리 내에 있으면 점프
-                photonView.RPC("StartJump", RpcTarget.All);
-            }
-        }
+                float distanceToPlayer = Vector3.Distance(transform.position, enemyHealth.Target.position);
 
-        if (isJumping)
-        {
-            PerformJump();
+                if (distanceToPlayer >= minJumpDistance && distanceToPlayer <= maxJumpDistance && !isJumping && Time.time >= lastJumpTime + jumpCooldown)
+                {
+                    // 플레이어가 점프 거리 내에 있으면 점프
+                    StartJump();
+                }
+            }
+
+            if (isJumping)
+            {
+                PerformJump();
+            }
+
+            yield return new WaitForSeconds(0.25f);
         }
     }
+
 
     [PunRPC]
     void StartJump()

@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 350178753708319214}
   - component: {fileID: 6550813846524330917}
   - component: {fileID: 3737615170193594805}
-  - component: {fileID: 6713020774651827960}
+  - component: {fileID: -2987590293375374242}
   m_Layer: 8
   m_Name: Yaku J Ignite
   m_TagString: Untagged
@@ -304,18 +304,18 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3300339860900103561}
-  - {fileID: 6713020774651827960}
+  - {fileID: -2987590293375374242}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6713020774651827960
+--- !u!114 &-2987590293375374242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336601600002010810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -885,6 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adc41a91b03b004a87901dbe02b814a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyController: {fileID: 6550813846524330917}
 --- !u!1 &2320920617068569340
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,8 +25,8 @@ public class EnemyInterpolation : MonoBehaviourPun, IPunObservable
         lastRotation = transform.rotation;
         lastReceivedTime = Time.time;
 
-        PhotonNetwork.SerializationRate = 5; // 초당 패킷 전송 횟수 조정
-        PhotonNetwork.SendRate = 10;          // 초당 네트워크 업데이트 횟수 조정
+        PhotonNetwork.SerializationRate = 10; // 초당 패킷 전송 횟수 조정
+        PhotonNetwork.SendRate = 20;          // 초당 네트워크 업데이트 횟수 조정
     }
 
     // Update is called once per frame
