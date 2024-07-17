@@ -3097,7 +3097,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 53a37950da1ec7a4e9bcf883dd155829, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -3127,7 +3127,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 5.78
   m_Direction: 1
-  m_Center: {x: 0, y: 2.72, z: 0}
+  m_Center: {x: 0, y: 2.78, z: 0}
 --- !u!195 &8125079811796781678
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3140,7 +3140,7 @@ NavMeshAgent:
   m_Radius: 1
   m_Speed: 2.5
   m_Acceleration: 8
-  avoidancePriority: 5
+  avoidancePriority: 2
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1

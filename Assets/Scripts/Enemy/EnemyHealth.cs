@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviourPun
     public bool isChase;
     [HideInInspector]public NavMeshAgent nav;
 
+
     public Collider[] colliders;
     float closestDistance = Mathf.Infinity;
 
@@ -67,7 +68,7 @@ public class EnemyHealth : MonoBehaviourPun
     {
         isAttack = false;
         isChase = true;
-        
+
         StartCoroutine(UpdateTarget());
     }
 
@@ -132,22 +133,6 @@ public class EnemyHealth : MonoBehaviourPun
                     photonView.RPC("SetTarget", RpcTarget.AllBuffered, closestTarget.GetComponent<PhotonView>().ViewID);
                 }
             }
-
-            /*if (zombieType == ZombieType.Boss)
-            {
-                if (closestDistance >= minJumpDistance
-                        && closestDistance <= maxJumpDistance
-                        && !isJumping && Target != null
-                        && Time.time >= lastJumpTime + jumpCooldown)
-                {
-                    // 플레이어가 점프 거리 내에 있으면 점프
-                    StartJump();
-                }
-                if (isJumping)
-                {
-                    PerformJump();
-                }
-            }*/
 
             if (colliders.Length <= 0)
             {
@@ -230,7 +215,7 @@ public class EnemyHealth : MonoBehaviourPun
                 }
 
 
-                if (!isAttack && !isJumping)
+                if (!isAttack)
                 {
                     nav.isStopped = false;
                     speed = nav.velocity.magnitude;
@@ -240,7 +225,7 @@ public class EnemyHealth : MonoBehaviourPun
                     nav.isStopped = true;
                 }
 
-                if (speed > 0.1f && !isJumping)
+                if (speed > 0.1f)
                 {
                     anim.SetBool("isWalking", true);
                     anim.SetFloat("speed", speed);
@@ -251,7 +236,7 @@ public class EnemyHealth : MonoBehaviourPun
                     anim.SetFloat("speed", 0f);
                 }
 
-                if (isChase & !isJumping)
+                if (isChase)
                 {
                     nav.SetDestination(Target.transform.position);
                 }
@@ -259,6 +244,8 @@ public class EnemyHealth : MonoBehaviourPun
             else
             {
                 nav.isStopped = true;
+                anim.SetBool("isWalking", false);
+                anim.SetFloat("speed", 0f);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -380,7 +367,6 @@ public class EnemyHealth : MonoBehaviourPun
 
     IEnumerator Attack()
     {
-        
         isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
@@ -526,57 +512,4 @@ public class EnemyHealth : MonoBehaviourPun
             Target = targetPhotonView.transform;
         }
     }
-
-    /*[PunRPC]
-    void StartJump()
-    {
-        isJumping = true;
-        isJumpAnimating = true;
-        nav.isStopped = true;
-        jumpStartPosition = transform.position;
-        jumpTargetPosition = Target.position;
-        jumpStartTime = Time.time;
-
-        // 점프 높이를 고려한 포물선 궤적 계산
-        Vector3 jumpDirection = (jumpTargetPosition - jumpStartPosition).normalized;
-        float jumpDistance = Mathf.Min(Vector3.Distance(jumpStartPosition, jumpTargetPosition), maxJumpDistance);
-        jumpTargetPosition = jumpStartPosition + jumpDirection * chaseDistance;
-        jumpTargetPosition.y = jumpStartPosition.y;
-
-        anim.SetBool("isJumping", isJumpAnimating);
-        anim.SetBool("isWalking", false);
-    }
-
-    [PunRPC]
-    void PerformJump()
-    {
-        float elapsedTime = Time.time - jumpStartTime;
-        float jumpProgress = elapsedTime / jumpSpeed;
-
-        if (jumpProgress < 1f)
-        {
-            // 포물선 운동 계산
-            Vector3 currentPosition = Vector3.Lerp(jumpStartPosition, jumpTargetPosition, jumpProgress);
-            currentPosition.y = jumpStartPosition.y + Mathf.Sin(jumpProgress * Mathf.PI) * jumpHeight;
-
-            transform.position = currentPosition;
-        }
-        else
-        {
-            LandJump();
-        }
-    }
-
-    [PunRPC]
-    void LandJump()
-    {
-        isJumping = false;
-        nav.isStopped = false;
-
-        isJumpAnimating = false;
-        anim.SetBool("isJumping", isJumpAnimating);
-
-        // 마지막 점프 시간을 현재 시간으로 설정
-        lastJumpTime = Time.time;
-    }*/
 }
