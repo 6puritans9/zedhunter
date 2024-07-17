@@ -144,6 +144,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cylinderPrefab: {fileID: 393688310361382728, guid: cfc814c595454418b9f59c09bf88a4c2,
     type: 3}
+  interactionDistance: 3
+  interactionTime: 3
+  progressBarPrefab: {fileID: 5594391320106607434, guid: cda16f33be5a843b7aa9a41416f5afb6,
+    type: 3}
+  progressDecreaseRate: 0.5
+  progressImage: {fileID: 0}
+  progressSprites:
+  - {fileID: 21300000, guid: f02bcf9adf0df4ce782abd8b0e990a11, type: 3}
+  - {fileID: 21300000, guid: 62a883bbad08d4ef1ba86f4cbfad2c66, type: 3}
+  - {fileID: 21300000, guid: fc6fde6ced8c74d149eadcb19924e374, type: 3}
+  - {fileID: 21300000, guid: 4b621f9a9233a4c1c9c0da144849c6d4, type: 3}
 --- !u!114 &-4879933445031640425
 MonoBehaviour:
   m_ObjectHideFlags: 0

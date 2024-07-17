@@ -175,9 +175,9 @@ MonoBehaviour:
   photonView: {fileID: 5779119290696472647}
   fireRate: 0.12
   semiAuto: 0
-  hitParticle: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af,
+  hitParticle: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a,
     type: 3}
-  barrelPos: {fileID: 5162585066618421704}
+  barrelPos: {fileID: 1064816629762730220}
   bulletVelocity: 0
   bulletPerShot: 1
   damage: 20
@@ -2693,6 +2693,7 @@ GameObject:
   - component: {fileID: 5877787245656161687}
   - component: {fileID: 2880074762113699685}
   - component: {fileID: 7190924473076582110}
+  - component: {fileID: 8652195730092381962}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -2888,6 +2889,7 @@ MonoBehaviour:
   lastClickedTime: 0
   maxComboDelay: 1
   playerSetipView: {fileID: 3258976892097752592}
+  maxPlayerHealth: 500
 --- !u!114 &8995276241006279050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,6 +3013,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: SwordAction2
+  - Type: 4
+    SynchronizeType: 0
+    Name: isFixing
+  - Type: 9
+    SynchronizeType: 0
+    Name: Fixing
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -3044,6 +3052,19 @@ MonoBehaviour:
   TPWeaponHolder: {fileID: 4190117653180004925}
   gunRig: {fileID: 5010970117691427978}
   anim: {fileID: 7875545662532149066}
+--- !u!114 &8652195730092381962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665432962039639041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7643eacb5c1f47659351ba0d2c08069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCooldown: 0.29
 --- !u!1 &5872631436813746477
 GameObject:
   m_ObjectHideFlags: 0

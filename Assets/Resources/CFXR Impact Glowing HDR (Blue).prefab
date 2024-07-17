@@ -4948,7 +4948,7 @@ Light:
   m_Intensity: 0
   m_Range: 4
   m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_InnerSpotAngle: 21.802082
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -5007,7 +5007,8 @@ GameObject:
   - component: {fileID: 2708598583397607897}
   - component: {fileID: 2708598583397607910}
   - component: {fileID: 2708598583397607899}
-  - component: {fileID: -7872264942507238820}
+  - component: {fileID: 3843905883586437835}
+  - component: {fileID: 2342257904575777745}
   m_Layer: 0
   m_Name: CFXR Impact Glowing HDR (Blue)
   m_TagString: Untagged
@@ -9921,7 +9922,29 @@ MonoBehaviour:
     perlinColor: 0
     perlinColorSpeed: 1
   fadeOutReference: {fileID: 0}
---- !u!114 &-7872264942507238820
+--- !u!114 &3843905883586437835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2708598583397607911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2342257904575777745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

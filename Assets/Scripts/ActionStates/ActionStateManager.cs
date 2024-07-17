@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ActionStateManager : MonoBehaviourPun
 {
@@ -13,7 +15,7 @@ public class ActionStateManager : MonoBehaviourPun
     public SwordAction SwordAction = new SwordAction();
 
 	public bool isDead;
-	public int playerHealth = 100;
+	public int playerHealth = 500;
 	public GameObject currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;
@@ -37,13 +39,25 @@ public class ActionStateManager : MonoBehaviourPun
 
 	public PhotonView playerSetipView;
 
+    private Volume postProcessVolume;
+    private Vignette vignette; // ë¹„ë„¤íŠ¸ íš¨ê³¼
+		public int maxPlayerHealth = 500;
 
     private void Awake()
     {
 		ammo = currentWeapon.GetComponent<WeaponAmmo>();
 		anim = GetComponent<Animator>();
 		audioSource = currentWeapon.GetComponent<AudioSource>();
-	}
+
+        
+        postProcessVolume = FindObjectOfType<Volume>();
+        if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
+        {
+            vignette.active = true;
+            vignette.color.Override(Color.red);
+        }
+    }
+	
 
     // Start is called before the first frame update
     void Start()
@@ -55,31 +69,49 @@ public class ActionStateManager : MonoBehaviourPun
 
 		gun.SetActive(false);
 		gunRig.weight = 0;
-		SetLayerWeight(0, 1);  // ¹«±â ¾øÀ½
+		SetLayerWeight(0, 1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
+
+		anim.SetInteger("Health",playerHealth)
 	}
 
     // Update is called once per frame
     void Update()
     {
-		// ÀÔ·Â¿¡ µû¶ó ·¹ÀÌ¾î °¡ÁßÄ¡ Á¶Àı
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
-			gun.SetActive(false);
-			//gunRig.weight = 0;
-			SetLayerWeight(0, 1);  // ¹«±â ¾øÀ½
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 2);
-			gun.SetActive(true);
-			//gunRig.weight = 1;
-			SetLayerWeight(1, 1);  // ÃÑ
-		}
+			// ï¿½Ô·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 1);
+				gun.SetActive(false);
+				//gunRig.weight = 0;
+				SetLayerWeight(0, 1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				playerSetipView.RPC("SetTPWeapon", RpcTarget.All, 2);
+				gun.SetActive(true);
+				//gunRig.weight = 1;
+				SetLayerWeight(1, 1);  // ï¿½ï¿½
+			}
 
+			anim.SetInteger("Health", playerHealth);
+			currentState.UpdateState(this);
+			UpdateHealthEffect(); // ì²´ë ¥ íš¨ê³¼ ì—…ë°ì´íŠ¸
+    }
 
-		currentState.UpdateState(this);
+    void UpdateHealthEffect()
+    {
+        if (vignette != null)
+        {
+            float healthPercentage = (float)playerHealth / maxPlayerHealth;
+            float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+            vignette.intensity.Override(vignetteIntensity);
+            Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");
+        }
+        else
+        {
+            Debug.LogError("Vignette effect is null!");
+        }
     }
 
 	public void OnClick()
@@ -109,6 +141,8 @@ public class ActionStateManager : MonoBehaviourPun
 		if(playerHealth > 0)
         {
 			playerHealth -= damage;
+				anim.SetInteger("Health", playerHealth);
+        UpdateHealthEffect(); // ë°ë¯¸ì§€ë¥¼ ì…ì„ ë•Œë§ˆë‹¤ íš¨ê³¼ ì—…ë°ì´íŠ¸
 			if (playerHealth <= 0)
 				PlayerDeath();
 			else
@@ -131,12 +165,12 @@ public class ActionStateManager : MonoBehaviourPun
     }
 	void SetLayerWeight(int layerIndex, float weight)
 	{
-		// ¸ğµç ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ 0À¸·Î ¼³Á¤
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < anim.layerCount; i++)
 		{
 			anim.SetLayerWeight(i, 0);
 		}
-		// ÁöÁ¤µÈ ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ ¼³Á¤
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 
