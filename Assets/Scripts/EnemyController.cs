@@ -53,8 +53,6 @@ public class EnemyController : MonoBehaviourPunCallbacks
         {
             PerformJump();
         }
-
-        Debug.Log(isJumpAnimating);
     }
     
 

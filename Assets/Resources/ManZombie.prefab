@@ -3174,6 +3174,12 @@ MonoBehaviour:
   attackRange: {fileID: 5660792536603426533}
   health: 80
   isDead: 0
+  chaseDistance: 5
+  minJumpDistance: 4
+  maxJumpDistance: 8
+  jumpSpeed: 2
+  jumpHeight: 2
+  jumpCooldown: 3
 --- !u!114 &4991871911626703096
 MonoBehaviour:
   m_ObjectHideFlags: 0

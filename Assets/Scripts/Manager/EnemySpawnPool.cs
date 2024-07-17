@@ -184,18 +184,21 @@ public class EnemySpawnPool : MonoBehaviourPunCallbacks
         {
             //EnemyHealth enemy = femaleZombiePool.Dequeue();
             bossZombiePool.TryDequeue(out EnemyHealth enemy);
-            if (!enemy.gameObject.activeSelf)
+            if(enemy)
             {
-                enemy.transform.position = GetRandomSpawnPosition(spawnPoints[2].position);
-                //Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
-                //enemy.transform.position = randomSpawnPosition;
-                enemy.gameObject.SetActive(true);
-                //enemiesToSpawn--;
-            }
-            else
-            {
-                // 다시 큐에 넣어 비활성화된 적을 찾을 때까지 반복
-                bossZombiePool.Enqueue(enemy);
+                if (!enemy.gameObject.activeSelf)
+                {
+                    enemy.transform.position = GetRandomSpawnPosition(spawnPoints[2].position);
+                    //Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
+                    //enemy.transform.position = randomSpawnPosition;
+                    enemy.gameObject.SetActive(true);
+                    //enemiesToSpawn--;
+                }
+                else
+                {
+                    // 다시 큐에 넣어 비활성화된 적을 찾을 때까지 반복
+                    bossZombiePool.Enqueue(enemy);
+                }
             }
         }
     }
