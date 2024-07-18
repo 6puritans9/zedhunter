@@ -32,10 +32,14 @@ public class AimStateManager : MonoBehaviourPun
     [SerializeField] float shoulderSwapSpeed = 10;
     MovementStateManager moving;
 
-	private void Awake()
+    // ADS Animation Fix
+    private AdsAnimationManager _adsManager;
+
+    private void Awake()
 	{
 		vCam = GetComponentInChildren<CinemachineVirtualCamera>();
-	}
+        _adsManager = GetComponent<AdsAnimationManager>();
+    }
 
 	// Start is called before the first frame update
 	void Start()
@@ -72,9 +76,19 @@ public class AimStateManager : MonoBehaviourPun
         MoveCamera();
 
 		currentState.UpdateStare(this);
-	}
 
-	private void LateUpdate()
+        #region ADS_Animation_Fix
+
+        if (this.currentState == this.Aim)
+            _adsManager.SetValues();
+
+        else
+            _adsManager.ResetValues();
+
+        #endregion
+    }
+
+    private void LateUpdate()
 	{
         camFollowPos.localEulerAngles = new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);

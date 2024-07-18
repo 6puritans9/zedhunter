@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CheckPlayer : MonoBehaviourPun
 {
-    ComputerInteraction computerInteraction;
+    /*ComputerInteraction computerInteraction;
 
     private void Awake()
     {
@@ -18,5 +18,5 @@ public class CheckPlayer : MonoBehaviourPun
         {
             computerInteraction.CheckPlayer = other.gameObject;
         }
-    }
+    }*/
 }

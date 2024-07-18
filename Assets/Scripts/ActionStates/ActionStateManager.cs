@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ActionStateManager : MonoBehaviourPun
 {
@@ -38,12 +40,22 @@ public class ActionStateManager : MonoBehaviourPun
 
 	public PhotonView playerSetipView;
 
+	private Volume postProcessVolume;
+	private Vignette vignette; // 비네트 효과
+	public int maxPlayerHealth = 500;
 
-    private void Awake()
+	private void Awake()
     {
 		ammo = currentWeapon.GetComponent<WeaponAmmo>();
 		anim = GetComponent<Animator>();
 		audioSource = currentWeapon.GetComponent<AudioSource>();
+
+		postProcessVolume = FindObjectOfType<Volume>();
+		if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
+		{
+			vignette.active = true;
+			vignette.color.Override(Color.red);
+		}
 	}
 
     // Start is called before the first frame update
@@ -82,7 +94,24 @@ public class ActionStateManager : MonoBehaviourPun
 
 
 		currentState.UpdateState(this);
-    }
+		UpdateHealthEffect(); // 체력 효과 업데이트
+	}
+
+	void UpdateHealthEffect()
+	{
+		if (vignette != null)
+		{
+			float healthPercentage = (float)playerHealth / maxPlayerHealth;
+			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			vignette.intensity.Override(vignetteIntensity);
+			Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");
+		}
+		else
+		{
+			Debug.LogError("Vignette effect is null!");
+		}
+	}
+
 
 	public void OnClick()
 	{
