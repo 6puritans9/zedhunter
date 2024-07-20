@@ -18,12 +18,10 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable {
     [SerializeField] private float groundYOffset;
     [SerializeField] private LayerMask groundMask;
     Vector3 spherePos;
-
-
+    
     [SerializeField] private float jumpHeight = 1.0f;
 
     [HideInInspector] public MovementBaseState currentState;
-
 
     public IdleState Idle = new IdleState();
     public WalkState Walk = new WalkState();
@@ -51,8 +49,8 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        PhotonNetwork.SerializationRate = 5; // ÃÊ´ç ÆĞÅ¶ Àü¼Û È½¼ö Á¶Á¤
-        PhotonNetwork.SendRate = 10;          // ÃÊ´ç ³×Æ®¿öÅ© ¾÷µ¥ÀÌÆ® È½¼ö Á¶Á¤
+        PhotonNetwork.SerializationRate = 5; // ì´ˆë‹¹ ì§ë ¬í™” íŒ¨í‚· ìˆ˜ ì„¤ì •
+        PhotonNetwork.SendRate = 10;          // ì´ˆë‹¹ ë„¤íŠ¸ì›Œí¬ ë©”ì‹œì§€ ì „ì†¡ ìˆ˜ ì„¤ì •
 
         targetPosition = transform.position;
         targetRotation = transform.rotation;
@@ -75,7 +73,9 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable {
         else
         {
             float lerpFactor = (Time.time - lastReceivedTime) * PhotonNetwork.SerializationRate;
+            // í˜„ì¬ ìœ„ì¹˜ë¥¼ ë³´ê°„í•©ë‹ˆë‹¤.
             transform.position = Vector3.Lerp(transform.position, targetPosition, lerpFactor);
+            // í˜„ì¬ íšŒì „ì„ ë³´ê°„í•©ë‹ˆë‹¤.
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lerpFactor);
         }
     }
@@ -103,21 +103,141 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable {
     {
         if(stream.IsWriting)
         {
-            //ÇöÀç À§Ä¡¿Í È¸Àü Àü¼Û
+            // í˜„ì¬ ìœ„ì¹˜ì™€ íšŒì „ ì •ë³´ë¥¼ ë³´ëƒ…ë‹ˆë‹¤.
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
         }
         else
         {
-            //À§Ä¡¿Í È¸Àü µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÏ¿© ¸ñÇ¥À§Ä¡¿Í È¸ÀüÀ¸·Î ¼³Á¤
+            // ìœ„ì¹˜ì™€ íšŒì „ ë°ì´í„°ë¥¼ ìˆ˜ì‹ í•˜ì—¬ ëª©í‘œ ìœ„ì¹˜ì™€ íšŒì „ì„ ì„¤ì •í•©ë‹ˆë‹¤.
             targetPosition = (Vector3)stream.ReceiveNext();
             targetRotation = (Quaternion)stream.ReceiveNext();
             lastReceivedTime = Time.time;
         }
     }
 
-
-
-
     #endregion
 }
+
+
+// using Photon.Pun;
+// using UnityEngine;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine.InputSystem.XR;
+//
+// public class MovementStateManager : MonoBehaviourPun, IPunObservable {
+//     public float currentMoveSpeed;
+//     public float walkSpeed = 3, walkBackSpeed = 2;
+//     public float runSpeed = 7, runBackSpeed = 5;
+//     public float crouchSpeed = 2, crouchBackSpeed = 1;
+//
+//     [HideInInspector] public Vector3 dir;
+//     [HideInInspector] public float hzInput, vInput;
+//     private Rigidbody rb;
+//     private CapsuleCollider capsuleCollider;
+//
+//     [SerializeField] private float groundYOffset;
+//     [SerializeField] private LayerMask groundMask;
+//     Vector3 spherePos;
+//     
+//     [SerializeField] private float jumpHeight = 1.0f;
+//
+//     [HideInInspector] public MovementBaseState currentState;
+//
+//     public IdleState Idle = new IdleState();
+//     public WalkState Walk = new WalkState();
+//     public CrouchState Crouch = new CrouchState();
+//     public RunState Run = new RunState();
+//
+//     [HideInInspector] public Animator anim;
+//
+//     Vector3 targetPosition;
+//     Quaternion targetRotation;
+//
+//     float moveSmoothTime = 0.1f;
+//     float rotationSmoothTime = 0.1f;
+//     float lastReceivedTime;
+//
+//     #region Init_and_Update
+//
+//     private void Awake() {
+//         rb = GetComponent<Rigidbody>();
+//         capsuleCollider = GetComponent<CapsuleCollider>();
+//         anim = GetComponent<Animator>();
+//         SwitchState(Idle);
+//
+//         // Cursor settings
+//         Cursor.lockState = CursorLockMode.Locked;
+//         Cursor.visible = false;
+//
+//         PhotonNetwork.SerializationRate = 5; // ï¿½Ê´ï¿½ ï¿½ï¿½Å¶ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//         PhotonNetwork.SendRate = 10;          // ï¿½Ê´ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//
+//         targetPosition = transform.position;
+//         targetRotation = transform.rotation;
+//     }
+//
+//     void Update() {
+//         if (photonView.IsMine)
+//         {
+//             hzInput = Input.GetAxis("Horizontal");
+//             vInput = Input.GetAxis("Vertical");
+//
+//             dir = (transform.forward * vInput) + (transform.right * hzInput);
+//             dir.y = 0;
+//
+//             anim.SetFloat("hzInput", hzInput);
+//             anim.SetFloat("vInput", vInput);
+//
+//             currentState.UpdateState(this);
+//         }
+//         else
+//         {
+//             float lerpFactor = (Time.time - lastReceivedTime) * PhotonNetwork.SerializationRate;
+//             transform.position = Vector3.Lerp(transform.position, targetPosition, lerpFactor);
+//             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lerpFactor);
+//         }
+//     }
+//
+//     void FixedUpdate() {
+//         if(photonView.IsMine)
+//             Move();
+//     }
+//
+//     #endregion
+//
+//     #region Other_Functions
+//
+//     public void SwitchState(MovementBaseState state) {
+//         currentState = state;
+//         currentState.EnterState(this);
+//     }
+//
+//     void Move() {
+//         Vector3 moveVelocity = dir.normalized * currentMoveSpeed;
+//         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+//     }
+//
+//     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+//     {
+//         if(stream.IsWriting)
+//         {
+//             //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//             stream.SendNext(transform.position);
+//             stream.SendNext(transform.rotation);
+//         }
+//         else
+//         {
+//             //ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//             targetPosition = (Vector3)stream.ReceiveNext();
+//             targetRotation = (Quaternion)stream.ReceiveNext();
+//             lastReceivedTime = Time.time;
+//         }
+//     }
+//
+//
+//
+//
+//     #endregion
+// }

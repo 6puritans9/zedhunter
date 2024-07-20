@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1874111735508765366
+--- !u!114 &-4798422997246031571
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Serval_00_Mat_Body1
-  m_Shader: {fileID: 4800000, guid: 36188a0b5b70a0942945754cdf718ca2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 10088bb375bd73d478691e66f3ee13df, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: ec71f9e05db099b4fbafa2194e733148, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04c79fe162ebe9b458e0d0d39394ce80, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ec71f9e05db099b4fbafa2194e733148, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04c79fe162ebe9b458e0d0d39394ce80, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

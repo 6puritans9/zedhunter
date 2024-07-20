@@ -13,7 +13,7 @@ public class ReloadState : ActionBaseState
 
 	public override void FixedState(ActionStateManager actions)
 	{
-		throw new System.NotImplementedException();
+		// throw new System.NotImplementedException();
 	}
 
 	public override void UpdateState(ActionStateManager actions)

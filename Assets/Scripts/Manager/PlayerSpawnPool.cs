@@ -7,7 +7,7 @@ public class PlayerSpawnPool : MonoBehaviourPunCallbacks
 {
     public static PlayerSpawnPool Instance;
 
-    public GameObject playerPrefab;
+    public GameObject playerToSpawn;
     public List<GameObject> playerPool = new List<GameObject>();
 
     private void Awake()

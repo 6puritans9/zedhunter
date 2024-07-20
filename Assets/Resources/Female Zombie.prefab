@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAD: 10
   canAttack: 0
+  targetPlayer: {fileID: 0}
 --- !u!1 &5303808165141027727
 GameObject:
   m_ObjectHideFlags: 0

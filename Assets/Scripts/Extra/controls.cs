@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class controls : MonoBehaviour
+public class Controls : MonoBehaviour
 {
 	[SerializeField]
 	private Camera cam;
