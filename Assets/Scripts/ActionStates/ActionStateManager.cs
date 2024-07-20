@@ -26,7 +26,7 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
 
     public float cooldownTime = 2f;
     public float nextFireTime = 0f;
-    public static int noOfClicks = 0;
+    public static int numOfClicks = 0;
     public float lastClickedTime = 0;
     public float maxComboDelay = 1;
 
@@ -184,7 +184,7 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("ActionStateManager: OnClick called");
         lastClickedTime = Time.time;
-        noOfClicks++;
+        numOfClicks++;
 
         if (anim == null)
         {
@@ -194,9 +194,9 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
 
         anim.SetBool("SwordAction1", true);
         
-        noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
+        numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
 
-        if (noOfClicks >= 2 && anim.GetCurrentAnimatorStateInfo(2).normalizedTime > 0.7f && anim.GetCurrentAnimatorStateInfo(2).IsName("SwordAction1"))
+        if (numOfClicks >= 2 && anim.GetCurrentAnimatorStateInfo(2).normalizedTime > 0.7f && anim.GetCurrentAnimatorStateInfo(2).IsName("SwordAction1"))
         {
             anim.SetBool("SwordAction1", false);
             anim.SetBool("SwordAction2", true);

@@ -3670,7 +3670,7 @@ GameObject:
   - component: {fileID: 2022332207150144183}
   - component: {fileID: 2275716278216314648}
   m_Layer: 7
-  m_Name: Kafka
+  m_Name: Kafka 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4055,7 +4055,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Aiming
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: Reload
   - Type: 4
     SynchronizeType: 0
@@ -4063,9 +4063,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: SwordAction2
-  - Type: 4
-    SynchronizeType: 0
-    Name: Reload 0
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

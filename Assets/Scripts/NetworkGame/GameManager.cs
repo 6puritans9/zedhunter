@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         public static GameManager Instance;
 
         [Space] public Transform playerSpawnPoint;
+        public EnemySpawnPool EnemySpawnPool;
         public Transform[] enemySpawnPoints;
         public Vector2 spawnAreaSize = new Vector2(2f, 2f);
 

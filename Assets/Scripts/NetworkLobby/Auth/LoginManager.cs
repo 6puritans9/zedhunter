@@ -146,12 +146,12 @@ public class LoginManager : MonoBehaviour
                         yield break;
                     }
 
-                if (!Regex.IsMatch(password, PASSWORD_REGEX))
-                    {
-                        createAlertText.text = "Invalid credentials";
-                        ActivateButtons(true);
-                        yield break;
-                    }
+                // if (!Regex.IsMatch(password, PASSWORD_REGEX))
+                //     {
+                //         createAlertText.text = "Invalid credentials";
+                //         ActivateButtons(true);
+                //         yield break;
+                //     }
 
                 WWWForm form = new WWWForm();
                 form.AddField("rUsername", username);
