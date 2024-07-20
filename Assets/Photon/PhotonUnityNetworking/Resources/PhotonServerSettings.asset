@@ -63,6 +63,10 @@ MonoBehaviour:
   - BossZombieSpawnWave
   - FemaleZombieSpawnWave
   - MaleZombieSpawnWave
+  - DestroyBlock
+  - InteractWithComputer
+  - StartJump
+  - SyncProgress
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

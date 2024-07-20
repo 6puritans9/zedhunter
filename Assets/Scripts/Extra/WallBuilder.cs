@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Photon.Pun;
+using System.Linq; // List 변환을 위해 추가
 
 public class WallBuilder : MonoBehaviourPun
 {
+    public static WallBuilder Instance;
+
     PhotonView photonView;
 
     public GameObject wallPrefab;
@@ -17,40 +20,51 @@ public class WallBuilder : MonoBehaviourPun
     private Queue<GameObject> builtWalls = new Queue<GameObject>();
     private Vector3 lastValidPosition;
 
+    private void Awake()
+    {
+        Instance = this;
+        photonView = GetComponent<PhotonView>();
+    }
+
     void Start()
     {
-		photonView = GetComponentInParent<PhotonView>();
-		// 여기서 레이어를 확인하고 설정합니다.
-		if (LayerMask.NameToLayer("Wall") == -1)
+        if (LayerMask.NameToLayer("Wall") == -1)
         {
             Debug.LogError("Wall layer does not exist. Please create it in Unity's Layer settings.");
         }
+
+        WallHP.OnWallDestroyed += HandleWallDestroyed; // 이벤트 구독
+    }
+
+    void OnDestroy()
+    {
+        WallHP.OnWallDestroyed -= HandleWallDestroyed; // 이벤트 구독 해제
     }
 
     void Update()
     {
         if (photonView.IsMine)
         {
-			if (Input.GetKeyDown(KeyCode.Q))
-			{
-				ToggleBuildMode();
-			}
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                ToggleBuildMode();
+            }
 
-			if (isBuildingEnabled)
-			{
-				UpdatePreview();
+            if (isBuildingEnabled)
+            {
+                UpdatePreview();
 
-				if (Input.GetMouseButtonDown(0))
-				{
-					BuildWall();
-				}
-			}
-			else if (currentPreview != null)
-			{
-				Destroy(currentPreview);
-				currentPreview = null;
-			}
-		}
+                if (Input.GetMouseButtonDown(0))
+                {
+                    BuildWall();
+                }
+            }
+            else if (currentPreview != null)
+            {
+                Destroy(currentPreview);
+                currentPreview = null;
+            }
+        }
     }
 
     void ToggleBuildMode()
@@ -69,14 +83,12 @@ public class WallBuilder : MonoBehaviourPun
             Vector3 buildPosition = hit.point;
             buildPosition.y = Mathf.Round(buildPosition.y);
 
-            // 벽 크기의 절반만큼 위로 올림
             float wallHeight = wallPrefab.GetComponent<Renderer>().bounds.size.y;
             buildPosition.y += wallHeight / 2;
 
             if (currentPreview == null)
             {
                 currentPreview = Instantiate(wallPreviewPrefab, buildPosition, Quaternion.identity);
-                // Preview의 레이어를 Default로 설정 (또는 다른 적절한 레이어)
                 currentPreview.layer = LayerMask.NameToLayer("PreviewWall");
             }
 
@@ -92,7 +104,6 @@ public class WallBuilder : MonoBehaviourPun
                 currentPreview.transform.position = lastValidPosition;
             }
 
-            // 미리보기 색상 변경
             Renderer previewRenderer = currentPreview.GetComponent<Renderer>();
             if (previewRenderer != null)
             {
@@ -110,17 +121,51 @@ public class WallBuilder : MonoBehaviourPun
 
             if (builtWalls.Count >= maxWalls)
             {
-                GameObject oldestWall = builtWalls.Dequeue();
-                PhotonNetwork.Destroy(oldestWall);
+                photonView.RPC("DestroyBlock", RpcTarget.All);
             }
 
             builtWalls.Enqueue(newWall);
         }
     }
 
+    public void UseRPC_AddBlock()
+    {
+        GameObject newWall = PhotonNetwork.Instantiate(wallPrefab.name, currentPreview.transform.position, Quaternion.identity);
+        newWall.layer = LayerMask.NameToLayer("Wall");
+        newWall.SetActive(false);
+        builtWalls.Enqueue(newWall);
+    }
+
+    public void UseRPC_DestroyBlock()
+    {
+        photonView.RPC("DestroyBlock", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void DestroyBlock()
+    {
+        GameObject oldestWall = builtWalls.Dequeue();
+        PhotonNetwork.Destroy(oldestWall);
+    }
+
     bool IsOverlapping(Vector3 position)
     {
         Collider[] colliders = Physics.OverlapBox(position, wallPrefab.GetComponent<Renderer>().bounds.extents * 0.9f, Quaternion.identity, wallLayer);
         return colliders.Length > 0;
+    }
+
+    private void HandleWallDestroyed(GameObject wall)
+    {
+        if (builtWalls.Contains(wall))
+        {
+            // Queue를 List로 변환
+            List<GameObject> tempList = builtWalls.ToList();
+            // List에서 제거
+            tempList.Remove(wall);
+            // 다시 Queue로 변환
+            builtWalls = new Queue<GameObject>(tempList);
+            Debug.Log("Wall destroyed and removed from queue.");
+        }
+        PhotonNetwork.Destroy(wall);
     }
 }

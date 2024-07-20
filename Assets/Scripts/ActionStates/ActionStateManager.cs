@@ -1,6 +1,10 @@
 using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ActionStateManager : MonoBehaviourPunCallbacks
 {
@@ -32,6 +36,11 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
 
     public PhotonView playerSetupView;
 
+    // Red Display
+	private Volume postProcessVolume;
+	private Vignette vignette; 
+	public int maxPlayerHealth = 500;
+
     private void Awake()
     {
         Debug.Log("ActionStateManager: Awake called");
@@ -40,6 +49,12 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
         {
             Debug.LogError("ActionStateManager: Animator component not found!");
         }
+		postProcessVolume = FindObjectOfType<Volume>();
+		if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
+		{
+			vignette.active = true;
+			vignette.color.Override(Color.red);
+		}
     }
 
     void Start()
@@ -130,7 +145,24 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
         {
             currentState.UpdateState(this);
         }
+
+        UpdateHealthEffect();
     }
+
+    void UpdateHealthEffect()
+	{
+		if (vignette != null)
+		{
+			float healthPercentage = (float)playerHealth / maxPlayerHealth;
+			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			vignette.intensity.Override(vignetteIntensity);
+			Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");
+		}
+		else
+		{
+			Debug.LogError("Vignette effect is null!");
+		}
+	}
 
     void SwitchToSword()
     {
