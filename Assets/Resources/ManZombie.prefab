@@ -812,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAD: 30
   canAttack: 0
-  target: {fileID: 0}
+  targetPlayer: {fileID: 0}
 --- !u!1 &1510352749443628500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3138,7 +3138,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 2.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 2
   m_AngularSpeed: 120
@@ -3162,7 +3162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d701f277eaf80e4a82f3df579dbf8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieType: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 640
@@ -3172,15 +3171,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 5660792536603426533}
-  health: 80
+  health: 50
   isDead: 0
-  chaseDistance: 5
-  minJumpDistance: 4
-  maxJumpDistance: 8
-  jumpSpeed: 2
-  jumpHeight: 2
-  jumpCooldown: 3
-  bloodSplashPrefab: {fileID: 0}
 --- !u!114 &4991871911626703096
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,287 @@
+// using Photon.Pun;
+// using Photon.Realtime;
+// using System.Collections;
+// using UnityEngine;
+// using UnityEngine.AI;
+
+// public class EnemyHealth : MonoBehaviourPun
+// {
+//     public static EnemyHealth Instance;
+
+//     public LayerMask whatIsTarget; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½
+
+//     public Coroutine UpdateTargetCorutine;
+
+//     public Animator anim;
+
+//     [HideInInspector]public Transform Target;
+//     public bool isChase;
+//     [HideInInspector]public NavMeshAgent nav;
+
+//     public Collider[] colliders;
+//     float closestDistance = Mathf.Infinity;
+
+
+//     public delegate void EnemyKilledHandler(EnemyHealth enemy);
+//     public event EnemyKilledHandler OnEnemyKilled;
+
+//     public BoxCollider attackRange;
+
+//     public float health = 20;
+//     [HideInInspector] public bool isDead;
+
+//     EnemyAttack enemyAttack;
+//     bool isAttack;
+
+//     private void Awake()
+//     {
+//         Instance = this;
+//         enemyAttack = GetComponentInChildren<EnemyAttack>();
+//         nav = GetComponent<NavMeshAgent>();
+//         anim = GetComponent<Animator>();
+//     }
+
+//     private void Start()
+//     {
+//         isAttack = false;
+//         isChase = true;
+//         isDead = false;
+//         StartCoroutine(UpdateTarget());
+//     }
+
+//     IEnumerator UpdateTarget()
+//     {
+//         while (!isDead)
+//         {
+//             // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ closestDistanceï¿½ï¿½ ï¿½Ê±ï¿½È­
+//             closestDistance = Mathf.Infinity;
+//             // 20 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//             // ï¿½ï¿½, targetLayersï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½
+//             colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
+//             GameObject closestTarget = null;
+
+//             // ï¿½ï¿½ï¿½ ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ï¸é¼­, ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Ã£ï¿½ï¿½
+//             for (int i = 0; i < colliders.Length; i++)
+//             {
+//                 // ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½Îºï¿½ï¿½ï¿½ LivingEntity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//                 GameObject livingEntity = colliders[i].gameObject;
+
+//                 // LivingEntity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//                 if (livingEntity.layer == 7)
+//                 {
+//                     float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
+//                     if (distanceToTarget < closestDistance)
+//                     {
+//                         closestDistance = distanceToTarget;
+//                         closestTarget = livingEntity;
+//                     }
+
+//                     /*
+//                     * ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//                     * Photonï¿½ï¿½ RPC È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½
+//                     * SetTargetï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½
+//                     * ViewIDï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+//                     */
+//                     if (closestTarget != null)
+//                     {
+//                         Target = closestTarget.transform;
+//                         photonView.RPC(
+//                             "SetTarget",
+//                             RpcTarget.AllBuffered,
+//                             closestTarget.GetComponent<PhotonView>().ViewID);
+//                     }
+//                 }
+//             }
+
+//             //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çºï¿½
+//             if (colliders.Length <= 0)
+//             {
+//                 isChase = false;
+//                 Target = null;
+//             }
+//             else
+//                 isChase = true;
+
+//             if (Target)
+//             {
+//                 float speed = 0;
+
+//                 float targetRadius = 0.5f;
+//                 float targetRange = 0.5f;
+//                 RaycastHit[] rayHits = Physics.SphereCastAll(transform.position,
+//                                                          targetRadius, transform.forward,
+//                                                          targetRange, LayerMask.GetMask("Player"));
+                
+//                 if (rayHits.Length > 0 && !isAttack)
+//                 {
+//                     foreach (RaycastHit hit in rayHits)
+//                     {
+//                         GameObject hitObject = hit.collider.gameObject;
+//                         if(hitObject.TryGetComponent(out ActionStateManager player))
+//                         {
+//                             enemyAttack.targetPlayer = player.gameObject;
+//                             break;
+//                         }
+//                     }
+//                     StartCoroutine(Attack());
+//                 }
+
+//                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ navï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//                 if(!isAttack)
+//                 {
+//                     nav.isStopped = false;
+//                     speed = nav.velocity.magnitude;
+//                 }
+//                 else
+//                     nav.isStopped = true;
+
+//                 if (speed > 0.1f)
+//                 {
+//                     anim.SetBool("isWalking", true);
+//                     anim.SetFloat("speed", speed);
+//                 }
+//                 else
+//                 {
+//                     anim.SetBool("isWalking", false);
+//                     anim.SetFloat("speed", 0f);
+//                 }
+
+//                 nav.SetDestination(Target.transform.position);
+//             }
+//             else
+//             {
+//                 nav.isStopped = true;// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : AI ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+//                 SetRandomDestination();
+//             }
+//             // 0.25ï¿½ï¿½ ï¿½Ö±ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½İºï¿½
+//             yield return new WaitForSeconds(0.25f);
+//         }
+//     }
+
+//     IEnumerator Attack()
+//     {
+//         isChase = false;
+//         isAttack = true;
+//         anim.SetBool("isAttack", true);
+
+//         yield return new WaitForSeconds(1f);
+
+//         isChase = true;
+//         isAttack = false;
+//         anim.SetBool("isAttack", false);
+//     }
+
+//     public void DoAttack()
+//     {
+//         if (enemyAttack != null)
+//             enemyAttack.DoAttack();
+//     }
+
+//     public void StopUpdateTargetCorutine()
+//     {
+//         if(UpdateTargetCorutine != null)
+//         {
+//             StopCoroutine(UpdateTarget());
+//             UpdateTargetCorutine = null;
+//         }
+//     }
+
+//     public void StartUpdateTargetCorutine()
+//     {
+//         if(UpdateTargetCorutine == null)
+//         {
+//             UpdateTargetCorutine = StartCoroutine(UpdateTarget());
+//         }
+//     }
+
+
+
+//     private void SetRandomDestination()
+//     {
+//         anim.SetBool("isWalking", true);
+//         anim.SetFloat("speed", nav.velocity.magnitude);
+
+
+//         Vector3 randomDir = Random.insideUnitCircle * 2;
+//         randomDir += transform.position;
+//         NavMeshHit navHit;
+//         NavMesh.SamplePosition(randomDir, out navHit, 1, NavMesh.AllAreas);
+
+//         nav.SetDestination(navHit.position);
+//         nav.isStopped = false;
+//     }
+
+//     [PunRPC]
+//     public void TakeDamage(float damage)
+//     {
+//         if (health > 0)
+//         {
+//             health -= damage;
+//             if (PhotonNetwork.IsMasterClient)
+//             {
+//                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RPCï¿½ï¿½ EnemyDeath()È£ï¿½ï¿½ï¿½ï¿½ EnemyPoolï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+//                 if (health <= 0)
+//                 {
+//                     photonView.RPC("EnemyDeath", RpcTarget.All);
+//                     EnemySpawnPool.Instance.enemyPool.Enqueue(this);
+//                 }
+//             }
+//             /*else
+//                 Debug.Log("Hit!");*/
+//         }
+//     }
+
+//     [PunRPC]
+//     void EnemyDeath()
+//     {
+//         if (isDead) return;
+
+//         if (photonView.IsMine)
+//         {
+//             photonView.RPC("StopAction", RpcTarget.All);
+
+//             // OnEnemyKilled ï¿½Ìºï¿½Æ® È£ï¿½ï¿½
+//             OnEnemyKilled?.Invoke(this);
+//         }
+//     }
+
+//     [PunRPC]
+//     public void StopAction()
+//     {
+//         isDead = true;
+//         isChase = false;
+
+//         nav.enabled = false;
+//         anim.enabled = false;
+        
+//         UpdateTargetCorutine = null;
+//     }
+
+//     [PunRPC]
+//     public void ReStartAction()
+//     {
+//         if(nav.enabled == false)
+//             nav.enabled = true;
+//         anim.enabled = true;
+
+//         isDead = false;
+//         isChase = true;
+//         health = 25;
+
+//         StartUpdateTargetCorutine();
+//     }
+
+//     [PunRPC]
+//     void SetTarget(int targetViewID)
+//     {
+//         PhotonView targetPhotonView = PhotonView.Find(targetViewID);
+//         if (targetPhotonView != null)
+//         {
+//             Target = targetPhotonView.transform;
+//         }
+//     }
+// }
+
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -8,19 +292,18 @@ public class EnemyHealth : MonoBehaviourPun
 {
     public static EnemyHealth Instance;
 
-    public LayerMask whatIsTarget; // °ø°İ ´ë»ó ·¹ÀÌ¾î
+    public LayerMask whatIsTarget; // íƒ€ê²Ÿ ë ˆì´ì–´
 
     public Coroutine UpdateTargetCorutine;
 
     public Animator anim;
 
-    [HideInInspector]public Transform Target;
+    [HideInInspector] public Transform Target;
     public bool isChase;
-    [HideInInspector]public NavMeshAgent nav;
+    [HideInInspector] public NavMeshAgent nav;
 
     public Collider[] colliders;
     float closestDistance = Mathf.Infinity;
-
 
     public delegate void EnemyKilledHandler(EnemyHealth enemy);
     public event EnemyKilledHandler OnEnemyKilled;
@@ -53,20 +336,17 @@ public class EnemyHealth : MonoBehaviourPun
     {
         while (!isDead)
         {
-            // ¸Å ·çÇÁ ½ÃÀÛ ½Ã closestDistance¸¦ ÃÊ±âÈ­
+            // ë§¤ ì—…ë°ì´íŠ¸ë§ˆë‹¤ closestDistanceë¥¼ ì´ˆê¸°í™”
             closestDistance = Mathf.Infinity;
-            // 20 À¯´ÖÀÇ ¹İÁö¸§À» °¡Áø °¡»óÀÇ ±¸¸¦ ±×·ÈÀ»¶§, ±¸¿Í °ãÄ¡´Â ¸ğµç Äİ¶óÀÌ´õ¸¦ °¡Á®¿È
-            // ´Ü, targetLayers¿¡ ÇØ´çÇÏ´Â ·¹ÀÌ¾î¸¦ °¡Áø Äİ¶óÀÌ´õ¸¸ °¡Á®¿Àµµ·Ï ÇÊÅÍ¸µ
+            // 15 ê±°ë¦¬ ë‚´ì˜ íƒ€ê²Ÿ ë ˆì´ì–´ë¥¼ ê°€ì§„ ì½œë¼ì´ë”ë“¤ ì°¾ê¸°
             colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
             GameObject closestTarget = null;
 
-            // ¸ğµç Äİ¶óÀÌ´õµéÀ» ¼øÈ¸ÇÏ¸é¼­, »ì¾ÆÀÖ´Â ÇÃ·¹ÀÌ¾î¸¦ Ã£±â
+            // ëª¨ë“  ì½œë¼ì´ë”ë¥¼ í™•ì¸í•˜ë©°, ê°€ì¥ ê°€ê¹Œìš´ í”Œë ˆì´ì–´ ì°¾ê¸°
             for (int i = 0; i < colliders.Length; i++)
             {
-                // Äİ¶óÀÌ´õ·ÎºÎÅÍ LivingEntity ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
                 GameObject livingEntity = colliders[i].gameObject;
 
-                // LivingEntity ÄÄÆ÷³ÍÆ®°¡ Á¸Àç
                 if (livingEntity.layer == 7)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
@@ -76,12 +356,6 @@ public class EnemyHealth : MonoBehaviourPun
                         closestTarget = livingEntity;
                     }
 
-                    /*
-                    * ÇÃ·¹ÀÌ¾î¸¦ Å¸°ÙÀ¸·Î ¼³Á¤
-                    * PhotonÀÇ RPC È£ÃâÀ» ÅëÇØ ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡¼­
-                    * SetTargetÇÔ¼ö¸¦ È£Ãâ
-                    * ViewID·Î Å¸±ê µ¿±âÈ­
-                    */
                     if (closestTarget != null)
                     {
                         Target = closestTarget.transform;
@@ -93,7 +367,7 @@ public class EnemyHealth : MonoBehaviourPun
                 }
             }
 
-            //°¨Áö¿©ºÎÆÇº°
+            // íƒ€ê²Ÿì´ ì—†ìœ¼ë©´ ì¶”ì  ì¤‘ì§€
             if (colliders.Length <= 0)
             {
                 isChase = false;
@@ -111,13 +385,13 @@ public class EnemyHealth : MonoBehaviourPun
                 RaycastHit[] rayHits = Physics.SphereCastAll(transform.position,
                                                          targetRadius, transform.forward,
                                                          targetRange, LayerMask.GetMask("Player"));
-                
+
                 if (rayHits.Length > 0 && !isAttack)
                 {
                     foreach (RaycastHit hit in rayHits)
                     {
                         GameObject hitObject = hit.collider.gameObject;
-                        if(hitObject.TryGetComponent(out ActionStateManager player))
+                        if (hitObject.TryGetComponent(out ActionStateManager player))
                         {
                             enemyAttack.targetPlayer = player.gameObject;
                             break;
@@ -126,8 +400,8 @@ public class EnemyHealth : MonoBehaviourPun
                     StartCoroutine(Attack());
                 }
 
-                //°ø°İÁßÀÌ¸é Àá½Ã navÀá½Ã ¸ØÃã
-                if(!isAttack)
+                // ì¶”ì  ì¤‘ì´ë©´ ë„¤ë¹„ê²Œì´ì…˜ ì´ë™
+                if (!isAttack)
                 {
                     nav.isStopped = false;
                     speed = nav.velocity.magnitude;
@@ -150,10 +424,9 @@ public class EnemyHealth : MonoBehaviourPun
             }
             else
             {
-                nav.isStopped = true;// ÃßÀû ´ë»ó ¾øÀ½ : AI ÀÌµ¿ ÁßÁö
+                nav.isStopped = true; // íƒ€ê²Ÿì´ ì—†ìœ¼ë©´ AI ì´ë™ ì¤‘ì§€
                 SetRandomDestination();
             }
-            // 0.25ÃÊ ÁÖ±â·Î Ã³¸® ¹İº¹
             yield return new WaitForSeconds(0.25f);
         }
     }
@@ -179,7 +452,7 @@ public class EnemyHealth : MonoBehaviourPun
 
     public void StopUpdateTargetCorutine()
     {
-        if(UpdateTargetCorutine != null)
+        if (UpdateTargetCorutine != null)
         {
             StopCoroutine(UpdateTarget());
             UpdateTargetCorutine = null;
@@ -188,19 +461,16 @@ public class EnemyHealth : MonoBehaviourPun
 
     public void StartUpdateTargetCorutine()
     {
-        if(UpdateTargetCorutine == null)
+        if (UpdateTargetCorutine == null)
         {
             UpdateTargetCorutine = StartCoroutine(UpdateTarget());
         }
     }
 
-
-
     private void SetRandomDestination()
     {
         anim.SetBool("isWalking", true);
         anim.SetFloat("speed", nav.velocity.magnitude);
-
 
         Vector3 randomDir = Random.insideUnitCircle * 2;
         randomDir += transform.position;
@@ -217,17 +487,25 @@ public class EnemyHealth : MonoBehaviourPun
         if (health > 0)
         {
             health -= damage;
+            anim.SetTrigger("damage");
             if (PhotonNetwork.IsMasterClient)
             {
-                //Á×À¸¸é RPC·Î EnemyDeath()È£ÃâÈÄ EnemyPool¿¡ Áı¾î³Ö±â
+                // ë§ˆìŠ¤í„° í´ë¼ì´ì–¸íŠ¸ì—ì„œë§Œ ì£½ìŒ ì²˜ë¦¬
                 if (health <= 0)
                 {
                     photonView.RPC("EnemyDeath", RpcTarget.All);
-                    EnemySpawnPool.Instance.enemyPool.Enqueue(this);
+                    StartCoroutine(RemoveFromSceneAfterDelay(2f));
                 }
             }
-            /*else
-                Debug.Log("Hit!");*/
+        }
+    }
+
+    IEnumerator RemoveFromSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -240,9 +518,10 @@ public class EnemyHealth : MonoBehaviourPun
         {
             photonView.RPC("StopAction", RpcTarget.All);
 
-            // OnEnemyKilled ÀÌº¥Æ® È£Ãâ
+            // OnEnemyKilled ì´ë²¤íŠ¸ í˜¸ì¶œ
             OnEnemyKilled?.Invoke(this);
         }
+        anim.SetTrigger("death");
     }
 
     [PunRPC]
@@ -253,14 +532,14 @@ public class EnemyHealth : MonoBehaviourPun
 
         nav.enabled = false;
         anim.enabled = false;
-        
+
         UpdateTargetCorutine = null;
     }
 
     [PunRPC]
     public void ReStartAction()
     {
-        if(nav.enabled == false)
+        if (nav.enabled == false)
             nav.enabled = true;
         anim.enabled = true;
 
@@ -281,3 +560,5 @@ public class EnemyHealth : MonoBehaviourPun
         }
     }
 }
+
+
