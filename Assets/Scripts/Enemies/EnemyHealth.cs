@@ -352,13 +352,13 @@ public class EnemyHealth : MonoBehaviourPun
         switch (zombieType)
         {
             case ZombieType.Female:
-                health = 25;
+                health = 5;
                 break;
             case ZombieType.Male:
-                health = 80;
+                health = 5;
                 break;
             case ZombieType.Boss:
-                health = 300;
+                health = 10;
                 break;
         }
     }
