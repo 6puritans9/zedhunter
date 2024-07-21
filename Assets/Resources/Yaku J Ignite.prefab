@@ -191,7 +191,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 3
   m_AngularSpeed: 120
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d701f277eaf80e4a82f3df579dbf8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieType: 2
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -224,8 +225,16 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 7757451556906149779}
-  health: 100
+  health: 50
   isDead: 0
+  chaseDistance: 5
+  minJumpDistance: 4
+  maxJumpDistance: 8
+  jumpSpeed: 2
+  jumpHeight: 2
+  jumpCooldown: 3
+  bloodSplashPrefab: {fileID: 3548588485384254792, guid: 4728f7248da6e4ae5978cfbba8c74fc4,
+    type: 3}
 --- !u!114 &3300339860900103561
 MonoBehaviour:
   m_ObjectHideFlags: 0

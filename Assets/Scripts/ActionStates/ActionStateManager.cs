@@ -289,7 +289,7 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
 
             transform.position = GameManager.Instance.playerSpawnPoint.position;
             isDead = false;
-            playerHealth = 30;
+            playerHealth = 500;
         }
         photonView.RPC("RPC_RespawnPlayer", RpcTarget.All, photonView.ViewID);
     }

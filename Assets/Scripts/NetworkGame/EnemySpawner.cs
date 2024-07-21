@@ -1,3 +1,5 @@
+// 기존 코드
+
 // using Photon.Pun;
 // using System.Collections;
 // using System.Collections.Generic;
@@ -254,8 +256,138 @@
 
 
 
+// 수정한 코드
 
+// using Photon.Pun;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
 
+// public class EnemySpawner : MonoBehaviourPunCallbacks
+// {
+//     public static EnemySpawner Instance;
+
+//     public Transform[] spawnPoints = new Transform[10]; // 10개의 스폰 포인트
+//     public GameObject femaleZombiePrefab;
+//     public GameObject maleZombiePrefab;
+//     public GameObject bossZombiePrefab;
+
+//     public int femaleZombiePoolSize;
+//     public int maleZombiePoolSize;
+//     public int bossZombiePoolSize;
+
+//     private Queue<EnemyHealth> femaleZombiePool = new Queue<EnemyHealth>();
+//     private Queue<EnemyHealth> maleZombiePool = new Queue<EnemyHealth>();
+//     private Queue<EnemyHealth> bossZombiePool = new Queue<EnemyHealth>();
+
+//     public Vector2 spawnAreaSize = new Vector2(1f, 1f); // 스폰 영역 크기
+
+//     private void Awake()
+//     {
+//         Instance = this;
+//         InitializeSpawnPoints();
+//     }
+
+//     private void Start()
+//     {
+//         if (PhotonNetwork.IsMasterClient)
+//         {
+//             InitializeEnemyPool();
+//             StartCoroutine(SpawnEnemies());
+//         }
+//     }
+
+//     private void InitializeSpawnPoints()
+//     {
+//         for (int i = 0; i < spawnPoints.Length; i++)
+//         {
+//             spawnPoints[i] = transform.GetChild(i);
+//         }
+//     }
+
+//     private void InitializeEnemyPool()
+//     {
+//         // femaleZombie
+//         for (int i = 0; i < femaleZombiePoolSize; i++)
+//         {
+//             GameObject enemy = PhotonNetwork.Instantiate(femaleZombiePrefab.name, Vector3.zero, Quaternion.identity);
+//             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+//             femaleZombiePool.Enqueue(enemyHealth);
+//             enemy.SetActive(false);
+//         }
+
+//         // maleZombie
+//         for (int i = 0; i < maleZombiePoolSize; i++)
+//         {
+//             GameObject enemy = PhotonNetwork.Instantiate(maleZombiePrefab.name, Vector3.zero, Quaternion.identity);
+//             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+//             maleZombiePool.Enqueue(enemyHealth);
+//             enemy.SetActive(false);
+//         }
+
+//         // bossZombie
+//         for (int i = 0; i < bossZombiePoolSize; i++)
+//         {
+//             GameObject enemy = PhotonNetwork.Instantiate(bossZombiePrefab.name, Vector3.zero, Quaternion.identity);
+//             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+//             bossZombiePool.Enqueue(enemyHealth);
+//             enemy.SetActive(false);
+//         }
+//     }
+
+//     private IEnumerator SpawnEnemies()
+//     {
+//         while (true)
+//         {
+//             foreach (var spawnPoint in spawnPoints)
+//             {
+//                 float rand = Random.Range(0f, 1f);
+//                 if (rand <= 0.60f)
+//                 {
+//                     SpawnZombieFromPool(femaleZombiePool, spawnPoint.position);
+//                 }
+//                 else if (rand <= 0.95f)
+//                 {
+//                     SpawnZombieFromPool(maleZombiePool, spawnPoint.position);
+//                 }
+//                 else
+//                 {
+//                     SpawnZombieFromPool(bossZombiePool, spawnPoint.position);
+//                 }
+//             }
+//             yield return new WaitForSeconds(5f); // 2초 대기
+//         }
+//     }
+
+//     private void SpawnZombieFromPool(Queue<EnemyHealth> pool, Vector3 spawnPosition)
+//     {
+//         if (pool.TryDequeue(out EnemyHealth enemy))
+//         {
+//             if (!enemy.gameObject.activeSelf)
+//             {
+//                 enemy.transform.position = GetRandomSpawnPosition(spawnPosition);
+//                 enemy.gameObject.SetActive(true);
+//             }
+//             else
+//             {
+//                 pool.Enqueue(enemy);
+//             }
+//         }
+//     }
+
+//     private Vector3 GetRandomSpawnPosition(Vector3 center)
+//     {
+//         float halfWidth = spawnAreaSize.x / 2f;
+//         float halfHeight = spawnAreaSize.y / 2f;
+
+//         float randomX = Random.Range(-halfWidth, halfWidth);
+//         float randomZ = Random.Range(-halfHeight, halfHeight);
+
+//         Vector3 randomSpawnPosition = new Vector3(randomX, 0f, randomZ) + center;
+
+//         return randomSpawnPosition;
+//     }
+// }
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -265,112 +397,112 @@ public class EnemySpawner : MonoBehaviourPunCallbacks
 {
     public static EnemySpawner Instance;
 
-    public Transform[] spawnPoints = new Transform[10]; // 10개의 스폰 포인트
-    public GameObject femaleZombiePrefab;
-    public GameObject maleZombiePrefab;
-    public GameObject bossZombiePrefab;
+    public Transform[] spawnPoints;
+    public GameObject[] enemyPrefabs; // 0: female, 1: male, 2: boss
 
-    public int femaleZombiePoolSize;
-    public int maleZombiePoolSize;
-    public int bossZombiePoolSize;
+    [System.Serializable]
+    public class EnemyPoolInfo
+    {
+        public int poolSize;
+        public float spawnChance;
+    }
 
-    private Queue<EnemyHealth> femaleZombiePool = new Queue<EnemyHealth>();
-    private Queue<EnemyHealth> maleZombiePool = new Queue<EnemyHealth>();
-    private Queue<EnemyHealth> bossZombiePool = new Queue<EnemyHealth>();
+    public EnemyPoolInfo[] enemyPoolInfos; // 0: female, 1: male, 2: boss
 
-    public Vector2 spawnAreaSize = new Vector2(30f, 30f); // 스폰 영역 크기
+    private ObjectPool<EnemyHealth>[] enemyPools;
+
+    public Vector2 spawnAreaSize = new Vector2(1f, 1f);
+
+    private float spawnInterval = 5f;
+    private float nextSpawnTime;
 
     private void Awake()
     {
         Instance = this;
         InitializeSpawnPoints();
+        InitializeEnemyPools();
     }
 
     private void Start()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            InitializeEnemyPool();
-            StartCoroutine(SpawnEnemies());
+            nextSpawnTime = Time.time + spawnInterval;
+        }
+    }
+
+    private void Update()
+    {
+        if (PhotonNetwork.IsMasterClient && Time.time >= nextSpawnTime)
+        {
+            SpawnEnemyWave();
+            nextSpawnTime = Time.time + spawnInterval;
         }
     }
 
     private void InitializeSpawnPoints()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
+        spawnPoints = new Transform[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
         {
             spawnPoints[i] = transform.GetChild(i);
         }
     }
 
-    private void InitializeEnemyPool()
+    private void InitializeEnemyPools()
     {
-        // femaleZombie
-        for (int i = 0; i < femaleZombiePoolSize; i++)
+        enemyPools = new ObjectPool<EnemyHealth>[enemyPrefabs.Length];
+        for (int i = 0; i < enemyPrefabs.Length; i++)
         {
-            GameObject enemy = PhotonNetwork.Instantiate(femaleZombiePrefab.name, Vector3.zero, Quaternion.identity);
-            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-            femaleZombiePool.Enqueue(enemyHealth);
-            enemy.SetActive(false);
-        }
-
-        // maleZombie
-        for (int i = 0; i < maleZombiePoolSize; i++)
-        {
-            GameObject enemy = PhotonNetwork.Instantiate(maleZombiePrefab.name, Vector3.zero, Quaternion.identity);
-            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-            maleZombiePool.Enqueue(enemyHealth);
-            enemy.SetActive(false);
-        }
-
-        // bossZombie
-        for (int i = 0; i < bossZombiePoolSize; i++)
-        {
-            GameObject enemy = PhotonNetwork.Instantiate(bossZombiePrefab.name, Vector3.zero, Quaternion.identity);
-            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-            bossZombiePool.Enqueue(enemyHealth);
-            enemy.SetActive(false);
+            int poolSize = enemyPoolInfos[i].poolSize;
+            enemyPools[i] = new ObjectPool<EnemyHealth>(
+                createFunc: () => PhotonNetwork.Instantiate(enemyPrefabs[i].name, Vector3.zero, Quaternion.identity).GetComponent<EnemyHealth>(),
+                actionOnGet: (enemy) => enemy.gameObject.SetActive(true),
+                actionOnRelease: (enemy) => enemy.gameObject.SetActive(false),
+                actionOnDestroy: (enemy) => PhotonNetwork.Destroy(enemy.gameObject),
+                defaultCapacity: poolSize,
+                maxSize: poolSize
+            );
         }
     }
 
-    private IEnumerator SpawnEnemies()
+    [PunRPC]
+    private void SpawnEnemy(int enemyType, Vector3 position, int viewID)
     {
-        while (true)
+        if (enemyType < 0 || enemyType >= enemyPools.Length) return;
+
+        EnemyHealth enemy = enemyPools[enemyType].Get();
+        enemy.transform.position = position;
+        enemy.GetComponent<PhotonView>().ViewID = viewID;
+        enemy.OnEnemyKilled += (killedEnemy) => ReturnEnemyToPool(killedEnemy, enemyType);
+    }
+
+    private void SpawnEnemyWave()
+    {
+        foreach (var spawnPoint in spawnPoints)
         {
-            foreach (var spawnPoint in spawnPoints)
+            float rand = Random.Range(0f, 1f);
+            float cumulativeChance = 0f;
+
+            for (int i = 0; i < enemyPoolInfos.Length; i++)
             {
-                float rand = Random.Range(0f, 1f);
-                if (rand <= 0.60f)
+                cumulativeChance += enemyPoolInfos[i].spawnChance;
+                if (rand <= cumulativeChance)
                 {
-                    SpawnZombieFromPool(femaleZombiePool, spawnPoint.position);
-                }
-                else if (rand <= 0.95f)
-                {
-                    SpawnZombieFromPool(maleZombiePool, spawnPoint.position);
-                }
-                else
-                {
-                    SpawnZombieFromPool(bossZombiePool, spawnPoint.position);
+                    Vector3 spawnPosition = GetRandomSpawnPosition(spawnPoint.position);
+                    // int viewID = PhotonNetwork.AllocateViewID();
+                    PhotonView pv = PhotonNetwork.Instantiate(enemyPrefabs[i].name, spawnPosition, Quaternion.identity).GetComponent<PhotonView>();
+                    int viewID = pv.ViewID;
+                    photonView.RPC("SpawnEnemy", RpcTarget.All, i, spawnPosition, viewID);
+                    break;
                 }
             }
-            yield return new WaitForSeconds(5f); // 2초 대기
         }
     }
 
-    private void SpawnZombieFromPool(Queue<EnemyHealth> pool, Vector3 spawnPosition)
+    private void ReturnEnemyToPool(EnemyHealth enemy, int enemyType)
     {
-        if (pool.TryDequeue(out EnemyHealth enemy))
-        {
-            if (!enemy.gameObject.activeSelf)
-            {
-                enemy.transform.position = GetRandomSpawnPosition(spawnPosition);
-                enemy.gameObject.SetActive(true);
-            }
-            else
-            {
-                pool.Enqueue(enemy);
-            }
-        }
+        enemyPools[enemyType].Release(enemy);
     }
 
     private Vector3 GetRandomSpawnPosition(Vector3 center)
@@ -381,8 +513,51 @@ public class EnemySpawner : MonoBehaviourPunCallbacks
         float randomX = Random.Range(-halfWidth, halfWidth);
         float randomZ = Random.Range(-halfHeight, halfHeight);
 
-        Vector3 randomSpawnPosition = new Vector3(randomX, 0f, randomZ) + center;
+        return new Vector3(randomX, 0f, randomZ) + center;
+    }
+}
 
-        return randomSpawnPosition;
+// 간단한 ObjectPool 구현
+public class ObjectPool<T> where T : Component
+{
+    private readonly Queue<T> objects = new Queue<T>();
+    private readonly System.Func<T> createFunc;
+    private readonly System.Action<T> actionOnGet;
+    private readonly System.Action<T> actionOnRelease;
+    private readonly System.Action<T> actionOnDestroy;
+    private readonly int maxSize;
+
+    public ObjectPool(System.Func<T> createFunc, System.Action<T> actionOnGet, System.Action<T> actionOnRelease, System.Action<T> actionOnDestroy, int defaultCapacity, int maxSize)
+    {
+        this.createFunc = createFunc;
+        this.actionOnGet = actionOnGet;
+        this.actionOnRelease = actionOnRelease;
+        this.actionOnDestroy = actionOnDestroy;
+        this.maxSize = maxSize;
+
+        for (int i = 0; i < defaultCapacity; i++)
+        {
+            objects.Enqueue(createFunc());
+        }
+    }
+
+    public T Get()
+    {
+        T obj = objects.Count > 0 ? objects.Dequeue() : createFunc();
+        actionOnGet?.Invoke(obj);
+        return obj;
+    }
+
+    public void Release(T obj)
+    {
+        if (objects.Count < maxSize)
+        {
+            actionOnRelease?.Invoke(obj);
+            objects.Enqueue(obj);
+        }
+        else
+        {
+            actionOnDestroy?.Invoke(obj);
+        }
     }
 }

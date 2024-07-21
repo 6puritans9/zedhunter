@@ -2594,6 +2594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d701f277eaf80e4a82f3df579dbf8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieType: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -2603,8 +2604,16 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 3929473598535820894}
-  health: 25
+  health: 10
   isDead: 0
+  chaseDistance: 5
+  minJumpDistance: 4
+  maxJumpDistance: 8
+  jumpSpeed: 2
+  jumpHeight: 2
+  jumpCooldown: 3
+  bloodSplashPrefab: {fileID: 3548588485384254792, guid: 4728f7248da6e4ae5978cfbba8c74fc4,
+    type: 3}
 --- !u!114 &3287241835566591415
 MonoBehaviour:
   m_ObjectHideFlags: 0

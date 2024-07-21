@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CylinderInteraction : MonoBehaviourPunCallbacks, IPunObservable
 {
     private HashSet<int> playersInContact = new HashSet<int>();
-    private const int REQUIRED_PLAYERS = 3;
+    private const int REQUIRED_PLAYERS = 1;
 
     private void OnTriggerEnter(Collider other)
     {

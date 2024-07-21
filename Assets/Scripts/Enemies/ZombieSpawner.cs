@@ -5,7 +5,7 @@ public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefab;  // 좀비 프리팹
     public Transform[] spawnPoints;  // 스폰 포인트
-    public float spawnInterval = 5.0f;  // 좀비 스폰 간격
+    public float spawnInterval = 3.0f;  // 좀비 스폰 간격
     public ZombieManager zombieManager;  // 좀비 매니저
 
     private void Start()

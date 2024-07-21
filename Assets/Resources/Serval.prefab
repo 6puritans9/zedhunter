@@ -7445,7 +7445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  playerHealth: 30
+  playerHealth: 500
   currentWeapon: {fileID: 3390046823468107991}
   ammo: {fileID: 0}
   anim: {fileID: 0}
@@ -7458,6 +7458,7 @@ MonoBehaviour:
   lastClickedTime: 0
   maxComboDelay: 1
   playerSetupView: {fileID: 6155048246089777028}
+  maxPlayerHealth: 500
 --- !u!114 &234920062507591084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7496,7 +7497,7 @@ MonoBehaviour:
   photonView: {fileID: 6155048246089777028}
   fireRate: 0.12
   semiAuto: 0
-  hitParticle: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af,
+  hitParticle: {fileID: 5339739117810204693, guid: 1369995c871694dfa9b254128949465e,
     type: 3}
   barrelPos: {fileID: 8590757205618172304}
   bulletVelocity: 0
