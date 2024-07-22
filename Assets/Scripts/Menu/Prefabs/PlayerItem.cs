@@ -9,13 +9,13 @@ using TMPro;
 public class PlayerItem : MonoBehaviourPunCallbacks
     {
         public TMP_Text characterName;
-        public GameObject leftArrowButton;
-        public GameObject rightArrowButton;
         public Image playerAvatar;
         public Sprite[] avatars;
+        
+        public GameObject leftArrowButton;
+        public GameObject rightArrowButton;
 
-        private int currentAvatarIndex = 0;
-        private Hashtable _playerProperties = new Hashtable();
+        [HideInInspector] public Hashtable playerProperties = new Hashtable();
 
 
         private void Start()
@@ -32,26 +32,26 @@ public class PlayerItem : MonoBehaviourPunCallbacks
             {
                 characterName.text = playerAvatar.sprite.name;
 
-                if (_playerProperties["avatar"] == null)
-                    _playerProperties["avatar"] = 0;
+                if (playerProperties["avatar"] == null)
+                    playerProperties["avatar"] = 0;
             }
         
         public void UpdatePlayerItem()
             {
-                playerAvatar.sprite = avatars[(int)_playerProperties["avatar"]];
+                playerAvatar.sprite = avatars[(int)playerProperties["avatar"]];
             }
 
         #region ClickArrows
 
         public void OnClickLeftArrow()
             {
-                if ((int)_playerProperties["avatar"] == 0)
+                if ((int)playerProperties["avatar"] == 0)
                     {
-                        _playerProperties["avatar"] = avatars.Length - 1;
+                        playerProperties["avatar"] = avatars.Length - 1;
                     }
                 else
                     {
-                        _playerProperties["avatar"] = (int)_playerProperties["avatar"] - 1;
+                        playerProperties["avatar"] = (int)playerProperties["avatar"] - 1;
                     }
 
                 UpdatePlayerItem();
@@ -59,13 +59,13 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
         public void OnClickRightArrow()
             {
-                if ((int)_playerProperties["avatar"] == avatars.Length - 1)
+                if ((int)playerProperties["avatar"] == avatars.Length - 1)
                     {
-                        _playerProperties["avatar"] = 0;
+                        playerProperties["avatar"] = 0;
                     }
                 else
                     {
-                        _playerProperties["avatar"] = (int)_playerProperties["avatar"] + 1;
+                        playerProperties["avatar"] = (int)playerProperties["avatar"] + 1;
                     }
 
                 UpdatePlayerItem();

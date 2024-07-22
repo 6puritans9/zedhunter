@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using Photon.Pun;
 
-public class AimStateManager : MonoBehaviourPun
+public class AimStateManager : MonoBehaviour
     {
         [HideInInspector] public AimBaseState currentState;
         public HipFireState Hip = new HipFireState();
