@@ -82,32 +82,6 @@ public class DefaultState : ActionBaseState
 		{
 			actions.SwitchState(actions.Reload);
 		}
-
-		if (actions.anim.GetCurrentAnimatorStateInfo(2).normalizedTime > 0.7f
-			&& actions.anim.GetCurrentAnimatorStateInfo(2).IsName("SwordAction1"))
-		{
-			actions.anim.SetBool("SwordAction1", false);
-		}
-		if (actions.anim.GetCurrentAnimatorStateInfo(2).normalizedTime > 0.7f
-			&& actions.anim.GetCurrentAnimatorStateInfo(2).IsName("SwordAction2"))
-		{
-			actions.anim.SetBool("SwordAction2", false);
-			ActionStateManager.numOfClicks = 0;
-		}
-
-		if (Time.time - actions.lastClickedTime > actions.maxComboDelay)
-		{
-			actions.anim.SetBool("SwordAction2", false);
-			ActionStateManager.numOfClicks = 0;
-		}
-		if (Time.time > actions.nextFireTime)
-		{
-			actions.anim.SetBool("SwordAction2", false);
-		}
-		if (Input.GetMouseButtonDown(0))
-		{
-			actions.OnClick();
-		}
 	}
 
 	public override void FixedState(ActionStateManager actions)

@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
                         float healthPercentage = (float)playerHealth / maxPlayerHealth;
                         float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
                         vignette.intensity.Override(vignetteIntensity);
-                        Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");
+                        /*Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");*/
                     }
                 else
                     {

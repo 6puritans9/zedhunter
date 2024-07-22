@@ -754,7 +754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1374583216493949124}
   - component: {fileID: 5660792536603426533}
-  - component: {fileID: 7849853417592800925}
+  - component: {fileID: 7316572850818032120}
   m_Layer: 11
   m_Name: AttackRangePos
   m_TagString: Untagged
@@ -798,7 +798,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7849853417592800925
+--- !u!114 &7316572850818032120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -807,12 +807,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439494347344579809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baed81957606a8444b6471b222db92f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a45e8ed386915d42b014d44b71eed50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAD: 30
+  enemyAD: 0
   canAttack: 0
-  targetPlayer: {fileID: 0}
+  target: {fileID: 0}
 --- !u!1 &1510352749443628500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,10 +3050,6 @@ GameObject:
   - component: {fileID: 6322253683901959397}
   - component: {fileID: 6833397714076461568}
   - component: {fileID: 8125079811796781678}
-  - component: {fileID: 6010720379429624169}
-  - component: {fileID: 4991871911626703096}
-  - component: {fileID: 4169191243158054619}
-  - component: {fileID: 6423536283666969259}
   m_Layer: 8
   m_Name: ManZombie
   m_TagString: Untagged
@@ -3150,85 +3146,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &6010720379429624169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7836535008196545933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d701f277eaf80e4a82f3df579dbf8d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombieType: 0
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 640
-  anim: {fileID: 6322253683901959397}
-  Target: {fileID: 0}
-  isChase: 0
-  nav: {fileID: 0}
-  colliders: []
-  attackRange: {fileID: 5660792536603426533}
-  health: 15
-  isDead: 0
-  chaseDistance: 5
-  minJumpDistance: 4
-  maxJumpDistance: 8
-  jumpSpeed: 2
-  jumpHeight: 2
-  jumpCooldown: 3
-  bloodSplashPrefab: {fileID: 3548588485384254792, guid: 4728f7248da6e4ae5978cfbba8c74fc4,
-    type: 3}
---- !u!114 &4991871911626703096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7836535008196545933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4d6eab0a362f1408ca27a2c834cc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4169191243158054619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7836535008196545933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6666cbfc1b9dcec4d8dde14df8e4f35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6423536283666969259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7836535008196545933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 4991871911626703096}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &7908514773467319733
 GameObject:
   m_ObjectHideFlags: 0

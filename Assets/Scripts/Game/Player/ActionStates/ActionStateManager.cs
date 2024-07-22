@@ -1,229 +1,207 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class ActionStateManager : MonoBehaviour
-    {
-        [HideInInspector] public ActionBaseState currentState;
-        private PlayerSetup playerSetup;
+{
+	[HideInInspector] public ActionBaseState currentState;
 
-        public DefaultState Default = new DefaultState();
-        public ReloadState Reload = new ReloadState();
+	public ReloadState Reload = new ReloadState();
+	public DefaultState Default = new DefaultState();
 
-        public Rig gunRig;
-        public GameObject gun;
-        public GameObject currentWeapon;
-        [HideInInspector] public WeaponAmmo ammo;
+	public bool isDead;
+	int playerMaxHP = 100;
+	public int playerHealth = 100;
+	public GameObject currentWeapon;
+	[HideInInspector] public WeaponAmmo ammo;
+	AudioSource audioSource;
 
-        public MultiAimConstraint rHandAim;
-        public TwoBoneIKConstraint lHandIK;
+	[HideInInspector] public Animator anim;
 
-        public float cooldownTime = 2f;
-        public float nextFireTime = 0f;
-        public float lastClickedTime = 0;
-        public static int numOfClicks = 0;
-        public float maxComboDelay = 1;
+	public MultiAimConstraint rHandAim;
+	public TwoBoneIKConstraint lHandIK;
 
-        [HideInInspector] public Animator anim;
-        AudioSource audioSource;
+	//public GameObject sword;
+	public GameObject gun;
+	public Rig gunRig;
 
-        private void Awake()
-            {
-                // Debug.Log("ActionStateManager: Awake called");
-
-                anim = GetComponent<Animator>();
-                if (anim == null)
-                    {
-                        Debug.LogError("ActionStateManager: Animator component not found!");
-                    }
-            }
-
-        void Start()
-            {
-                // Debug.Log("ActionStateManager: Start called");
-
-                ammo = currentWeapon.GetComponent<WeaponAmmo>();
-                if (ammo == null)
-                    {
-                        Debug.LogError("ActionStateManager: WeaponAmmo component not found on currentWeapon!");
-                    }
-
-                audioSource = currentWeapon.GetComponent<AudioSource>();
-                if (audioSource == null)
-                    {
-                        Debug.LogError("ActionStateManager: AudioSource component not found on currentWeapon!");
-                    }
-                
-                playerSetup = GetComponent<PlayerSetup>();
-                
-                SwitchState(Default);
-
-                gun.SetActive(false);
-                gunRig.weight = 0;
-                SetLayerWeight(0, 1); // Sword layer
-
-                SwitchToGun();
-            }
-
-        void Update()
-            {
-                if (currentState == null)
-                    {
-                        Debug.LogError("ActionStateManager: currentState is null!");
-                    }
-                else
-                    {
-                        currentState.UpdateState(this);
-                    }
-
-                
-            }
+	//SwordAction
+	public float cooldownTime = 2f;
+	public float nextFireTime = 0f;
+	public static int noOfClicks = 0;
+	public float lastClickedTime = 0;
+	public float maxComboDelay = 1;
+	//SwordAction
 
 
-        // void SwitchToSword()
-        //     {
-        //         Debug.Log("ActionStateManager: Switching to Sword");
-        //         if (playerSetupView == null)
-        //             {
-        //                 Debug.LogError("ActionStateManager: playerSetupView is null when switching to sword!");
-        //             }
-        //         else
-        //             {
-        //                 playerSetupView.RPC("SetTPWeapon", RpcTarget.All, 1);
-        //             }
-        //
-        //         if (gun == null)
-        //             {
-        //                 Debug.LogError("ActionStateManager: gun is null when switching to sword!");
-        //             }
-        //         else
-        //             {
-        //                 gun.SetActive(false);
-        //             }
-        //
-        //         SetLayerWeight(0, 1); // Sword layer
-        //     }
+	private Volume postProcessVolume;
+	private Vignette vignette; // 비네트 효과
+	public int maxPlayerHealth = 500;
 
-        void SwitchToGun()
-            {
-                Debug.Log("ActionStateManager: Switching to Gun");
+	private void Awake()
+	{
 
-                playerSetup.SetTPWeapon(2);
-                gun.SetActive(true);
-                SetLayerWeight(1, 1); // Gun layer
-            }
+		ammo = currentWeapon.GetComponent<WeaponAmmo>();
+		anim = GetComponent<Animator>();
+		audioSource = currentWeapon.GetComponent<AudioSource>();
 
-        public void OnClick()
-            {
-                Debug.Log("ActionStateManager: OnClick called");
-                lastClickedTime = Time.time;
-                numOfClicks++;
+		postProcessVolume = FindObjectOfType<Volume>();
+		if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
+		{
+			vignette.active = true;
+			vignette.color.Override(Color.red);
+		}
+	}
 
-                if (anim == null)
-                    {
-                        Debug.LogError("ActionStateManager: anim is null in OnClick!");
-                        return;
-                    }
-
-                anim.SetBool("SwordAction1", true);
-
-                numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
-
-                if (numOfClicks >= 2 && anim.GetCurrentAnimatorStateInfo(2).normalizedTime > 0.7f &&
-                    anim.GetCurrentAnimatorStateInfo(2).IsName("SwordAction1"))
-                    {
-                        anim.SetBool("SwordAction1", false);
-                        anim.SetBool("SwordAction2", true);
-                    }
-            }
+	// Start is called before the first frame update
+	void Start()
+	{
+		SwitchState(Default);
 
 
-        // public void TakeDamage(int damage)
-        //     {
-        //         Debug.Log($"ActionStateManager: TakeDamage called with damage: {damage}");
-        //         if (playerHealth > 0)
-        //             {
-        //                 playerHealth -= damage;
-        //                 if (playerHealth <= 0)
-        //                     {
-        //                         PlayerDeath();
-        //                     }
-        //                 else
-        //                     Debug.Log("Player Hit!!");
-        //             }
-        //     }
-        //
-        // void PlayerDeath()
-        //     {
-        //         // TODO: need fix
-        //         gameObject.SetActive(false);
-        //
-        //         isDead = true;
-        //         Invoke("RespawnPlayer", 5f);
-        //     }
+		isDead = false;
 
-        public void SwitchState(ActionBaseState state)
-            {
-                Debug.Log($"ActionStateManager: Switching state to {state.GetType().Name}");
-                currentState = state;
-                currentState.EnterState(this);
-            }
+		SetWeapon(2);
+	}
 
-        void SetLayerWeight(int layerIndex, float weight)
-            {
-                Debug.Log($"ActionStateManager: Setting layer {layerIndex} weight to {weight}");
-                if (anim == null)
-                    {
-                        Debug.LogError("ActionStateManager: anim is null in SetLayerWeight!");
-                        return;
-                    }
+	// Update is called once per frame
+	void Update()
+	{
 
-                for (int i = 0; i < anim.layerCount; i++)
-                    {
-                        anim.SetLayerWeight(i, 0);
-                    }
+		// 입력에 따라 레이어 가중치 조절
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			SetWeapon(1);
 
-                anim.SetLayerWeight(layerIndex, weight);
-            }
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			SetWeapon(2);
+		}
 
-        public void ReloadWeapon()
-            {
-                Debug.Log("ActionStateManager: ReloadWeapon called");
-                if (ammo != null)
-                    ammo.Reload();
-                else
-                    Debug.LogError("ActionStateManager: ammo is null in ReloadWeapon!");
+		currentState.UpdateState(this);
+		UpdateHealthEffect(); // 체력 효과 업데이트
+	}
 
-                SwitchState(Default);
-            }
+	void UpdateHealthEffect()
+	{
+		if (vignette != null)
+		{
+			float healthPercentage = (float)playerHealth / maxPlayerHealth;
+			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			vignette.intensity.Override(vignetteIntensity);
+		}
+		else
+		{
+			Debug.LogError("Vignette effect is null!");
+		}
+	}
 
-        public void Magout()
-            {
-                Debug.Log("ActionStateManager: Magout called");
-                if (ammo != null && audioSource != null)
-                    audioSource.PlayOneShot(ammo.magOutSound);
-                else
-                    Debug.LogError("ActionStateManager: ammo or audioSource is null in Magout!");
-            }
+	void SetWeapon(int idx)
+	{
+		switch (idx)
+		{
+			case 1:
+				gun.SetActive(false);
+				//gunRig.weight = 0;
+				SetLayerWeight(0, 1);
+				break;
+			case 2:
+				gun.SetActive(true);
+				//gunRig.weight = 1;
+				SetLayerWeight(1, 1);
+				break;
+		}
+	}
 
-        public void MagIn()
-            {
-                Debug.Log("ActionStateManager: MagIn called");
-                if (ammo != null && audioSource != null)
-                    audioSource.PlayOneShot(ammo.magInSound);
-                else
-                    Debug.LogError("ActionStateManager: ammo or audioSource is null in MagIn!");
-            }
 
-        public void ReleaseSlide()
-            {
-                Debug.Log("ActionStateManager: ReleaseSlide called");
-                if (ammo != null && audioSource != null)
-                    audioSource.PlayOneShot(ammo.releaseSlideSound);
-                else
-                    Debug.LogError("ActionStateManager: ammo or audioSource is null in ReleaseSlide!");
-            }
-    }
+	public void TakeDamage(int damage)
+	{
+		if (playerHealth > 0)
+		{
+			playerHealth -= damage;
+			if (playerHealth <= 0)
+			{
+				PlayerDeath();
+			}
+			else
+				Debug.Log("Player Hit!!");
+		}
+	}
+
+	void PlayerDeath()
+	{
+		isDead = true;
+		Invoke("RespawnPlayer", 5f); // 5초 후에 재생성
+	}
+
+	void RPC_PlayerDeath()
+	{
+		gameObject.SetActive(false);
+	}
+
+	public void RespawnPlayer()
+	{
+		isDead = false;
+		playerHealth = playerMaxHP;
+		RPC_RespawnPlayer();
+	}
+
+	public void RPC_RespawnPlayer()
+	{
+		gameObject.SetActive(true);
+	}
+
+
+	public void SwitchState(ActionBaseState state)
+	{
+		currentState = state;
+		currentState.EnterState(this);
+	}
+
+	void SetLayerWeight(int layerIndex, int weight)
+	{
+		// 모든 레이어의 가중치를 0으로 설정
+		for (int i = 0; i < anim.layerCount; i++)
+		{
+			anim.SetLayerWeight(i, 0);
+		}
+
+		if (layerIndex == 1 && weight > 0.9f)
+			gunRig.weight = 1;
+		else
+			gunRig.weight = 0;
+
+		// 지정된 레이어의 가중치를 설정
+		anim.SetLayerWeight(layerIndex, weight);
+	}
+
+	public void ReloadWeapon()
+	{
+		if (ammo != null)
+			ammo.Reload();
+		SwitchState(Default);
+	}
+
+	public void Magout()
+	{
+		if (ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.magOutSound);
+	}
+
+	public void MagIn()
+	{
+		if (ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.magInSound);
+	}
+
+	public void ReleaseSlide()
+	{
+		if (ammo != null && audioSource != null)
+			audioSource.PlayOneShot(ammo.releaseSlideSound);
+	}
+}

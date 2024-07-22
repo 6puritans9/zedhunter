@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 
                 isDead = true;
                 StartCoroutine(DelayedRespawn(5f));
-                Invoke("RespawnPlayer", 5f);
+                /*Invoke("RespawnPlayer", 5f);*/
             }
 
         IEnumerator DelayedRespawn(float delay)
