@@ -7,6 +7,10 @@ TagManager:
   - ToggleManager
   - Wall
   - FxTemporaire
+<<<<<<< HEAD
+=======
+  - Weapon
+>>>>>>> 5e2cef3c54108a1189991f93beead034f49be709
   layers:
   - Default
   - TransparentFX

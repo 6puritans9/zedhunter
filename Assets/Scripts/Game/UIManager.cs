@@ -1,19 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class UIManager : MonoBehaviour
     {
+        public static UIManager Instance;
+        
         [Header("Vignetting")] private Volume postProcessVolume;
         private Vignette vignette;
 
+        [Header("Bullets")] public TMP_Text ammoIndicator;
+        private WeaponAmmo _weaponAmmo;
+        public WeaponAmmo weaponAmmo;
+
+
         private bool isCursorLocked = true;
+
+        private void Awake()
+            {
+                Instance = this;
+            }
 
         // Start is called before the first frame update
         void Start()
             {
+                _weaponAmmo = FindWeaponAmmo();
+
                 postProcessVolume = FindObjectOfType<Volume>();
                 if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
                     {
@@ -33,6 +49,8 @@ public class UIManager : MonoBehaviour
                         isCursorLocked = !isCursorLocked;
                         SetCursorState(isCursorLocked);
                     }
+                
+                UpdateCurrentAmmo();
             }
 
         public void UpdateHealthEffect(int playerHealth, int maxPlayerHealth)
@@ -63,8 +81,34 @@ public class UIManager : MonoBehaviour
                         Cursor.visible = true;
                     }
             }
-    }
 
-// Cursor settings
-// Cursor.lockState = CursorLockMode.Locked;
-// Cursor.visible = false;
+        private WeaponAmmo FindWeaponAmmo()
+            {
+                WeaponAmmo weaponAmmo = null;
+
+                GameObject weaponObject = GameObject.FindGameObjectWithTag("Player");
+                print($"weaponobject: {weaponObject}");
+                if (weaponObject != null)
+                    {
+                        print("1");
+                        weaponAmmo = weaponObject.GetComponentInChildren<WeaponAmmo>();
+                        print("2");
+                    }
+
+                print($"weaponAmmo: {weaponAmmo}");
+                return weaponAmmo;
+            }
+
+        private void UpdateCurrentAmmo()
+            {
+                int currentAmmo;
+                int maxAmmo;
+
+                if (_weaponAmmo != null)
+                    {
+                        currentAmmo = _weaponAmmo.currentAmmo;
+                        maxAmmo = _weaponAmmo.clipSize;
+                        ammoIndicator.text = $"{currentAmmo}/{maxAmmo}";
+                    }
+            }
+    }

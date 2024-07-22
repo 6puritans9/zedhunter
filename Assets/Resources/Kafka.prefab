@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 5460223637183411154}
   m_Layer: 0
   m_Name: Assault_Rifle_M4_StarrailShaded (1)
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5183,6 +5183,7 @@ MonoBehaviour:
   magInSound: {fileID: 8300000, guid: 29ff97669552f694381b4a72b47de684, type: 3}
   magOutSound: {fileID: 8300000, guid: 1aed76bf288c2ca4e89b24dd942d4b70, type: 3}
   releaseSlideSound: {fileID: 8300000, guid: 10d9312ce26cb394381649fa48f4330b, type: 3}
+  ammoIndicator: {fileID: 0}
 --- !u!114 &3854689807753076362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10158,8 +10159,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5294249032902257918}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09853761, y: -0, z: -0, w: 0.99513334}
-  m_LocalPosition: {x: 0.5, y: 1.9, z: -2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1.3000001, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15920,6 +15921,7 @@ MonoBehaviour:
   magInSound: {fileID: 8300000, guid: 29ff97669552f694381b4a72b47de684, type: 3}
   magOutSound: {fileID: 8300000, guid: 1aed76bf288c2ca4e89b24dd942d4b70, type: 3}
   releaseSlideSound: {fileID: 8300000, guid: 10d9312ce26cb394381649fa48f4330b, type: 3}
+  ammoIndicator: {fileID: 0}
 --- !u!114 &1219425754153903928
 MonoBehaviour:
   m_ObjectHideFlags: 0
