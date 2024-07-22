@@ -1,4 +1,3 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,14 +9,9 @@ public class ActionStateManager : MonoBehaviour
     {
         [HideInInspector] public ActionBaseState currentState;
         private PlayerSetup playerSetup;
-        private UIManager uiManager;
 
         public DefaultState Default = new DefaultState();
         public ReloadState Reload = new ReloadState();
-
-        public bool isDead;
-        public int maxPlayerHealth = 500;
-        public int playerHealth = 100;
 
         public Rig gunRig;
         public GameObject gun;
@@ -62,11 +56,9 @@ public class ActionStateManager : MonoBehaviour
                     {
                         Debug.LogError("ActionStateManager: AudioSource component not found on currentWeapon!");
                     }
-
-                uiManager = FindObjectOfType<UIManager>();
+                
                 playerSetup = GetComponent<PlayerSetup>();
-
-                isDead = false;
+                
                 SwitchState(Default);
 
                 gun.SetActive(false);
@@ -87,10 +79,9 @@ public class ActionStateManager : MonoBehaviour
                         currentState.UpdateState(this);
                     }
 
-                uiManager.UpdateHealthEffect(playerHealth, maxPlayerHealth);
+                
             }
 
-        
 
         // void SwitchToSword()
         //     {
@@ -119,7 +110,7 @@ public class ActionStateManager : MonoBehaviour
         void SwitchToGun()
             {
                 Debug.Log("ActionStateManager: Switching to Gun");
-                
+
                 playerSetup.SetTPWeapon(2);
                 gun.SetActive(true);
                 SetLayerWeight(1, 1); // Gun layer
@@ -149,68 +140,30 @@ public class ActionStateManager : MonoBehaviour
                     }
             }
 
-        
-        public void TakeDamage(int damage)
-            {
-                Debug.Log($"ActionStateManager: TakeDamage called with damage: {damage}");
-                if (playerHealth > 0)
-                    {
-                        playerHealth -= damage;
-                        if (playerHealth <= 0)
-                            {
-                                PlayerDeath();
-                            }
-                        else
-                            Debug.Log("Player Hit!!");
-                    }
-            }
-        
-        void PlayerDeath()
-            {
-                // TODO: need fix
-                gameObject.SetActive(false);
 
-                isDead = true;
-                Invoke("RespawnPlayer", 5f);
-            }
-
-        public void RespawnPlayer()
-            {
-                Debug.Log("ActionStateManager: RespawnPlayer called");
-
-                // if (GameManager.Instance == null)
-                // {
-                //     Debug.LogError("ActionStateManager: GameManager.Instance is null!");
-                //     return;
-                // }
-
-                // if (GameManager.Instance.playerSpawnPoint == null)
-                // {
-                //     Debug.LogError("ActionStateManager: GameManager.Instance.playerSpawnPoint is null!");
-                //     return;
-                // }
-
-                // transform.position = GameManager.Instance.playerSpawnPoint.position;
-                isDead = false;
-                playerHealth = 500;
-
-                // photonView.RPC("RPC_RespawnPlayer", RpcTarget.All, photonView.ViewID);
-            }
-        
-        public void RPC_RespawnPlayer(int viewID)
-            {
-                Debug.Log($"ActionStateManager: RPC_RespawnPlayer called with viewID: {viewID}");
-                PhotonView targetView = PhotonView.Find(viewID);
-                if (targetView != null)
-                    {
-                        targetView.gameObject.SetActive(true);
-                    }
-                else
-                    {
-                        Debug.LogError(
-                            $"ActionStateManager: PhotonView with ID {viewID} not found in RPC_RespawnPlayer!");
-                    }
-            }
+        // public void TakeDamage(int damage)
+        //     {
+        //         Debug.Log($"ActionStateManager: TakeDamage called with damage: {damage}");
+        //         if (playerHealth > 0)
+        //             {
+        //                 playerHealth -= damage;
+        //                 if (playerHealth <= 0)
+        //                     {
+        //                         PlayerDeath();
+        //                     }
+        //                 else
+        //                     Debug.Log("Player Hit!!");
+        //             }
+        //     }
+        //
+        // void PlayerDeath()
+        //     {
+        //         // TODO: need fix
+        //         gameObject.SetActive(false);
+        //
+        //         isDead = true;
+        //         Invoke("RespawnPlayer", 5f);
+        //     }
 
         public void SwitchState(ActionBaseState state)
             {

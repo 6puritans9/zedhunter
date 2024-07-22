@@ -3757,8 +3757,6 @@ MonoBehaviour:
   walkBackSpeed: 2
   runSpeed: 7
   runBackSpeed: 5
-  crouchSpeed: 2
-  crouchBackSpeed: 1
   dir: {x: 0, y: 0, z: 0}
   hzInput: 0
   vInput: 0
@@ -3827,9 +3825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98f59bffc79ea845afac36d8eed61ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
-  maxPlayerHealth: 100
-  playerHealth: 100
   gunRig: {fileID: 3970975668324695640}
   gun: {fileID: 2770044469240247445}
   currentWeapon: {fileID: 2770044469240247445}
@@ -3876,6 +3871,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0c57833ebfab34eb40273018401556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  semiAuto: 0
+  fireRate: 0
+  aim: {fileID: 0}
+  barrelPos: {fileID: 0}
+  bulletVelocity: 0
+  bulletPerShot: 0
+  damage: 20
+  gunShot: {fileID: 0}
+  lightReturnSpeed: 20
+  enemyKickbackForce: 100
+  initialParticlePoolSize: 10
 --- !u!1 &2025878769439987442
 GameObject:
   m_ObjectHideFlags: 0
@@ -9782,7 +9788,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3325378204732630870}
-  - component: {fileID: 1782736224104008176}
   m_Layer: 7
   m_Name: AimPos
   m_TagString: Untagged
@@ -9805,22 +9810,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5512388197402652218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1782736224104008176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5336988126562027435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &5356202898427445246
 GameObject:
   m_ObjectHideFlags: 0
@@ -15271,7 +15260,6 @@ GameObject:
   - component: {fileID: 6816527138699252105}
   - component: {fileID: 1219425754153903928}
   - component: {fileID: 3285939444352789088}
-  - component: {fileID: 2640001897009639351}
   m_Layer: 7
   m_Name: Italian machine guns
   m_TagString: Untagged
@@ -15427,6 +15415,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0c57833ebfab34eb40273018401556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  semiAuto: 0
+  fireRate: 0
+  aim: {fileID: 0}
+  barrelPos: {fileID: 0}
+  bulletVelocity: 0
+  bulletPerShot: 0
+  damage: 20
+  gunShot: {fileID: 0}
+  lightReturnSpeed: 20
+  enemyKickbackForce: 100
+  initialParticlePoolSize: 10
 --- !u!114 &6816527138699252105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15478,28 +15477,6 @@ MonoBehaviour:
   crouchBloomMultiplier: 0.5
   sprintBloomMultiplier: 2
   adsBloomMultiplier: 0
---- !u!114 &2640001897009639351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8945089130154502879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &8973668765826977693
 GameObject:
   m_ObjectHideFlags: 0

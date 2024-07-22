@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using Photon.Pun;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -52,8 +51,7 @@ public class PlayerSetup : MonoBehaviour
                 weaponRecoil.enabled = true;
                 weaponBloom.enabled = true;
             }
-
-        [PunRPC]
+        
         public void SetTPWeapon(int _weaponIndex)
             {
                 // Manage third-person weapon models based on _weaponIndex

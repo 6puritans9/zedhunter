@@ -1,30 +1,25 @@
-using Photon.Pun;
 using System;
 using UnityEngine;
 
-public class WallHP : MonoBehaviourPun
-{
-    public int HP = 100;
-    public GameObject Player;
-
-    public static event Action<GameObject> OnWallDestroyed;
-
-    PhotonView photonVeiw;
-    private void OnEnable()
+public class WallHP : MonoBehaviour
     {
-        photonVeiw = GetComponent<PhotonView>();
-    }
+        public int HP = 100;
+        public GameObject Player;
 
-    [PunRPC]
-    public void TakeDamage(int damage)
-    {
-        HP -= damage;
-        if (HP <= 0)
-        {
-            if (photonVeiw.IsMine)
+        public static event Action<GameObject> OnWallDestroyed;
+
+
+        // private void OnEnable()
+        //     {
+        //         photonVeiw = GetComponent<PhotonView>();
+        //     }
+
+        public void TakeDamage(int damage)
             {
-                OnWallDestroyed?.Invoke(this.gameObject); // º®ÀÌ ÆÄ±«µÉ ¶§ ÀÌº¥Æ® ¹ß»ý
+                HP -= damage;
+                if (HP <= 0)
+                    {
+                        OnWallDestroyed?.Invoke(this.gameObject); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ß»ï¿½
+                    }
             }
-        }
     }
-}
