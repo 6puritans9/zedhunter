@@ -116,7 +116,7 @@ public class EnemySpawnPool : MonoBehaviour
 			femaleZombiePool.TryDequeue(out EnemyHealth enemy);
 			if (!enemy.gameObject.activeSelf)
 			{
-				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[0].position);
+				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
 				//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
 				//enemy.transform.position = randomSpawnPosition;
 				enemy.gameObject.SetActive(true);
@@ -141,7 +141,7 @@ public class EnemySpawnPool : MonoBehaviour
 			maleZombiePool.TryDequeue(out EnemyHealth enemy);
 			if (!enemy.gameObject.activeSelf)
 			{
-				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[1].position);
+				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
 				//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[1].position);
 				//enemy.transform.position = randomSpawnPosition;
 				enemy.gameObject.SetActive(true);
@@ -168,7 +168,7 @@ public class EnemySpawnPool : MonoBehaviour
 			{
 				if (!enemy.gameObject.activeSelf)
 				{
-					enemy.transform.position = GetRandomSpawnPosition(spawnPoints[2].position);
+					enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
 					//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
 					//enemy.transform.position = randomSpawnPosition;
 					enemy.gameObject.SetActive(true);

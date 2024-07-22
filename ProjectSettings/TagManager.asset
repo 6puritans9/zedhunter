@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ToggleManager
+  - Wall
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - PreviewWall
   - AttackBox
   - Gun
-  - 
+  - GroundCheck
   - 
   - 
   - 

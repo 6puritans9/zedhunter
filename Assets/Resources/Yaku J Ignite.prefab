@@ -78,7 +78,8 @@ GameObject:
   - component: {fileID: 799076793294411267}
   - component: {fileID: 808172774429252711}
   - component: {fileID: 8968186797407933859}
-  - component: {fileID: 6550813846524330917}
+  - component: {fileID: 2386790783998013877}
+  - component: {fileID: 9021623118696851610}
   m_Layer: 8
   m_Name: Yaku J Ignite
   m_TagString: Untagged
@@ -198,7 +199,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6550813846524330917
+--- !u!114 &2386790783998013877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +208,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 336601600002010810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92a9cb11ac11604db6ea3f754102362, type: 3}
+  m_Script: {fileID: 11500000, guid: 14d6e6b1198bdce4ba761498bc158f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieType: 2
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 128
+  anim: {fileID: 4893894478795274912}
+  Target: {fileID: 0}
+  isChase: 0
+  nav: {fileID: 0}
+  colliders: []
+  attackRange: {fileID: 7757451556906149779}
+  health: 100
+  isDead: 0
+  chaseDistance: 5
+  minJumpDistance: 4
+  maxJumpDistance: 8
+  jumpSpeed: 2
+  jumpHeight: 2
+  jumpCooldown: 3
+--- !u!114 &9021623118696851610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336601600002010810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c0da6f5caf094c9b12e5e44c21a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2
@@ -218,8 +249,8 @@ MonoBehaviour:
   maxJumpDistance: 8
   rotationSpeed: 5
   jumpCooldown: 3
-  agent: {fileID: 8968186797407933859}
-  animator: {fileID: 4893894478795274912}
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   jumpStartPosition: {x: 0, y: 0, z: 0}
   jumpTargetPosition: {x: 0, y: 0, z: 0}
   jumpStartTime: 0
@@ -786,7 +817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adc41a91b03b004a87901dbe02b814a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyController: {fileID: 6550813846524330917}
 --- !u!1 &2320920617068569340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2566969649678187701}
   - component: {fileID: 7757451556906149779}
+  - component: {fileID: 1493592435333656151}
   m_Layer: 11
   m_Name: AttackRangePos
   m_TagString: Untagged
@@ -1064,6 +1095,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 1.37}
   m_Center: {x: 0, y: 1.1, z: 1.06}
+--- !u!114 &1493592435333656151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878158930015996451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a45e8ed386915d42b014d44b71eed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAD: 100
+  canAttack: 0
+  target: {fileID: 0}
 --- !u!1 &2919703323782910853
 GameObject:
   m_ObjectHideFlags: 0

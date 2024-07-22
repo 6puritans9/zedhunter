@@ -3050,6 +3050,7 @@ GameObject:
   - component: {fileID: 6322253683901959397}
   - component: {fileID: 6833397714076461568}
   - component: {fileID: 8125079811796781678}
+  - component: {fileID: 8650462511235955347}
   m_Layer: 8
   m_Name: ManZombie
   m_TagString: Untagged
@@ -3146,6 +3147,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &8650462511235955347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836535008196545933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d6e6b1198bdce4ba761498bc158f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieType: 0
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 640
+  anim: {fileID: 6322253683901959397}
+  Target: {fileID: 0}
+  isChase: 0
+  nav: {fileID: 0}
+  colliders: []
+  attackRange: {fileID: 5660792536603426533}
+  health: 70
+  isDead: 0
+  chaseDistance: 5
+  minJumpDistance: 4
+  maxJumpDistance: 8
+  jumpSpeed: 2
+  jumpHeight: 2
+  jumpCooldown: 3
 --- !u!1 &7908514773467319733
 GameObject:
   m_ObjectHideFlags: 0
