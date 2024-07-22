@@ -27,11 +27,11 @@ public class WeaponBloom : MonoBehaviour
         if (movement.currentState == movement.Idle) currentBloom = defaultBloomAngle;
         else if (movement.currentState == movement.Walk) currentBloom = defaultBloomAngle * walkBloomMultiplier;
         else if (movement.currentState == movement.Run) currentBloom = defaultBloomAngle * sprintBloomMultiplier;
-        else if (movement.currentState == movement.Crouch)
-        {
-            if (movement.dir.magnitude == 0) currentBloom = defaultBloomAngle * crouchBloomMultiplier;
-            else currentBloom = defaultBloomAngle * crouchBloomMultiplier * walkBloomMultiplier;
-        }
+        // else if (movement.currentState == movement.Crouch)
+        // {
+        //     if (movement.dir.magnitude == 0) currentBloom = defaultBloomAngle * crouchBloomMultiplier;
+        //     else currentBloom = defaultBloomAngle * crouchBloomMultiplier * walkBloomMultiplier;
+        // }
 
         if (aiming.currentState == aiming.Aim) currentBloom *= adsBloomMultiplier;
 

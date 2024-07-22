@@ -143,7 +143,9 @@ public class UIMenuManager : MonoBehaviour
             {
                 exitMenu.SetActive(false);
                 if (createAccountMenu) createAccountMenu.SetActive(false);
-                signInMenu.SetActive(true);
+                // signInMenu.SetActive(true);
+                Position2();
+                ReturnMenu();
             }
 
 

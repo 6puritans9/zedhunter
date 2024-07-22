@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e97a596078754408977a7275806faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: {fileID: 6543486917996227007}
+  characterName: {fileID: 6543486917996227007}
   leftArrowButton: {fileID: 1566846666067393544}
   rightArrowButton: {fileID: 802216367556214186}
   playerAvatar: {fileID: 2081073436044269077}

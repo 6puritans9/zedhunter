@@ -3689,13 +3689,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6739765762048829160}
   - {fileID: 5512388197402652218}
   - {fileID: 2683858613337690500}
   - {fileID: 2706202968444591719}
   - {fileID: 7909955655584414195}
   - {fileID: 4012784723980742495}
   - {fileID: 2496264971547751224}
-  - {fileID: 6739765762048829160}
   - {fileID: 5362253862522397623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7525,7 +7525,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0.2, y: -0.5, z: 0}
   VerticalArmLength: 0.25
   CameraSide: 1
-  CameraDistance: 1.4
+  CameraDistance: 1.2
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0

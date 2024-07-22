@@ -12,7 +12,6 @@ public class ActionStateManager : MonoBehaviourPunCallbacks
 
     public DefaultState Default = new DefaultState();
     public ReloadState Reload = new ReloadState();
-    public SwordAction SwordAction = new SwordAction();
 
     public bool isDead;
     public int playerHealth = 100;

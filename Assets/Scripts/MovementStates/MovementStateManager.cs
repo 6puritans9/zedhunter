@@ -25,7 +25,6 @@ public class MovementStateManager : MonoBehaviourPun, IPunObservable {
 
     public IdleState Idle = new IdleState();
     public WalkState Walk = new WalkState();
-    public CrouchState Crouch = new CrouchState();
     public RunState Run = new RunState();
 
     [HideInInspector] public Animator anim;
