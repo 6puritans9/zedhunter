@@ -58,6 +58,12 @@ public class MovementStateManager : MonoBehaviour
 
             anim.SetFloat("hzInput", hzInput);
             anim.SetFloat("vInput", vInput);
+            
+            if(hzInput <= 0.1f || vInput <= 0.1f)
+            {
+			    rb.velocity = Vector3.zero;
+			    rb.angularVelocity = Vector3.zero;
+		    }
 
             currentState.UpdateState(this);
         
@@ -76,11 +82,13 @@ public class MovementStateManager : MonoBehaviour
             Move();
         }
 
-    #endregion
+	
 
-    #region Other_Functions
+	#endregion
 
-    public void SwitchState(MovementBaseState state) {
+	#region Other_Functions
+
+	public void SwitchState(MovementBaseState state) {
         currentState = state;
         currentState.EnterState(this);
     }

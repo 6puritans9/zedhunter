@@ -35,6 +35,8 @@ public class EnemyHealth : MonoBehaviour
 	EnemyAttack enemyAttack;
 	bool isAttack;
 
+	int OriginNavSpeed;
+
 	// === BossParam === 
 	public float chaseDistance = 5f;
 	public float minJumpDistance = 4f;
@@ -51,6 +53,7 @@ public class EnemyHealth : MonoBehaviour
 	private bool isJumpAnimating = false;
 	// === BossParam === 
 
+	public GameObject zombie4Prefab;
 
 	private void Awake()
 	{
@@ -68,6 +71,12 @@ public class EnemyHealth : MonoBehaviour
 		isAttack = false;
 		isChase = true;
 
+		if (zombieType == ZombieType.Female)
+			OriginNavSpeed = 4;
+		else if (zombieType == ZombieType.Male)
+			OriginNavSpeed = 5;
+		else
+			OriginNavSpeed = 7;
 
 		StartCoroutine(UpdateTarget());
 	}
@@ -147,8 +156,8 @@ public class EnemyHealth : MonoBehaviour
 			if (Target)
 			{
 				float speed = 0;
-				float targetRadius = 0.5f;
-				float targetRange = 0.5f;
+				float targetRadius = 1f;
+				float targetRange = 1f;
 				if (zombieType == ZombieType.Female)
 				{
 					RaycastHit[] rayHits = Physics.SphereCastAll(
@@ -216,6 +225,7 @@ public class EnemyHealth : MonoBehaviour
 							}
 						}
 						StartCoroutine(Attack());
+						
 					}
 				}
 
@@ -224,10 +234,12 @@ public class EnemyHealth : MonoBehaviour
 				{
 					nav.isStopped = false;
 					speed = nav.velocity.magnitude;
+					nav.speed = OriginNavSpeed;
 				}
 				else
 				{
 					nav.isStopped = true;
+					nav.speed = 0;
 				}
 
 				if (speed > 0.1f)
@@ -453,31 +465,78 @@ public class EnemyHealth : MonoBehaviour
 		isChase = false;
 		nav.enabled = false;
 		anim.enabled = false;
-		transform.position = Vector3.zero;
 
-		UpdateTargetCorutine = null;
-		if (isDead)
+		if (isDead && (zombieType == ZombieType.Male || zombieType == ZombieType.Female))
 		{
-			if (zombieType == EnemyHealth.ZombieType.Male)
+			if (zombie4Prefab != null)
 			{
-				EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
-				EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
-			}
-			else if (zombieType == EnemyHealth.ZombieType.Female)
-			{
-				EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
-				EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
-			}
-			else if (zombieType == EnemyHealth.ZombieType.Boss)
-			{
-				EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
-				EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
+				if (zombieType == EnemyHealth.ZombieType.Male)
+				{
+					EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
+				}
+				else if (zombieType == EnemyHealth.ZombieType.Female)
+				{
+					EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
+				}
+				else if (zombieType == EnemyHealth.ZombieType.Boss)
+				{
+					EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
+				}
+
+				GameObject zombie4Instance = Instantiate(zombie4Prefab, transform.position, transform.rotation);
+
+				// 활성화 상태 확인 및 설정
+				zombie4Instance.SetActive(true);
+
+				// 렌더러 확인
+				Renderer renderer = zombie4Instance.GetComponent<Renderer>();
+				if (renderer != null)
+				{
+					renderer.enabled = true;
+				}
+
+
+				// 2초 후에 사라지도록 설정
+				Destroy(zombie4Instance, 2f);
 			}
 		}
 		gameObject.SetActive(false);
 	}
 
-	public void ReStartAction()
+
+		/*public void StopAction()
+		{
+			*//*isChase = false;
+			nav.enabled = false;
+			anim.enabled = false;
+			transform.position = Vector3.zero;
+
+			UpdateTargetCorutine = null;
+			if (isDead)
+			{
+				if (zombieType == EnemyHealth.ZombieType.Male)
+				{
+					EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
+				}
+				else if (zombieType == EnemyHealth.ZombieType.Female)
+				{
+					EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
+				}
+				else if (zombieType == EnemyHealth.ZombieType.Boss)
+				{
+					EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
+					EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
+				}
+			}
+			gameObject.SetActive(false);*//*
+		}*/
+
+		public void ReStartAction()
 	{
 		if (nav.enabled == false)
 			nav.enabled = true;

@@ -71,8 +71,8 @@ public class EnemyAttack : MonoBehaviour
 	private void OnTriggerExit(Collider other)
 	{
 		if ((other.CompareTag("Player") 
-			|| other.gameObject.layer == LayerMask.NameToLayer("Wall"))
-			|| other.CompareTag("Pizza") 
+			|| other.gameObject.layer == LayerMask.NameToLayer("Wall")
+			|| other.CompareTag("Pizza"))
 			&& enemyHealth.Target != null)
 		{
 			canAttack = false;

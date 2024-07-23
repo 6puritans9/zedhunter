@@ -14,9 +14,6 @@ public class UIManager : MonoBehaviour
         private Vignette vignette;
 
         [Header("Bullets")] public TMP_Text ammoIndicator;
-        private WeaponAmmo _weaponAmmo;
-        public WeaponAmmo weaponAmmo;
-
 
         private bool isCursorLocked = true;
 
@@ -28,8 +25,6 @@ public class UIManager : MonoBehaviour
         // Start is called before the first frame update
         void Start()
             {
-                _weaponAmmo = FindWeaponAmmo();
-
                 postProcessVolume = FindObjectOfType<Volume>();
                 if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
                     {
@@ -49,8 +44,6 @@ public class UIManager : MonoBehaviour
                         isCursorLocked = !isCursorLocked;
                         SetCursorState(isCursorLocked);
                     }
-                
-                UpdateCurrentAmmo();
             }
 
         public void UpdateHealthEffect(int playerHealth, int maxPlayerHealth)
@@ -82,31 +75,31 @@ public class UIManager : MonoBehaviour
                     }
             }
 
-        private WeaponAmmo FindWeaponAmmo()
-            {
-                WeaponAmmo weaponAmmo = null;
-
-                GameObject weaponObject = GameObject.FindGameObjectWithTag("Player");
-                if (weaponObject != null)
-                    {
-                        print("1");
-                        weaponAmmo = weaponObject.GetComponentInChildren<WeaponAmmo>();
-                        print("2");
-                    }
-
-                return weaponAmmo;
-            }
-
-        private void UpdateCurrentAmmo()
-            {
-                int currentAmmo;
-                int maxAmmo;
-
-                if (_weaponAmmo != null)
-                    {
-                        currentAmmo = _weaponAmmo.currentAmmo;
-                        maxAmmo = _weaponAmmo.clipSize;
-                        ammoIndicator.text = $"{currentAmmo}/{maxAmmo}";
-                    }
-            }
+        // private WeaponAmmo FindWeaponAmmo()
+        //     {
+        //         WeaponAmmo weaponAmmo = null;
+        //
+        //         GameObject weaponObject = GameObject.FindGameObjectWithTag("Player");
+        //         if (weaponObject != null)
+        //             {
+        //                 print("1");
+        //                 weaponAmmo = weaponObject.GetComponentInChildren<WeaponAmmo>();
+        //                 print("2");
+        //             }
+        //
+        //         return weaponAmmo;
+        //     }
+        //
+        // private void UpdateCurrentAmmo()
+        //     {
+        //         int currentAmmo;
+        //         int maxAmmo;
+        //
+        //         if (_weaponAmmo != null)
+        //             {
+        //                 currentAmmo = _weaponAmmo.currentAmmo;
+        //                 maxAmmo = _weaponAmmo.clipSize;
+        //                 ammoIndicator.text = $"{currentAmmo}/{maxAmmo}";
+        //             }
+        //     }
     }

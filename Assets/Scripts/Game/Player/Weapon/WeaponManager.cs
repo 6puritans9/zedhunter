@@ -61,6 +61,7 @@ public class WeaponManager : MonoBehaviour
 		muzzleFlashParticles = GetComponentInChildren<ParticleSystem>();
 		fireRateTimer = fireRate;
 
+		audioSource.volume = 0.1f;
 
 		InitializeHitParticlePool();
 		InitializeHitParticleToZombiePool();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WeaponAmmo : MonoBehaviour
@@ -11,6 +12,8 @@ public class WeaponAmmo : MonoBehaviour
     public AudioClip magInSound;
     public AudioClip magOutSound;
     public AudioClip releaseSlideSound;
+    
+    [Header("Canvas")] public TMP_Text ammoIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,7 @@ public class WeaponAmmo : MonoBehaviour
 	private void Update()
 	{
         if (Input.GetKeyDown(KeyCode.R)) Reload();
+        UpdateAmmoIndicator();
 	}
 
 	public void Reload()
@@ -46,4 +50,10 @@ public class WeaponAmmo : MonoBehaviour
             }
         }
     }
+    
+    private void UpdateAmmoIndicator()
+        {
+            if (UIManager.Instance.ammoIndicator)
+                UIManager.Instance.ammoIndicator.text = $"{currentAmmo.ToString()} / {clipSize.ToString()}";
+        }
 }

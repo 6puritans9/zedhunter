@@ -10,12 +10,16 @@ public class WallBuilder : MonoBehaviour
 	public GameObject wallPreviewPrefab;
 	public LayerMask buildableLayer;
 	public LayerMask wallLayer;
+	public LayerMask pizzaLayer;
+
 	public int maxWalls = 3;
 
 	private GameObject currentPreview;
 	private bool isBuildingEnabled = false;
 	private Queue<GameObject> builtWalls = new Queue<GameObject>();
 	private Vector3 lastValidPosition;
+
+	bool canBuild;
 
 	private void Awake()
 	{
@@ -48,7 +52,7 @@ public class WallBuilder : MonoBehaviour
 		{
 			UpdatePreview();
 
-			if (Input.GetMouseButtonDown(0))
+			if (canBuild && Input.GetMouseButtonDown(0))
 			{
 				BuildWall();
 			}
@@ -85,7 +89,7 @@ public class WallBuilder : MonoBehaviour
 				currentPreview.layer = LayerMask.NameToLayer("PreviewWall");
 			}
 
-			bool canBuild = !IsOverlapping(buildPosition);
+			canBuild = !IsOverlapping(buildPosition);
 
 			if (canBuild)
 			{
@@ -140,9 +144,11 @@ public class WallBuilder : MonoBehaviour
 
 	bool IsOverlapping(Vector3 position)
 	{
-		Collider[] colliders = Physics.OverlapBox(position,
+		Collider[] wallColliders = Physics.OverlapBox(position,
 			wallPrefab.GetComponent<Renderer>().bounds.extents * 0.9f, Quaternion.identity, wallLayer);
-		return colliders.Length > 0;
+		Collider[] pizzaColliders = Physics.OverlapBox(position,
+			wallPrefab.GetComponent<Renderer>().bounds.extents * 0.9f, Quaternion.identity, pizzaLayer);
+		return wallColliders.Length > 0 || pizzaColliders.Length > 0;
 	}
 
 	private void HandleWallDestroyed(GameObject wall)

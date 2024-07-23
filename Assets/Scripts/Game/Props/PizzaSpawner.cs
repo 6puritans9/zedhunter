@@ -7,40 +7,42 @@ public class PizzaSpawner : MonoBehaviour
     {
         public GameObject pizza;
         public Transform[] spawnPoints;
-        
+
         private bool[] hasPizza = new bool[9];
         private bool isSpawning = false;
-        
-    void Start()
-    {
-        for (int i = 0; i < hasPizza.Length; i += 1)
+        public int MAX_PIZZA_COUNT = 3;
+        private int currentPizzaCount = 0;
+
+        void Start()
             {
-                hasPizza[i] = false;
+                for (int i = 0; i < hasPizza.Length; i += 1)
+                    {
+                        hasPizza[i] = false;
+                    }
+            }
+
+        // Update is called once per frame
+        void Update()
+            {
+                if (!isSpawning && currentPizzaCount < MAX_PIZZA_COUNT)
+                    {
+                        int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
+                        StartCoroutine(SpawnPizza(randomIndex));
+                    }
+            }
+
+        private IEnumerator SpawnPizza(int index)
+            {
+                isSpawning = true;
+
+                if (!hasPizza[index])
+                    {
+                        Instantiate(pizza, spawnPoints[index].position, spawnPoints[index].rotation);
+                        hasPizza[index] = true;
+
+                        yield return new WaitForSeconds(15f);
+                    }
+
+                isSpawning = false;
             }
     }
-
-    // Update is called once per frame
-    void Update()
-        {
-            if(!isSpawning)
-                StartCoroutine(SpawnPizza());
-        }
-
-    private IEnumerator SpawnPizza()
-        {
-            isSpawning = true;
-            
-            for (int i = 0; i < spawnPoints.Length; i += 1)
-                {
-                    if (!hasPizza[i])
-                        {
-                            Instantiate(pizza, spawnPoints[i].position, spawnPoints[i].rotation);
-                            hasPizza[i] = true;
-
-                            yield return new WaitForSeconds(5f);
-                        }
-                }
-
-            isSpawning = false;
-        }
-}
