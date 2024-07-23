@@ -18,12 +18,11 @@ public class EnemySetup : MonoBehaviour
 
 	public void OnEnable()
 	{
-
+		
 		enemyHealth.ReStartAction();
 	}
 
 	public void OnDisable()
 	{
-		
 	}
 }

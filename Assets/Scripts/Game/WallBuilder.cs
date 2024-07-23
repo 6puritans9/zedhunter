@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq; // List 변환을 위해 추가
+using UnityEngine.UI;
 
 public class WallBuilder : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class WallBuilder : MonoBehaviour
 	public LayerMask pizzaLayer;
 
 	public int maxWalls = 3;
+
+	public float cooldownTime = 10f; // 스킬 쿨타임 시간
+	private float cooldownTimer;
+	private bool isCooldown;
+
 
 	private GameObject currentPreview;
 	private bool isBuildingEnabled = false;
@@ -43,6 +49,23 @@ public class WallBuilder : MonoBehaviour
 
 	void Update()
 	{
+		if (isCooldown)
+        {
+			isBuildingEnabled = false;
+			cooldownTimer -= Time.deltaTime;
+			UIManager.Instance.coolDownText.text = ((cooldownTimer / cooldownTime) * 10).ToString("F1");
+            if (cooldownTimer <= 0)
+            {
+				UIManager.Instance.coolDownText.text = "";
+				isCooldown = false;
+                UIManager.Instance.coolDownImage.fillAmount = 0;
+            }
+            else
+            {
+				UIManager.Instance.coolDownImage.fillAmount = cooldownTimer / cooldownTime;
+            }
+        }
+
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			ToggleBuildMode();
@@ -52,7 +75,7 @@ public class WallBuilder : MonoBehaviour
 		{
 			UpdatePreview();
 
-			if (canBuild && Input.GetMouseButtonDown(0))
+			if (canBuild && Input.GetMouseButtonDown(0) && !isCooldown)
 			{
 				BuildWall();
 			}
@@ -66,6 +89,7 @@ public class WallBuilder : MonoBehaviour
 
 	void ToggleBuildMode()
 	{
+		if (isCooldown) return;
 		isBuildingEnabled = !isBuildingEnabled;
 		Debug.Log("Building mode: " + (isBuildingEnabled ? "On" : "Off"));
 	}
@@ -115,7 +139,7 @@ public class WallBuilder : MonoBehaviour
 		if (currentPreview != null && !IsOverlapping(currentPreview.transform.position))
 		{
 			GameObject newWall = Instantiate(wallPrefab,
-				currentPreview.transform.position + new Vector3(0, 100, 0), Quaternion.identity);
+				currentPreview.transform.position + new Vector3(0, 15, 0), Quaternion.identity);
 			newWall.layer = LayerMask.NameToLayer("Wall");
 
 			if (builtWalls.Count >= maxWalls)
@@ -124,6 +148,10 @@ public class WallBuilder : MonoBehaviour
 			}
 
 			builtWalls.Enqueue(newWall);
+
+			isCooldown = true;
+			cooldownTimer = cooldownTime;
+			UIManager.Instance.coolDownImage.fillAmount = 1;
 		}
 	}
 

@@ -215,7 +215,7 @@ MonoBehaviour:
   zombieType: 2
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   anim: {fileID: 4893894478795274912}
   Target: {fileID: 0}
   isChase: 0

@@ -72,11 +72,11 @@ public class EnemyHealth : MonoBehaviour
 		isChase = true;
 
 		if (zombieType == ZombieType.Female)
-			OriginNavSpeed = 4;
+			nav.speed = OriginNavSpeed = 4;
 		else if (zombieType == ZombieType.Male)
-			OriginNavSpeed = 5;
+			nav.speed = OriginNavSpeed = 5;
 		else
-			OriginNavSpeed = 7;
+			nav.speed = OriginNavSpeed = 7;
 
 		StartCoroutine(UpdateTarget());
 	}
@@ -480,11 +480,6 @@ public class EnemyHealth : MonoBehaviour
 					EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
 					EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
 				}
-				else if (zombieType == EnemyHealth.ZombieType.Boss)
-				{
-					EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
-					EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
-				}
 
 				GameObject zombie4Instance = Instantiate(zombie4Prefab, transform.position, transform.rotation);
 
@@ -502,6 +497,11 @@ public class EnemyHealth : MonoBehaviour
 				// 2초 후에 사라지도록 설정
 				Destroy(zombie4Instance, 2f);
 			}
+		}
+		else if (isDead && zombieType == EnemyHealth.ZombieType.Boss)
+		{
+			EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
+			EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
 		}
 		gameObject.SetActive(false);
 	}
@@ -538,14 +538,19 @@ public class EnemyHealth : MonoBehaviour
 
 		public void ReStartAction()
 	{
+		Debug.Log("살아남?");
 		if (nav.enabled == false)
 			nav.enabled = true;
+		//nav.speed = OriginNavSpeed;
+
 		anim.enabled = true;
+
 		if (isDead)
 			if (zombieType == ZombieType.Boss)
 				EnemyController.Instance.ReStartTarget();
 		isDead = false;
 		isChase = true;
+		isAttack = false;
 
 		switch (zombieType)
 		{
@@ -560,7 +565,7 @@ public class EnemyHealth : MonoBehaviour
 				break;
 		}
 
-		StartUpdateTargetCorutine();
+		StartCoroutine(UpdateTarget());
 		/*if (zombieType == EnemyHealth.ZombieType.Boss)
             enemyJump.RestartCorutine();*/
 	}

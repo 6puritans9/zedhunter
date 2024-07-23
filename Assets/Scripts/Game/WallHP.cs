@@ -9,6 +9,8 @@ public class WallHP : MonoBehaviour
 	public int HP = 100;
 	public GameObject Player;
 
+	public bool canAttack = false;
+
 	public static event Action<GameObject> OnWallDestroyed;
 
 	public Material originalMaterial; // 기본 메테리얼
@@ -102,6 +104,7 @@ public class WallHP : MonoBehaviour
 		if (previewRenderer != null) previewRenderer.enabled = false;
 		if (wallCollider != null) wallCollider.enabled = false;
 
+		canAttack = true;
 		// 폭발 이펙트 생성
 		if (explosionEffect != null && explosionEffect2)
 		{

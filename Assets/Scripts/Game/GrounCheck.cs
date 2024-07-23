@@ -24,7 +24,7 @@ public class GrounCheck : MonoBehaviour
          }
          if (other.TryGetComponent(out WallHP wall))
          {
-             wall.TakeDamage(100);
+             //wall.TakeDamage(100);
          }
      }
     
