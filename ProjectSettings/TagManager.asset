@@ -7,6 +7,8 @@ TagManager:
   - ToggleManager
   - Wall
   - FxTemporaire
+  - Enemy
+  - Pizza
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - AttackBox
   - Gun
   - GroundCheck
-  - 
+  - Pizza
   - 
   - 
   - 

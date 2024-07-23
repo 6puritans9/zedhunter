@@ -12,7 +12,7 @@ public class BoxSoundEffect : MonoBehaviour
 
 	private AudioSource audioSource;
 	private AudioSource fallingAudioSource;
-	public AudioSource explosionAudioSource;
+	[HideInInspector]public AudioSource explosionAudioSource;
 
 	private void Awake()
 	{

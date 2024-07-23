@@ -51,6 +51,7 @@ public class EnemyHealth : MonoBehaviour
 	private bool isJumpAnimating = false;
 	// === BossParam === 
 
+
 	private void Awake()
 	{
 		Instance = this;
@@ -82,13 +83,13 @@ public class EnemyHealth : MonoBehaviour
 			switch (zombieType)
 			{
 				case ZombieType.Female:
-					colliders = Physics.OverlapSphere(transform.position, 10, whatIsTarget);
+					colliders = Physics.OverlapSphere(transform.position, 100, whatIsTarget);
 					break;
 				case ZombieType.Male:
-					colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
+					colliders = Physics.OverlapSphere(transform.position, 100, whatIsTarget);
 					break;
 				case ZombieType.Boss:
-					colliders = Physics.OverlapSphere(transform.position, 25, whatIsTarget);
+					colliders = Physics.OverlapSphere(transform.position, 100, whatIsTarget);
 					break;
 			}
 
@@ -97,7 +98,7 @@ public class EnemyHealth : MonoBehaviour
 				GameObject targetObject = colliders[i].gameObject;
 
 				//좀비 타입에 따라 다르게 타겟팅
-				if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Player"))
+				if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Pizza"))
 				{
 					float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
 					if (distanceToTarget < closestDistance)
@@ -150,16 +151,21 @@ public class EnemyHealth : MonoBehaviour
 				float targetRange = 0.5f;
 				if (zombieType == ZombieType.Female)
 				{
-					RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+					RaycastHit[] rayHits = Physics.SphereCastAll(
+						transform.position, 
+						targetRadius, 
+						transform.forward, 
+						targetRange, 
+						LayerMask.GetMask("Pizza"));
 
 					if (rayHits.Length > 0 && !isAttack)
 					{
 						foreach (RaycastHit hit in rayHits)
 						{
 							GameObject hitObject = hit.collider.gameObject;
-							if (hitObject.TryGetComponent(out ActionStateManager player))
+							if (hitObject.TryGetComponent(out PizzaHP pizzaHP))
 							{
-								enemyAttack.target = player.gameObject;
+								enemyAttack.target = pizzaHP.gameObject;
 								break;
 							}
 						}
@@ -447,19 +453,20 @@ public class EnemyHealth : MonoBehaviour
 		isChase = false;
 		nav.enabled = false;
 		anim.enabled = false;
+		transform.position = Vector3.zero;
 
 		UpdateTargetCorutine = null;
 		if (isDead)
 		{
 			if (zombieType == EnemyHealth.ZombieType.Male)
 			{
-				EnemySpawnPool.Instance.maleZombiePool.Enqueue(this);
-				EnemySpawnPool.Instance.maleEnemiesToSpawn -= 1;
+				EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
+				EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
 			}
 			else if (zombieType == EnemyHealth.ZombieType.Female)
 			{
-				EnemySpawnPool.Instance.femaleZombiePool.Enqueue(this);
-				EnemySpawnPool.Instance.femaleEnemiesToSpawn -= 1;
+				EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
+				EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
 			}
 			else if (zombieType == EnemyHealth.ZombieType.Boss)
 			{
@@ -484,7 +491,7 @@ public class EnemyHealth : MonoBehaviour
 		switch (zombieType)
 		{
 			case ZombieType.Female:
-				health = 25;
+				health = 50;
 				break;
 			case ZombieType.Male:
 				health = 80;

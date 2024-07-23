@@ -80,9 +80,10 @@ GameObject:
   - component: {fileID: 8968186797407933859}
   - component: {fileID: 2386790783998013877}
   - component: {fileID: 9021623118696851610}
+  - component: {fileID: 2944078946521376918}
   m_Layer: 8
   m_Name: Yaku J Ignite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,6 +257,18 @@ MonoBehaviour:
   jumpStartTime: 0
   isJumping: 0
   isJumpAnimating: 0
+--- !u!114 &2944078946521376918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336601600002010810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8290675197187ad41b6536eddc3307da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &352731715014043669
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adc41a91b03b004a87901dbe02b814a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyController: {fileID: 0}
 --- !u!1 &2320920617068569340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,8 +1107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 1.37}
-  m_Center: {x: 0, y: 1.1, z: 1.06}
+  m_Size: {x: 2, y: 2, z: 1.88}
+  m_Center: {x: 0, y: 1.1, z: 1.11}
 --- !u!114 &1493592435333656151
 MonoBehaviour:
   m_ObjectHideFlags: 0

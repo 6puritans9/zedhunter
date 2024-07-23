@@ -1,19 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using SlimUI.ModernMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
     {
+        private UIMenuManager _uiMenuManager; 
         private PlayerItem _playerItem;
-        public Button startButton;
 
         private void Start()
             {
                 _playerItem = FindObjectOfType<PlayerItem>();
+                _uiMenuManager = FindObjectOfType<UIMenuManager>();
+            }
+
+        public void OnConnectClick()
+            {
+                _uiMenuManager.Position2();
+                _uiMenuManager.ReturnMenu();
             }
 
         public void OnStartClick()
@@ -22,6 +28,6 @@ public class MenuManager : MonoBehaviour
                 
                 GameManager.instance.SetPlayerAvatar(playerAvatarIndex);
                 GameManager.instance.InitializeGame();
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("TutorialScene");
             }
 }

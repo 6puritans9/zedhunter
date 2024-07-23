@@ -19,13 +19,20 @@ public class EnemyAttack : MonoBehaviour
 		enemyHealth = GetComponentInParent<EnemyHealth>();
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player") && enemyHealth.Target != null)
+		{
+			canAttack = true;
+		}
+	}
 
 	private void OnTriggerStay(Collider other)
 	{
 		if (enemyHealth.zombieType == EnemyHealth.ZombieType.Female)
 		{
 			//공격범위에 있는 플레이어 바라보기
-			if (other.CompareTag("Player") && enemyHealth.Target != null)
+			if (other.CompareTag("Pizza") && enemyHealth.Target != null)
 			{
 				target = other.gameObject;
 				canAttack = true;
@@ -63,7 +70,10 @@ public class EnemyAttack : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if ((other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Wall")) && enemyHealth.Target != null)
+		if ((other.CompareTag("Player") 
+			|| other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+			|| other.CompareTag("Pizza") 
+			&& enemyHealth.Target != null)
 		{
 			canAttack = false;
 		}
@@ -86,6 +96,10 @@ public class EnemyAttack : MonoBehaviour
 		else if (target.TryGetComponent(out WallHP wall))
 		{
 			wall.TakeDamage(enemyAD);
+		}
+		else if (target.TryGetComponent(out PizzaHP pizzaHP))
+		{
+			pizzaHP.TakeDamage(enemyAD);
 		}
 	}
 }

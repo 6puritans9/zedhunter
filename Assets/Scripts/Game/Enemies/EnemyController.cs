@@ -85,7 +85,10 @@ public class EnemyController : MonoBehaviour
 		// 점프 높이를 고려한 포물선 궤적 계산
 		Vector3 jumpDirection = (jumpTargetPosition - jumpStartPosition).normalized;
 		float jumpDistance = Mathf.Min(Vector3.Distance(jumpStartPosition, jumpTargetPosition), maxJumpDistance);
-		jumpTargetPosition = jumpStartPosition + jumpDirection * jumpDistance;
+
+		//목표 위치를 조금 멀리 설정
+		float extraDistance = 2.0f; //추가로 점프할 거리(원하는 만큼 조정)
+		jumpTargetPosition = jumpStartPosition + jumpDirection * (jumpDistance + extraDistance);
 		jumpTargetPosition.y = jumpStartPosition.y;
 	}
 

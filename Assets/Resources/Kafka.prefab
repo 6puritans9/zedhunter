@@ -5157,6 +5157,8 @@ MonoBehaviour:
   semiAuto: 0
   hitParticle: {fileID: 5339739117810204693, guid: 1369995c871694dfa9b254128949465e,
     type: 3}
+  hitParticleToZombie: {fileID: 4553287630450876385, guid: 3d6113b8ea224c04ca5bbb9ab091d17f,
+    type: 3}
   barrelPos: {fileID: 9097958935937424850}
   bulletVelocity: 0
   bulletPerShot: 1
@@ -5164,7 +5166,7 @@ MonoBehaviour:
   gunShot: {fileID: 8300000, guid: 3bba340c1efffdd4ea23a5997f61fa71, type: 3}
   lightReturnSpeed: 20
   enemyKickbackForce: 100
-  initialParticlePoolSize: 10
+  initialParticlePoolSize: 5
 --- !u!114 &1518895969085442194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10158,8 +10160,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5294249032902257918}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09853761, y: -0, z: -0, w: 0.99513334}
-  m_LocalPosition: {x: 0.5, y: 1.9, z: -2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1.3000001, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15894,6 +15896,7 @@ MonoBehaviour:
   fireRate: 0
   semiAuto: 0
   hitParticle: {fileID: 0}
+  hitParticleToZombie: {fileID: 0}
   barrelPos: {fileID: 0}
   bulletVelocity: 0
   bulletPerShot: 0

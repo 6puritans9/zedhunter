@@ -13,6 +13,7 @@ public class WeaponManager : MonoBehaviour
 
 	[Header("Bullet Properties")]
 	[SerializeField] GameObject hitParticle;
+	[SerializeField] GameObject hitParticleToZombie;
 	[SerializeField] Transform barrelPos;
 	[SerializeField] float bulletVelocity;
 	[SerializeField] int bulletPerShot;
@@ -41,7 +42,8 @@ public class WeaponManager : MonoBehaviour
 
 
 	public Queue<ParticleSystem> hitParticlePool = new Queue<ParticleSystem>();
-	[SerializeField] private int initialParticlePoolSize = 10;
+	public Queue<ParticleSystem> hitParticleToZombiePool = new Queue<ParticleSystem>();
+	[SerializeField] private int initialParticlePoolSize = 5;
 
 
 	void Start()
@@ -61,6 +63,7 @@ public class WeaponManager : MonoBehaviour
 
 
 		InitializeHitParticlePool();
+		InitializeHitParticleToZombiePool();
 	}
 
 
@@ -83,6 +86,18 @@ public class WeaponManager : MonoBehaviour
 			particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 			particleObject.SetActive(false);
 			hitParticlePool.Enqueue(particleSystem);
+		}
+	}
+
+	void InitializeHitParticleToZombiePool()
+	{
+		for (int i = 0; i < initialParticlePoolSize; i++)
+		{
+			GameObject particleObject = Instantiate(hitParticleToZombie, Vector3.zero, Quaternion.identity);
+			ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
+			particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			particleObject.SetActive(false);
+			hitParticleToZombiePool.Enqueue(particleSystem);
 		}
 	}
 
@@ -118,6 +133,37 @@ public class WeaponManager : MonoBehaviour
 
 	}
 
+	void GetHitParticleToZombie(Vector3 position, Quaternion rotation)
+	{
+		ParticleSystem particleSystem;
+
+
+		if (hitParticlePool.Count > 0)
+		{
+			particleSystem = hitParticleToZombiePool.Dequeue();
+		}
+		else
+		{
+			GameObject particleObject = Instantiate(hitParticleToZombie, position, rotation);
+			particleSystem = particleObject.GetComponent<ParticleSystem>();
+		}
+
+		if (particleSystem != null)
+		{
+			particleSystem.transform.position = position;
+			particleSystem.transform.rotation = rotation;
+			particleSystem.gameObject.SetActive(true);
+			particleSystem.Play();
+
+
+			//if(photonView.IsMine)
+			// 파티클 시스템 큐에 추가
+			AddToHitParticleToZombiePool(particleSystem);
+			StartCoroutine(DeactivateParticleToZombieSystem(particleSystem));
+		}
+
+	}
+
 
 	void AddToHitParticlePool(ParticleSystem particleSystem)
 	{
@@ -127,13 +173,35 @@ public class WeaponManager : MonoBehaviour
 		}
 	}
 
+	void AddToHitParticleToZombiePool(ParticleSystem particleSystem)
+	{
+		if (particleSystem != null)
+		{
+			hitParticleToZombiePool.Enqueue(particleSystem);
+		}
+	}
+
 
 	IEnumerator DeactivateParticleSystem(ParticleSystem particleSystem)
 	{
 		yield return new WaitForSeconds(particleSystem.main.duration);
-		particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-		particleSystem.gameObject.SetActive(false);
-		hitParticlePool.Enqueue(particleSystem);
+		if(particleSystem)
+		{
+			particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			particleSystem.gameObject.SetActive(false);
+			hitParticlePool.Enqueue(particleSystem);
+		}
+	}
+
+	IEnumerator DeactivateParticleToZombieSystem(ParticleSystem particleSystem)
+	{
+		yield return new WaitForSeconds(particleSystem.main.duration);
+		if(particleSystem)
+		{
+			particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			particleSystem.gameObject.SetActive(false);
+			hitParticleToZombiePool.Enqueue(particleSystem);
+		}
 	}
 
 
@@ -177,7 +245,10 @@ public class WeaponManager : MonoBehaviour
 
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 		{
-			GetHitParticle(hit.point, Quaternion.LookRotation(hit.normal));
+			if(!hit.collider.gameObject.CompareTag("Enemy"))
+				GetHitParticle(hit.point, Quaternion.LookRotation(hit.normal));
+			else
+				GetHitParticleToZombie(hit.point, Quaternion.LookRotation(hit.normal));
 
 			if (hit.collider.TryGetComponent(out WallHP wallHP))
 			{

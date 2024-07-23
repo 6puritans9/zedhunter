@@ -9,32 +9,32 @@ public class EnemySpawnPool : MonoBehaviour
 
 	public Transform[] spawnPoints;
 
-	public GameObject femaleZombiePrefab;
-	public GameObject maleZombiePrefab;
+	public GameObject pizzaZombiePrefab;
+	public GameObject playerZombiePrefab;
 	public GameObject bossZombiePrefab;
 
-	public Queue<EnemyHealth> femaleZombiePool = new Queue<EnemyHealth>();
-	public Queue<EnemyHealth> maleZombiePool = new Queue<EnemyHealth>();
+	public Queue<EnemyHealth> pizzaZombiePool = new Queue<EnemyHealth>();
+	public Queue<EnemyHealth> playerZombiePool = new Queue<EnemyHealth>();
 	public Queue<EnemyHealth> bossZombiePool = new Queue<EnemyHealth>();
 
 	private EnemyHealth enemyHealth;
 
-	public int femaleZombiePoolSize;
-	public int maleZombiePoolSize;
+	public int pizzaZombiePoolSize;
+	public int playerZombiePoolSize;
 	public int bossZombiePoolSize;
 
 	public Vector2 spawnAreaSize = new Vector2(30f, 30f); // 스폰할 영역의 크기
 
-	[HideInInspector] public int maleEnemiesToSpawn;
-	[HideInInspector] public int femaleEnemiesToSpawn;
+	[HideInInspector] public int pizzaEnemiesToSpawn;
+	[HideInInspector] public int playerEnemiesToSpawn;
 	[HideInInspector] public int bossEnemiesToSpawn;
 	private void Awake()
 	{
 		Instance = this;
 
 
-		maleEnemiesToSpawn = 0;
-		femaleEnemiesToSpawn = 0;
+		pizzaEnemiesToSpawn = 0;
+		playerEnemiesToSpawn = 0;
 		bossEnemiesToSpawn = 0;
 
 		enemyHealth = GetComponent<EnemyHealth>();
@@ -54,12 +54,12 @@ public class EnemySpawnPool : MonoBehaviour
 		// 호스트만 적을 직접 생성할 수 있음
 		// 다른 클라이언트들은 호스트가 생성한 적을 동기화를 통해 받아옴
 		// 적을 모두 물리친 경우 다음 스폰 실행
-		if (femaleEnemiesToSpawn <= 0)
+		if (playerEnemiesToSpawn <= 0)
 		{
 			//FemaleZombieSpawnWave();
 			FemaleZombieSpawnWave();
 		}
-		if (maleEnemiesToSpawn <= 0)
+		if (pizzaEnemiesToSpawn <= 0)
 		{
 
 			//MaleZombieSpawnWave();
@@ -76,20 +76,20 @@ public class EnemySpawnPool : MonoBehaviour
 	void InitializeEnemyPool()
 	{
 		//femaleZombie
-		for (int i = 0; i < femaleZombiePoolSize; i++)
+		for (int i = 0; i < pizzaZombiePoolSize; i++)
 		{
-			GameObject enemy = Instantiate(femaleZombiePrefab, spawnPoints[0].position, Quaternion.identity);
+			GameObject enemy = Instantiate(pizzaZombiePrefab, spawnPoints[0].position, Quaternion.identity);
 			EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-			femaleZombiePool.Enqueue(enemyHealth);
+			pizzaZombiePool.Enqueue(enemyHealth);
 			EnemyHealth.Instance.OnEnemyKilled += OnEnemyKilled;
 			enemy.SetActive(false);
 		}
 		//maleZombie
-		for (int i = 0; i < maleZombiePoolSize; i++)
+		for (int i = 0; i < playerZombiePoolSize; i++)
 		{
-			GameObject enemy = Instantiate(maleZombiePrefab, spawnPoints[1].position, Quaternion.identity);
+			GameObject enemy = Instantiate(playerZombiePrefab, spawnPoints[1].position, Quaternion.identity);
 			EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-			maleZombiePool.Enqueue(enemyHealth);
+			playerZombiePool.Enqueue(enemyHealth);
 			EnemyHealth.Instance.OnEnemyKilled += OnEnemyKilled;
 			enemy.SetActive(false);
 		}
@@ -108,24 +108,24 @@ public class EnemySpawnPool : MonoBehaviour
 	// 현재 웨이브에 맞춰 적을 생성
 	private void FemaleZombieSpawnWave()
 	{
-		femaleEnemiesToSpawn = femaleZombiePoolSize;
+		playerEnemiesToSpawn = pizzaZombiePoolSize;
 		//int enemiesToSpawn = femaleZombiePoolSize;
-		for (int i = 0; i < femaleZombiePoolSize; i++)
+		for (int i = 0; i < pizzaZombiePoolSize; i++)
 		{
 			//EnemyHealth enemy = femaleZombiePool.Dequeue();
-			femaleZombiePool.TryDequeue(out EnemyHealth enemy);
+			pizzaZombiePool.TryDequeue(out EnemyHealth enemy);
 			if (!enemy.gameObject.activeSelf)
 			{
-				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
-				//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
-				//enemy.transform.position = randomSpawnPosition;
+				//enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+				Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+				enemy.transform.position = randomSpawnPosition;
 				enemy.gameObject.SetActive(true);
 				//enemiesToSpawn--;
 			}
 			else
 			{
 				// 다시 큐에 넣어 비활성화된 적을 찾을 때까지 반복
-				femaleZombiePool.Enqueue(enemy);
+				pizzaZombiePool.Enqueue(enemy);
 			}
 		}
 	}
@@ -133,24 +133,24 @@ public class EnemySpawnPool : MonoBehaviour
 	// 현재 웨이브에 맞춰 적을 생성
 	private void MaleZombieSpawnWave()
 	{
-		maleEnemiesToSpawn = maleZombiePoolSize;
+		pizzaEnemiesToSpawn = playerZombiePoolSize;
 		//maleEnemiesToSpawn = maleZombiePoolSize;
-		for (int i = 0; i < maleZombiePoolSize; i++)
+		for (int i = 0; i < playerZombiePoolSize; i++)
 		{
 			//EnemyHealth enemy = maleZombiePool.Dequeue();
-			maleZombiePool.TryDequeue(out EnemyHealth enemy);
+			playerZombiePool.TryDequeue(out EnemyHealth enemy);
 			if (!enemy.gameObject.activeSelf)
 			{
-				enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
-				//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[1].position);
-				//enemy.transform.position = randomSpawnPosition;
+				//enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+				Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+				enemy.transform.position = randomSpawnPosition;
 				enemy.gameObject.SetActive(true);
 				//enemiesToSpawn--;
 			}
 			else
 			{
 				// 다시 큐에 넣어 비활성화된 적을 찾을 때까지 반복
-				maleZombiePool.Enqueue(enemy);
+				playerZombiePool.Enqueue(enemy);
 			}
 		}
 	}
@@ -168,9 +168,9 @@ public class EnemySpawnPool : MonoBehaviour
 			{
 				if (!enemy.gameObject.activeSelf)
 				{
-					enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
-					//Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[0].position);
-					//enemy.transform.position = randomSpawnPosition;
+					//enemy.transform.position = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+					Vector3 randomSpawnPosition = GetRandomSpawnPosition(spawnPoints[Random.Range(0, spawnPoints.Length)].position);
+					enemy.transform.position = randomSpawnPosition;
 					enemy.gameObject.SetActive(true);
 					//enemiesToSpawn--;
 				}
