@@ -25,9 +25,9 @@ TagManager:
   - Gun
   - GroundCheck
   - Pizza
-  - 
-  - 
-  - 
+  - PlayerIcon
+  - EnemyIcon
+  - PizzaIcon
   - 
   - 
   - 
