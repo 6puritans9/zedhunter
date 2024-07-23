@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ToggleManager
+  - Wall
+  - FxTemporaire
+  - Enemy
+  - Pizza
   layers:
   - Default
   - TransparentFX
@@ -18,8 +23,8 @@ TagManager:
   - PreviewWall
   - AttackBox
   - Gun
-  - 
-  - 
+  - GroundCheck
+  - Pizza
   - 
   - 
   - 
