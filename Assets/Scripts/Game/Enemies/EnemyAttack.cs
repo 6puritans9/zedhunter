@@ -31,7 +31,7 @@ public class EnemyAttack : MonoBehaviour
 	{
 		if (enemyHealth.zombieType == EnemyHealth.ZombieType.Female)
 		{
-			//°ø°Ý¹üÀ§¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾î ¹Ù¶óº¸±â
+			//ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ù¶óº¸±ï¿½
 			if (other.CompareTag("Pizza") && enemyHealth.Target != null)
 			{
 				target = other.gameObject;
@@ -97,9 +97,9 @@ public class EnemyAttack : MonoBehaviour
 		{
 			wall.TakeDamage(enemyAD);
 		}
-		else if (target.TryGetComponent(out PizzaHP pizzaHP))
+		else if (target.TryGetComponent(out Pizza pizza))
 		{
-			pizzaHP.TakeDamage(enemyAD);
+			pizza.TakeDamage(enemyAD);
 		}
 	}
 }

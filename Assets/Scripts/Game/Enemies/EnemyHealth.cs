@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
 	public enum ZombieType { Male, Female, Boss }
 	public ZombieType zombieType;
 
-	public LayerMask whatIsTarget; // °ø°Ý ´ë»ó ·¹ÀÌ¾î
+	public LayerMask whatIsTarget; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½
 
 	public Coroutine UpdateTargetCorutine;
 
@@ -43,12 +43,12 @@ public class EnemyHealth : MonoBehaviour
 	public float maxJumpDistance = 8f;
 	public float jumpSpeed = 2f;
 	public float jumpHeight = 2f;
-	public float jumpCooldown = 3f; // Á¡ÇÁ ÄðÅ¸ÀÓ (ÃÊ ´ÜÀ§)
+	public float jumpCooldown = 3f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ (ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
 	private Vector3 jumpStartPosition;
 	private Vector3 jumpTargetPosition;
 	private float jumpStartTime;
-	private float lastJumpTime; // ¸¶Áö¸· Á¡ÇÁ ½Ã°£
+	private float lastJumpTime; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	private bool isJumping = false;
 	private bool isJumpAnimating = false;
 	// === BossParam === 
@@ -106,7 +106,7 @@ public class EnemyHealth : MonoBehaviour
 			{
 				GameObject targetObject = colliders[i].gameObject;
 
-				//Á»ºñ Å¸ÀÔ¿¡ µû¶ó ´Ù¸£°Ô Å¸°ÙÆÃ
+				//ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½
 				if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Pizza"))
 				{
 					float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
@@ -172,9 +172,9 @@ public class EnemyHealth : MonoBehaviour
 						foreach (RaycastHit hit in rayHits)
 						{
 							GameObject hitObject = hit.collider.gameObject;
-							if (hitObject.TryGetComponent(out PizzaHP pizzaHP))
+							if (hitObject.TryGetComponent(out Pizza pizza))
 							{
-								enemyAttack.target = pizzaHP.gameObject;
+								enemyAttack.target = pizza.gameObject;
 								break;
 							}
 						}
@@ -274,20 +274,20 @@ public class EnemyHealth : MonoBehaviour
     {
         while (!isDead)
         {
-            // ¸Å ·çÇÁ ½ÃÀÛ ½Ã closestDistance¸¦ ÃÊ±âÈ­
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ closestDistanceï¿½ï¿½ ï¿½Ê±ï¿½È­
             closestDistance = Mathf.Infinity;
-            // 20 À¯´ÖÀÇ ¹ÝÁö¸§À» °¡Áø °¡»óÀÇ ±¸¸¦ ±×·ÈÀ»¶§, ±¸¿Í °ãÄ¡´Â ¸ðµç ÄÝ¶óÀÌ´õ¸¦ °¡Á®¿È
-            // ´Ü, targetLayers¿¡ ÇØ´çÇÏ´Â ·¹ÀÌ¾î¸¦ °¡Áø ÄÝ¶óÀÌ´õ¸¸ °¡Á®¿Àµµ·Ï ÇÊÅÍ¸µ
+            // 20 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½, targetLayersï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½
             colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
             GameObject closestTarget = null;
 
-            // ¸ðµç ÄÝ¶óÀÌ´õµéÀ» ¼øÈ¸ÇÏ¸é¼­, »ì¾ÆÀÖ´Â ÇÃ·¹ÀÌ¾î¸¦ Ã£±â
+            // ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ï¸é¼­, ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Ã£ï¿½ï¿½
             for (int i = 0; i < colliders.Length; i++)
             {
-                // ÄÝ¶óÀÌ´õ·ÎºÎÅÍ LivingEntity ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+                // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½Îºï¿½ï¿½ï¿½ LivingEntity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 GameObject livingEntity = colliders[i].gameObject;
 
-                // LivingEntity ÄÄÆ÷³ÍÆ®°¡ Á¸Àç
+                // LivingEntity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (livingEntity.layer == 7)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
@@ -298,10 +298,10 @@ public class EnemyHealth : MonoBehaviour
                     }
 
                     *//*
-                    * ÇÃ·¹ÀÌ¾î¸¦ Å¸°ÙÀ¸·Î ¼³Á¤
-                    * PhotonÀÇ RPC È£ÃâÀ» ÅëÇØ ¸ðµç Å¬¶óÀÌ¾ðÆ®¿¡¼­
-                    * SetTargetÇÔ¼ö¸¦ È£Ãâ
-                    * ViewID·Î Å¸±ê µ¿±âÈ­
+                    * ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    * Photonï¿½ï¿½ RPC È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½
+                    * SetTargetï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½
+                    * ViewIDï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
                     *//*
                     if (closestTarget != null)
                     {
@@ -314,7 +314,7 @@ public class EnemyHealth : MonoBehaviour
                 }
             }
 
-            //°¨Áö¿©ºÎÆÇº°
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çºï¿½
             if (colliders.Length <= 0)
             {
                 isChase = false;
@@ -347,7 +347,7 @@ public class EnemyHealth : MonoBehaviour
                     StartCoroutine(Attack());
                 }
 
-                //°ø°ÝÁßÀÌ¸é Àá½Ã navÀá½Ã ¸ØÃã
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ navï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (!isAttack)
                 {
                     nav.isStopped = false;
@@ -374,10 +374,10 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                nav.isStopped = true;// ÃßÀû ´ë»ó ¾øÀ½ : AI ÀÌµ¿ ÁßÁö
+                nav.isStopped = true;// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : AI ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
                 //SetRandomDestination();
             }
-            // 0.25ÃÊ ÁÖ±â·Î Ã³¸® ¹Ýº¹
+            // 0.25ï¿½ï¿½ ï¿½Ö±ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ýºï¿½
             yield return new WaitForSeconds(0.25f);
         }
     }*/
@@ -441,12 +441,12 @@ public class EnemyHealth : MonoBehaviour
 		{
 			health -= damage;
 
-			//Á×À¸¸é RPC·Î EnemyDeath()È£ÃâÈÄ EnemyPool¿¡ Áý¾î³Ö±â
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RPCï¿½ï¿½ EnemyDeath()È£ï¿½ï¿½ï¿½ï¿½ EnemyPoolï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 			if (health <= 0)
 			{
 				EnemyDeath();
 
-				// OnEnemyKilled ÀÌº¥Æ® È£Ãâ
+				// OnEnemyKilled ï¿½Ìºï¿½Æ® È£ï¿½ï¿½
 				OnEnemyKilled?.Invoke(this);
 			}
 			/*else
@@ -483,10 +483,10 @@ public class EnemyHealth : MonoBehaviour
 
 				GameObject zombie4Instance = Instantiate(zombie4Prefab, transform.position, transform.rotation);
 
-				// È°¼ºÈ­ »óÅÂ È®ÀÎ ¹× ¼³Á¤
+				// È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				zombie4Instance.SetActive(true);
 
-				// ·»´õ·¯ È®ÀÎ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 				Renderer renderer = zombie4Instance.GetComponent<Renderer>();
 				if (renderer != null)
 				{
@@ -494,7 +494,7 @@ public class EnemyHealth : MonoBehaviour
 				}
 
 
-				// 2ÃÊ ÈÄ¿¡ »ç¶óÁöµµ·Ï ¼³Á¤
+				// 2ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				Destroy(zombie4Instance, 2f);
 			}
 		}
@@ -538,7 +538,7 @@ public class EnemyHealth : MonoBehaviour
 
 		public void ReStartAction()
 	{
-		Debug.Log("»ì¾Æ³²?");
+		Debug.Log("ï¿½ï¿½Æ³ï¿½?");
 		if (nav.enabled == false)
 			nav.enabled = true;
 		//nav.speed = OriginNavSpeed;

@@ -20,36 +20,36 @@ public class PlayerSpawner : MonoBehaviour
 		_gameManager = FindObjectOfType<GameManager>();
 		_playerManager = FindObjectOfType<PlayerManager>();
 
-		SpawnPlayer();
+		SpawnPlayer(_gameManager.avatarIndex);
 	}
 
-	// For Debug
-	private void SpawnPlayer()
-	{
-		GameObject playerToSpawn = playerPrefabs[0];
-		if (playerToSpawn == null)
-		{
-			Debug.LogError("Player prefab to spawn is null.");
-			return;
-		}
-
-		GameObject player = Instantiate(playerToSpawn, playerSpawnPoint.position, Quaternion.Euler(0, 180, 0));
-	}
+	// TODO: For Debug
+	// private void SpawnPlayer()
+	// {
+	// 	GameObject playerToSpawn = playerPrefabs[0];
+	// 	if (playerToSpawn == null)
+	// 	{
+	// 		Debug.LogError("Player prefab to spawn is null.");
+	// 		return;
+	// 	}
+	//
+	// 	GameObject player = Instantiate(playerToSpawn, playerSpawnPoint.position, Quaternion.Euler(0, 180, 0));
+	// }
 
 	// TODO: Restore Here
-	// private void SpawnPlayer(int index)
-	//     {
-	//         int avatarIndex = index;
-	//         
-	//         GameObject playerToSpawn = playerPrefabs[avatarIndex];
-	//         if (playerToSpawn == null)
-	//             {
-	//                 Debug.LogError("Player prefab to spawn is null.");
-	//                 return;
-	//             }
-	//
-	//         GameObject player = Instantiate(playerToSpawn, playerSpawnPoint.position, Quaternion.Euler(0, 180, 0));
-	//     }
+	private void SpawnPlayer(int index)
+	    {
+	        int avatarIndex = index;
+	        
+	        GameObject playerToSpawn = playerPrefabs[avatarIndex];
+	        if (playerToSpawn == null)
+	            {
+	                Debug.LogError("Player prefab to spawn is null.");
+	                return;
+	            }
+	
+	        GameObject player = Instantiate(playerToSpawn, playerSpawnPoint.position, Quaternion.Euler(0, 180, 0));
+	    }
 
 	public void RespawnPlayer()
 	{

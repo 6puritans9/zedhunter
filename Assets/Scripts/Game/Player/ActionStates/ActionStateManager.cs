@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
@@ -39,7 +38,7 @@ public class ActionStateManager : MonoBehaviour
 
 
 	private Volume postProcessVolume;
-	private Vignette vignette; // ºñ³×Æ® È¿°ú
+	private Vignette vignette; // ï¿½ï¿½ï¿½Æ® È¿ï¿½ï¿½
 	public int maxPlayerHealth = 500;
 
 	private void Awake()
@@ -72,7 +71,7 @@ public class ActionStateManager : MonoBehaviour
 	void Update()
 	{
 
-		// ÀÔ·Â¿¡ µû¶ó ·¹ÀÌ¾î °¡ÁßÄ¡ Á¶Àý
+		// ï¿½Ô·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			SetWeapon(1);
@@ -84,7 +83,7 @@ public class ActionStateManager : MonoBehaviour
 		}
 
 		currentState.UpdateState(this);
-		UpdateHealthEffect(); // Ã¼·Â È¿°ú ¾÷µ¥ÀÌÆ®
+		UpdateHealthEffect(); // Ã¼ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	}
 
 	void UpdateHealthEffect()
@@ -136,7 +135,7 @@ public class ActionStateManager : MonoBehaviour
 	void PlayerDeath()
 	{
 		isDead = true;
-		Invoke("RespawnPlayer", 5f); // 5ÃÊ ÈÄ¿¡ Àç»ý¼º
+		Invoke("RespawnPlayer", 5f); // 5ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
 	void RPC_PlayerDeath()
@@ -165,7 +164,7 @@ public class ActionStateManager : MonoBehaviour
 
 	void SetLayerWeight(int layerIndex, int weight)
 	{
-		// ¸ðµç ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ 0À¸·Î ¼³Á¤
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < anim.layerCount; i++)
 		{
 			anim.SetLayerWeight(i, 0);
@@ -176,7 +175,7 @@ public class ActionStateManager : MonoBehaviour
 		else
 			gunRig.weight = 0;
 
-		// ÁöÁ¤µÈ ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ ¼³Á¤
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 
