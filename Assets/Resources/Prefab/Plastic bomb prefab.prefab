@@ -144,7 +144,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4590355115207172287}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 75.375, y: 1.77, z: 75.375}
@@ -152,7 +152,7 @@ NavMeshObstacle:
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 4
+  m_TimeToStationary: 1
 --- !u!114 &6532835804956345964
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,6 +41,8 @@ public class ActionStateManager : MonoBehaviour
 	private Vignette vignette; // ���Ʈ ȿ��
 	public int maxPlayerHealth = 500;
 
+	private bool isGameOver = false;
+
 	private void Awake()
 	{
 
@@ -100,7 +102,7 @@ public class ActionStateManager : MonoBehaviour
 		}
 	}
 
-	void SetWeapon(int idx)
+	public void SetWeapon(int idx)
 	{
 		switch (idx)
 		{
@@ -120,9 +122,9 @@ public class ActionStateManager : MonoBehaviour
 	{
 		if (playerHealth > 0)
 		{
-			if(this.gameObject.name == "Kafka(Clone)" || this.gameObject.name == "Serval(Clone)")
+			if (this.gameObject.name == "Kafka(Clone)" || this.gameObject.name == "Serval(Clone)")
 				PlayerSoundSource.Instance.GetTakeDamageServalKafkaSound();
-			else if(this.gameObject.name == "Yanqing(Clone)")
+			else if (this.gameObject.name == "Yanqing(Clone)")
 				PlayerSoundSource.Instance.GetTakeDamageYanqingSound();
 
 			playerHealth -= damage;
@@ -138,10 +140,17 @@ public class ActionStateManager : MonoBehaviour
 	void PlayerDeath()
 	{
 		isDead = true;
-		Invoke("RespawnPlayer", 5f); // 5�� �Ŀ� �����
+		// Invoke("RespawnPlayer", 5f); // 5    Ŀ       
+		if (!isGameOver)
+		{
+			isGameOver = true;
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
+		}
 	}
 
-	void RPC_PlayerDeath()
+	/*void RPC_PlayerDeath()
 	{
 		gameObject.SetActive(false);
 	}
@@ -156,7 +165,7 @@ public class ActionStateManager : MonoBehaviour
 	public void RPC_RespawnPlayer()
 	{
 		gameObject.SetActive(true);
-	}
+	}*/
 
 
 	public void SwitchState(ActionBaseState state)
@@ -172,7 +181,7 @@ public class ActionStateManager : MonoBehaviour
 			anim.SetLayerWeight(i, 0);
 		}
 
-		if (layerIndex == 1 && weight > 0.9f)
+		if (layerIndex == 1)
 		{
 			gunRig.weight = 1;
 			gun.SetActive(true);

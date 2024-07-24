@@ -70,6 +70,7 @@ public class WeaponManager : MonoBehaviour
 
 	void Update()
 	{
+		Debug.Log(actions.Reload);
 		if (ShouldFire())
 		{
 			Fire();

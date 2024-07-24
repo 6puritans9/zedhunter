@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BoxDamage : MonoBehaviour
 {
 	WallHP wallHp;
+	NavMeshObstacle obstacle;
 
 	public bool groundCheck;
 	public bool downDamage = true;
@@ -14,12 +16,16 @@ public class BoxDamage : MonoBehaviour
 	private void Awake()
 	{
 		wallHp = GetComponent<WallHP>();
+		obstacle = GetComponent<NavMeshObstacle>();
 	}
 
 	private void OnCollisionStay(Collision collision)
 	{
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		{
 			groundCheck = true;
+			obstacle.enabled = true;
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)

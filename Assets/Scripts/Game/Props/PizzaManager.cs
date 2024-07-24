@@ -18,7 +18,7 @@ public class PizzaManager : MonoBehaviour
                 remainingPizzas = totalPizzas;
                 Instance = this;
             }
-
+        
         public void PizzaDestroyed(Pizza pizza)
             {
                 print("Pizza Destroyed");

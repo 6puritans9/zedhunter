@@ -69,7 +69,7 @@ public class WallBuilder : MonoBehaviour
             }
         }
 
-		if (Input.GetKeyDown(KeyCode.Q))
+		if (Input.GetKeyDown(KeyCode.Q) && state.currentState != state.Reload)
 		{
 			state.SetLayerWeight(0, 1);
 			ToggleBuildMode();

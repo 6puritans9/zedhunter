@@ -14,8 +14,6 @@ public class UIManager : MonoBehaviour
 	public Image coolDownImage;
 	public TMP_Text coolDownText;
 
-	[Header("Vignetting")] private Volume postProcessVolume;
-	private Vignette vignette;
 
 	[Header("Bullets")] public TMP_Text ammoIndicator;
 
@@ -35,12 +33,6 @@ public class UIManager : MonoBehaviour
 
 	void Start()
 	{
-		postProcessVolume = FindObjectOfType<Volume>();
-		if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
-		{
-			vignette.active = true;
-			vignette.color.Override(Color.red);
-		}
 
 		_pizzaManager = FindObjectOfType<PizzaManager>();
 		// Set 5 pizzaIndicators
@@ -63,20 +55,6 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public void UpdateHealthEffect(int playerHealth, int maxPlayerHealth)
-	{
-		if (vignette != null)
-		{
-			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
-			vignette.intensity.Override(vignetteIntensity);
-			/*Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");*/
-		}
-		else
-		{
-			Debug.LogError("Vignette effect is null!");
-		}
-	}
 
 	private void SetCursorState(bool isLocked)
 	{
