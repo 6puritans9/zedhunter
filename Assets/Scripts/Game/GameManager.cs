@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
         
         [Header("Player Info")]
         public int playerScore;
-        public int playerHealth;
 
         private void Awake()
             {
@@ -39,7 +38,5 @@ public class GameManager : MonoBehaviour
         public void InitializeGame()
             {
                 playerScore = 0;
-                playerHealth = 100;
-                // Add any other initialization logic here
             }
     }

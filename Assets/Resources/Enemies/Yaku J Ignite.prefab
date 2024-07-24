@@ -223,7 +223,7 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 7757451556906149779}
-  health: 300
+  health: 500
   isDead: 0
   chaseDistance: 5
   minJumpDistance: 4

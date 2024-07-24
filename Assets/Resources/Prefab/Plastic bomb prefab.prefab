@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2286384d1e73ab4587487da08fff2ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 250
+  HP: 30
   Player: {fileID: 2012685153070908845, guid: 30284aa2427f44868ad26dc285a1c430, type: 3}
   canAttack: 0
   originalMaterial: {fileID: 2100000, guid: d422ba90fae5b754f8f163b9681968fb, type: 2}
