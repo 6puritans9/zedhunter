@@ -89,7 +89,7 @@ public class WallHP : MonoBehaviour
 	private IEnumerator DestroyWallWithEffect()
 	{
 		// 깜빡임 효과 적용
-		float blinkDuration = 2.0f; // 깜빡임 효과 지속 시간
+		float blinkDuration = 1f; // 깜빡임 효과 지속 시간
 		float blinkInterval = 0.1f; // 깜빡임 간격
 
 		for (float t = 0; t < blinkDuration; t += blinkInterval * 2)

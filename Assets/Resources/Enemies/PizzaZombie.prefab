@@ -2380,7 +2380,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 30
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -2406,7 +2406,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 284061644237058192}
-  health: 70
+  MaxHealth: 20
+  health: 30
   isDead: 0
   chaseDistance: 5
   minJumpDistance: 4
@@ -2415,6 +2416,9 @@ MonoBehaviour:
   jumpHeight: 2
   jumpCooldown: 3
   zombie4Prefab: {fileID: 4894544454540710774, guid: 2901ee8780afa294b9880064a22b13f9,
+    type: 3}
+  maleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0, type: 3}
+  femaleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0,
     type: 3}
 --- !u!114 &2395558724091107109
 MonoBehaviour:

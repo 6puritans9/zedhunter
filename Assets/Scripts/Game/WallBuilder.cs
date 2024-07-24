@@ -7,6 +7,8 @@ public class WallBuilder : MonoBehaviour
 {
 	public static WallBuilder Instance;
 
+	ActionStateManager state;
+
 	public GameObject wallPrefab;
 	public GameObject wallPreviewPrefab;
 	public LayerMask buildableLayer;
@@ -30,6 +32,7 @@ public class WallBuilder : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+		state = GetComponent<ActionStateManager>();	
 	}
 
 	void Start()
@@ -68,6 +71,7 @@ public class WallBuilder : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
+			state.SetLayerWeight(0, 1);
 			ToggleBuildMode();
 		}
 
@@ -138,8 +142,19 @@ public class WallBuilder : MonoBehaviour
 	{
 		if (currentPreview != null && !IsOverlapping(currentPreview.transform.position))
 		{
+			if(this.gameObject.name == "Kafka(Clone)")
+			{
+				PlayerSoundSource.Instance.GetUseKafkaSkillSound();
+			}
+			else if (this.gameObject.name == "Serval(Clone)")
+			{
+				PlayerSoundSource.Instance.GetUseServalSkillSound();
+			}
+			else if (this.gameObject.name == "Yanqing(Clone)")
+				PlayerSoundSource.Instance.GetUseYanqingSkillSound();
+
 			GameObject newWall = Instantiate(wallPrefab,
-				currentPreview.transform.position + new Vector3(0, 15, 0), Quaternion.identity);
+				currentPreview.transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 			newWall.layer = LayerMask.NameToLayer("Wall");
 
 			if (builtWalls.Count >= maxWalls)

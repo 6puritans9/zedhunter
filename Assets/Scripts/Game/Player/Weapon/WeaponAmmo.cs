@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponAmmo : MonoBehaviour
 {
     public int clipSize;
-    public int extraAmmo;
+	[HideInInspector]public int extraAmmo;
     public int currentAmmo;
 
     public AudioClip magInSound;
@@ -18,7 +18,8 @@ public class WeaponAmmo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentAmmo = clipSize;
+        extraAmmo = 5000;
+		currentAmmo = clipSize;
     }
 
 	private void Update()

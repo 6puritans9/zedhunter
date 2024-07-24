@@ -2374,7 +2374,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 2
+  avoidancePriority: 40
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -2406,7 +2406,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   colliders: []
   attackRange: {fileID: 284061644237058192}
-  health: 70
+  MaxHealth: 30
+  health: 30
   isDead: 0
   chaseDistance: 5
   minJumpDistance: 4
@@ -2415,6 +2416,9 @@ MonoBehaviour:
   jumpHeight: 2
   jumpCooldown: 3
   zombie4Prefab: {fileID: 4894544454540710774, guid: 2901ee8780afa294b9880064a22b13f9,
+    type: 3}
+  maleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0, type: 3}
+  femaleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0,
     type: 3}
 --- !u!114 &-7065475578750263168
 MonoBehaviour:

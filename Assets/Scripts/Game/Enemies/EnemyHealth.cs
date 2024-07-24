@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static CartoonFX.CFXR_Effect;
 
 public class EnemyHealth : MonoBehaviour
 {
 	public static EnemyHealth Instance;
 
-	public enum ZombieType { Male, Female, Boss }
+	public enum ZombieType { PlayerZombie, PizzaZombie, Boss }
 	public ZombieType zombieType;
 
 	public LayerMask whatIsTarget; // ���� ��� ���̾�
@@ -29,7 +30,8 @@ public class EnemyHealth : MonoBehaviour
 
 	public BoxCollider attackRange;
 
-	public float health = 20;
+	public float MaxHealth;
+	[HideInInspector] public float health;
 	[HideInInspector] public bool isDead;
 
 	EnemyAttack enemyAttack;
@@ -38,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
 	int OriginNavSpeed;
 
 	// === BossParam === 
-	public float chaseDistance = 5f;
+	/*public float chaseDistance = 5f;
 	public float minJumpDistance = 4f;
 	public float maxJumpDistance = 8f;
 	public float jumpSpeed = 2f;
@@ -50,7 +52,11 @@ public class EnemyHealth : MonoBehaviour
 	private float jumpStartTime;
 	private float lastJumpTime; // ������ ���� �ð�
 	private bool isJumping = false;
-	private bool isJumpAnimating = false;
+	private bool isJumpAnimating = false;*/
+	public AudioClip bossDeathSoundClip;
+	public AudioClip bossAttackSoundClip;
+	private AudioSource bossDeathAudioSource;
+	private AudioSource bossAttackAudioSource;
 	// === BossParam === 
 
 	public GameObject zombie4Prefab;
@@ -60,6 +66,17 @@ public class EnemyHealth : MonoBehaviour
 		Instance = this;
 
 		isDead = false;
+
+		bossDeathAudioSource = gameObject.AddComponent<AudioSource>();
+		bossDeathAudioSource.loop = false;
+		bossDeathAudioSource.playOnAwake = false;
+		bossDeathAudioSource.clip = bossDeathSoundClip;
+
+		bossAttackAudioSource = gameObject.AddComponent<AudioSource>();
+		bossAttackAudioSource.loop = false;
+		bossAttackAudioSource.playOnAwake = false;
+		bossAttackAudioSource.clip = bossAttackSoundClip;
+
 
 		enemyAttack = GetComponentInChildren<EnemyAttack>();
 		nav = GetComponent<NavMeshAgent>();
@@ -71,17 +88,15 @@ public class EnemyHealth : MonoBehaviour
 		isAttack = false;
 		isChase = true;
 
-		if (zombieType == ZombieType.Female)
+		if (zombieType == ZombieType.PizzaZombie)
 			nav.speed = OriginNavSpeed = 4;
-		else if (zombieType == ZombieType.Male)
+		else if (zombieType == ZombieType.PlayerZombie)
 			nav.speed = OriginNavSpeed = 5;
 		else
 			nav.speed = OriginNavSpeed = 7;
 
 		StartCoroutine(UpdateTarget());
 	}
-
-
 
 	IEnumerator UpdateTarget()
 	{
@@ -91,10 +106,10 @@ public class EnemyHealth : MonoBehaviour
 			GameObject closestTarget = null;
 			switch (zombieType)
 			{
-				case ZombieType.Female:
+				case ZombieType.PizzaZombie:
 					colliders = Physics.OverlapSphere(transform.position, 100, whatIsTarget);
 					break;
-				case ZombieType.Male:
+				case ZombieType.PlayerZombie:
 					colliders = Physics.OverlapSphere(transform.position, 100, whatIsTarget);
 					break;
 				case ZombieType.Boss:
@@ -107,7 +122,7 @@ public class EnemyHealth : MonoBehaviour
 				GameObject targetObject = colliders[i].gameObject;
 
 				//���� Ÿ�Կ� ���� �ٸ��� Ÿ����
-				if (zombieType == ZombieType.Female && targetObject.layer == LayerMask.NameToLayer("Pizza"))
+				if (zombieType == ZombieType.PizzaZombie && targetObject.layer == LayerMask.NameToLayer("Pizza"))
 				{
 					float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
 					if (distanceToTarget < closestDistance)
@@ -116,7 +131,7 @@ public class EnemyHealth : MonoBehaviour
 						closestTarget = targetObject;
 					}
 				}
-				else if (zombieType == ZombieType.Male && (targetObject.layer == LayerMask.NameToLayer("Player") || targetObject.layer == LayerMask.NameToLayer("Wall")))
+				else if (zombieType == ZombieType.PlayerZombie && (targetObject.layer == LayerMask.NameToLayer("Player") || targetObject.layer == LayerMask.NameToLayer("Wall")))
 				{
 					float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
 					if (distanceToTarget < closestDistance)
@@ -158,13 +173,13 @@ public class EnemyHealth : MonoBehaviour
 				float speed = 0;
 				float targetRadius = 1f;
 				float targetRange = 1f;
-				if (zombieType == ZombieType.Female)
+				if (zombieType == ZombieType.PizzaZombie)
 				{
 					RaycastHit[] rayHits = Physics.SphereCastAll(
-						transform.position, 
-						targetRadius, 
-						transform.forward, 
-						targetRange, 
+						transform.position,
+						targetRadius,
+						transform.forward,
+						targetRange,
 						LayerMask.GetMask("Pizza"));
 
 					if (rayHits.Length > 0 && !isAttack)
@@ -181,7 +196,7 @@ public class EnemyHealth : MonoBehaviour
 						StartCoroutine(Attack());
 					}
 				}
-				else if (zombieType == ZombieType.Male)
+				else if (zombieType == ZombieType.PlayerZombie)
 				{
 					RaycastHit[] rayHits = Physics.SphereCastAll(
 						transform.position,
@@ -225,7 +240,6 @@ public class EnemyHealth : MonoBehaviour
 							}
 						}
 						StartCoroutine(Attack());
-						
 					}
 				}
 
@@ -269,119 +283,6 @@ public class EnemyHealth : MonoBehaviour
 		}
 	}
 
-
-	/*IEnumerator UpdateTarget()
-    {
-        while (!isDead)
-        {
-            // �� ���� ���� �� closestDistance�� �ʱ�ȭ
-            closestDistance = Mathf.Infinity;
-            // 20 ������ �������� ���� ������ ���� �׷�����, ���� ��ġ�� ��� �ݶ��̴��� ������
-            // ��, targetLayers�� �ش��ϴ� ���̾ ���� �ݶ��̴��� ���������� ���͸�
-            colliders = Physics.OverlapSphere(transform.position, 15, whatIsTarget);
-            GameObject closestTarget = null;
-
-            // ��� �ݶ��̴����� ��ȸ�ϸ鼭, ����ִ� �÷��̾ ã��
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                // �ݶ��̴��κ��� LivingEntity ������Ʈ ��������
-                GameObject livingEntity = colliders[i].gameObject;
-
-                // LivingEntity ������Ʈ�� ����
-                if (livingEntity.layer == 7)
-                {
-                    float distanceToTarget = Vector3.Distance(transform.position, livingEntity.transform.position);
-                    if (distanceToTarget < closestDistance)
-                    {
-                        closestDistance = distanceToTarget;
-                        closestTarget = livingEntity;
-                    }
-
-                    *//*
-                    * �÷��̾ Ÿ������ ����
-                    * Photon�� RPC ȣ���� ���� ��� Ŭ���̾�Ʈ����
-                    * SetTarget�Լ��� ȣ��
-                    * ViewID�� Ÿ�� ����ȭ
-                    *//*
-                    if (closestTarget != null)
-                    {
-                        Target = closestTarget.transform;
-                        photonView.RPC(
-                            "SetTarget",
-                            RpcTarget.AllBuffered,
-                            closestTarget.GetComponent<PhotonView>().ViewID);
-                    }
-                }
-            }
-
-            //���������Ǻ�
-            if (colliders.Length <= 0)
-            {
-                isChase = false;
-                Target = null;
-            }
-            else
-                isChase = true;
-
-            if (Target)
-            {
-                float speed = 0;
-
-                float targetRadius = 0.5f;
-                float targetRange = 0.5f;
-                RaycastHit[] rayHits = Physics.SphereCastAll(transform.position,
-                                                         targetRadius, transform.forward,
-                                                         targetRange, LayerMask.GetMask("Player"));
-                
-                if (rayHits.Length > 0 && !isAttack)
-                {
-                    foreach (RaycastHit hit in rayHits)
-                    {
-                        GameObject hitObject = hit.collider.gameObject;
-                        if(hitObject.TryGetComponent(out ActionStateManager player))
-                        {
-                            enemyAttack.targetPlayer = player.gameObject;
-                            break;
-                        }
-                    }
-                    StartCoroutine(Attack());
-                }
-
-                //�������̸� ��� nav��� ����
-                if (!isAttack)
-                {
-                    nav.isStopped = false;
-                    speed = nav.velocity.magnitude;
-                }
-                else
-                {
-                    nav.isStopped = true;
-                }
-
-                if (speed > 0.1f)
-                {
-                    anim.SetBool("isWalking", true);
-                    anim.SetFloat("speed", speed);
-                }
-                else
-                {
-                    anim.SetBool("isWalking", false);
-                    anim.SetFloat("speed", 0f);
-                }
-
-                if(isChase)
-                    nav.SetDestination(Target.transform.position);
-            }
-            else
-            {
-                nav.isStopped = true;// ���� ��� ���� : AI �̵� ����
-                //SetRandomDestination();
-            }
-            // 0.25�� �ֱ�� ó�� �ݺ�
-            yield return new WaitForSeconds(0.25f);
-        }
-    }*/
-
 	IEnumerator Attack()
 	{
 		isChase = false;
@@ -389,6 +290,7 @@ public class EnemyHealth : MonoBehaviour
 		anim.SetBool("isAttack", true);
 
 		yield return new WaitForSeconds(1f);
+		
 
 		isChase = true;
 		isAttack = false;
@@ -441,12 +343,10 @@ public class EnemyHealth : MonoBehaviour
 		{
 			health -= damage;
 
-			//������ RPC�� EnemyDeath()ȣ���� EnemyPool�� ����ֱ�
 			if (health <= 0)
 			{
 				EnemyDeath();
 
-				// OnEnemyKilled �̺�Ʈ ȣ��
 				OnEnemyKilled?.Invoke(this);
 			}
 			/*else
@@ -457,7 +357,14 @@ public class EnemyHealth : MonoBehaviour
 	void EnemyDeath()
 	{
 		isDead = true;
-		StopAction();
+		if (zombieType == ZombieType.Boss)
+		{
+			anim.SetTrigger("death");
+			bossDeathAudioSource.Play();
+			Invoke("StopAction", 3.5f);
+		}
+		else
+			StopAction();
 	}
 
 	public void StopAction()
@@ -466,35 +373,30 @@ public class EnemyHealth : MonoBehaviour
 		nav.enabled = false;
 		anim.enabled = false;
 
-		if (isDead && (zombieType == ZombieType.Male || zombieType == ZombieType.Female))
+		if (isDead && (zombieType == ZombieType.PlayerZombie || zombieType == ZombieType.PizzaZombie))
 		{
 			if (zombie4Prefab != null)
 			{
-				if (zombieType == EnemyHealth.ZombieType.Male)
+				if (zombieType == EnemyHealth.ZombieType.PlayerZombie)
 				{
 					EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
 					EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
 				}
-				else if (zombieType == EnemyHealth.ZombieType.Female)
+				else if (zombieType == EnemyHealth.ZombieType.PizzaZombie)
 				{
 					EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
 					EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
 				}
 
 				GameObject zombie4Instance = Instantiate(zombie4Prefab, transform.position, transform.rotation);
-
-				// Ȱ��ȭ ���� Ȯ�� �� ����
 				zombie4Instance.SetActive(true);
 
-				// ������ Ȯ��
 				Renderer renderer = zombie4Instance.GetComponent<Renderer>();
 				if (renderer != null)
 				{
 					renderer.enabled = true;
 				}
 
-
-				// 2�� �Ŀ� ��������� ����
 				Destroy(zombie4Instance, 2f);
 			}
 		}
@@ -506,39 +408,8 @@ public class EnemyHealth : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
-
-		/*public void StopAction()
-		{
-			*//*isChase = false;
-			nav.enabled = false;
-			anim.enabled = false;
-			transform.position = Vector3.zero;
-
-			UpdateTargetCorutine = null;
-			if (isDead)
-			{
-				if (zombieType == EnemyHealth.ZombieType.Male)
-				{
-					EnemySpawnPool.Instance.playerZombiePool.Enqueue(this);
-					EnemySpawnPool.Instance.pizzaEnemiesToSpawn -= 1;
-				}
-				else if (zombieType == EnemyHealth.ZombieType.Female)
-				{
-					EnemySpawnPool.Instance.pizzaZombiePool.Enqueue(this);
-					EnemySpawnPool.Instance.playerEnemiesToSpawn -= 1;
-				}
-				else if (zombieType == EnemyHealth.ZombieType.Boss)
-				{
-					EnemySpawnPool.Instance.bossZombiePool.Enqueue(this);
-					EnemySpawnPool.Instance.bossEnemiesToSpawn -= 1;
-				}
-			}
-			gameObject.SetActive(false);*//*
-		}*/
-
-		public void ReStartAction()
+	public void ReStartAction()
 	{
-		Debug.Log("��Ƴ�?");
 		if (nav.enabled == false)
 			nav.enabled = true;
 		//nav.speed = OriginNavSpeed;
@@ -554,14 +425,14 @@ public class EnemyHealth : MonoBehaviour
 
 		switch (zombieType)
 		{
-			case ZombieType.Female:
-				health = 50;
+			case ZombieType.PizzaZombie:
+				health = MaxHealth;
 				break;
-			case ZombieType.Male:
-				health = 80;
+			case ZombieType.PlayerZombie:
+				health = MaxHealth;
 				break;
 			case ZombieType.Boss:
-				health = 300;
+				health = MaxHealth;
 				break;
 		}
 
@@ -576,5 +447,10 @@ public class EnemyHealth : MonoBehaviour
 		{
 			Target = target.transform;
 		}
+	}
+
+	public void BossAttackSound()
+	{
+		bossAttackAudioSource.Play();
 	}
 }

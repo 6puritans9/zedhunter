@@ -6871,6 +6871,7 @@ GameObject:
   - component: {fileID: 579215611348252645}
   - component: {fileID: 3922585320573039482}
   - component: {fileID: 4605309061610007286}
+  - component: {fileID: -2422881101811579805}
   m_Layer: 7
   m_Name: Yanqing
   m_TagString: Player
@@ -7142,6 +7143,28 @@ MonoBehaviour:
     m_Bits: 16384
   maxWalls: 3
   cooldownTime: 10
+--- !u!114 &-2422881101811579805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744264587897390871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c4ee9635c321e4082418d8887b7cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeDamage1: {fileID: 8300000, guid: 13f35c57e0bb84844b8074de27320027, type: 3}
+  takeDamage2: {fileID: 8300000, guid: c1174fa8c17bb1e47a48e1b0dd3abed7, type: 3}
+  takeDamage3: {fileID: 8300000, guid: e9bbb5b3be30d414b9ff967d5c794a62, type: 3}
+  takeDamage4: {fileID: 8300000, guid: 1c68350c836420c41ba21515da9b1114, type: 3}
+  takeDamage5: {fileID: 8300000, guid: 81206c8f07011f34e94b22b4042f1134, type: 3}
+  useKafkaSkill1: {fileID: 8300000, guid: a5cef99f6872e9e49870a766ac017073, type: 3}
+  useServalSkill2: {fileID: 8300000, guid: e2e5f21da9d4f8b48b1d51675bb8a1e9, type: 3}
+  useServalSkill3: {fileID: 8300000, guid: b4d5cb95e1d04da47ab388d3f2ec0e96, type: 3}
+  useYanqingSkill1: {fileID: 8300000, guid: a2a5c615bf60f794ba566cd2a496ca2d, type: 3}
+  useYanqingSkill2: {fileID: 8300000, guid: 8e6f7f6201e8c02418fcc80d9749fe97, type: 3}
 --- !u!1 &783464150206390455
 GameObject:
   m_ObjectHideFlags: 0
@@ -19135,7 +19158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clipSize: 50
-  extraAmmo: 1000
+  extraAmmo: 5000
   currentAmmo: 0
   magInSound: {fileID: 8300000, guid: 29ff97669552f694381b4a72b47de684, type: 3}
   magOutSound: {fileID: 8300000, guid: 1aed76bf288c2ca4e89b24dd942d4b70, type: 3}

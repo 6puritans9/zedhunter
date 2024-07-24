@@ -91,7 +91,7 @@ public class ActionStateManager : MonoBehaviour
 		if (vignette != null)
 		{
 			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
 			vignette.intensity.Override(vignetteIntensity);
 		}
 		else
@@ -105,12 +105,10 @@ public class ActionStateManager : MonoBehaviour
 		switch (idx)
 		{
 			case 1:
-				gun.SetActive(false);
 				//gunRig.weight = 0;
 				SetLayerWeight(0, 1);
 				break;
 			case 2:
-				gun.SetActive(true);
 				//gunRig.weight = 1;
 				SetLayerWeight(1, 1);
 				break;
@@ -122,6 +120,11 @@ public class ActionStateManager : MonoBehaviour
 	{
 		if (playerHealth > 0)
 		{
+			if(this.gameObject.name == "Kafka(Clone)" || this.gameObject.name == "Serval(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageServalKafkaSound();
+			else if(this.gameObject.name == "Yanqing(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageYanqingSound();
+
 			playerHealth -= damage;
 			if (playerHealth <= 0)
 			{
@@ -162,20 +165,23 @@ public class ActionStateManager : MonoBehaviour
 		currentState.EnterState(this);
 	}
 
-	void SetLayerWeight(int layerIndex, int weight)
+	public void SetLayerWeight(int layerIndex, int weight)
 	{
-		// ��� ���̾��� ����ġ�� 0���� ����
 		for (int i = 0; i < anim.layerCount; i++)
 		{
 			anim.SetLayerWeight(i, 0);
 		}
 
 		if (layerIndex == 1 && weight > 0.9f)
+		{
 			gunRig.weight = 1;
+			gun.SetActive(true);
+		}
 		else
+		{
 			gunRig.weight = 0;
-
-		// ������ ���̾��� ����ġ�� ����
+			gun.SetActive(false);
+		}
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 
