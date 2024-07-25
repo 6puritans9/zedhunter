@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
         // Update is called once per frame
         void Update()
             {
-                _uiManager.UpdateHealthEffect(currentPlayerHealth, maxPlayerHealth);
+                // _uiManager.UpdateHealthEffect(currentPlayerHealth, maxPlayerHealth);
             }
 
         public void TakeDamage(int damage)

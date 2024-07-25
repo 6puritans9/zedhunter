@@ -91,7 +91,7 @@ public class ActionStateManager : MonoBehaviour
 		if (vignette != null)
 		{
 			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
 			vignette.intensity.Override(vignetteIntensity);
 		}
 		else

@@ -9,10 +9,13 @@ public class GameManager : MonoBehaviour
 
         [Header("Player Character Index")]
         [HideInInspector] public int avatarIndex;
-        
-        [Header("Player Info")]
-        public int playerScore;
 
+        [Header("Player Info")] public static string UserName;
+        public int playerScore;
+        private bool isNewRecord = false;
+        
+        public static bool IsNewRecord { get; private set; }
+        
         private void Awake()
             {
                 if (instance != null && instance != this)
@@ -24,7 +27,17 @@ public class GameManager : MonoBehaviour
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-
+        
+        public static void SetUserName(string name)
+            {
+                UserName = name;
+            }
+        
+        public void InitializeGame()
+            {
+                playerScore = 0;
+            }
+        
         public void SetPlayerAvatar(int index)
             {
                 avatarIndex = index;
@@ -33,10 +46,5 @@ public class GameManager : MonoBehaviour
         public int GetPlayerAvatar()
             {
                 return avatarIndex;
-            }
-        
-        public void InitializeGame()
-            {
-                playerScore = 0;
             }
     }

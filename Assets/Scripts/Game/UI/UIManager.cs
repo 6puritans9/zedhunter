@@ -35,14 +35,6 @@ public class UIManager : MonoBehaviour
 
 	void Start()
 	{
-		postProcessVolume = GetComponent<Volume>();
-		print($"postProcessVolume: {postProcessVolume}");
-		if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
-		{
-			vignette.active = true;
-			vignette.color.Override(Color.red);
-		}
-
 		_pizzaManager = FindObjectOfType<PizzaManager>();
 		// Set 5 pizzaIndicators
 		for (int i = 0; i < _pizzaManager.totalPizzas; i += 1)
@@ -63,25 +55,6 @@ public class UIManager : MonoBehaviour
 			SetCursorState(isCursorLocked);
 		}
 	}
-
-	public void UpdateHealthEffect(int playerHealth, int maxPlayerHealth)
-	{
-		if (vignette != null)
-		{
-			
-			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
-			vignette.intensity.Override(vignetteIntensity);
-			Debug.Log($"Health: {playerHealth}, Intensity: {vignetteIntensity}");
-			print($"postProcessVolume: {postProcessVolume}");
-			
-		}
-		else
-		{
-			Debug.LogError("Vignette effect is null!");
-		}
-	}
-
 	private void SetCursorState(bool isLocked)
 	{
 		if (isLocked)

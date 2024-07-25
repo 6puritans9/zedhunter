@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using System.Collections;
@@ -9,8 +10,12 @@ public class LoginManager : MonoBehaviour
         private string loginEndpoint = "http://52.78.204.71:13756/account/login";
         private string createEndpoint = "http://52.78.204.71:13756/account/create";
 
+        public static string LoginEndpoint { get; private set; }
+        
         public MenuManager menuManager;
-
+        private ImageUploader _imageUploader;
+        
+        [Header("Creating Account")]
         [SerializeField] private TextMeshProUGUI loginAlertText;
         [SerializeField] private TextMeshProUGUI createAlertText;
         [SerializeField] private Button loginButton;
@@ -21,7 +26,12 @@ public class LoginManager : MonoBehaviour
         [SerializeField] private TMP_InputField createPWInputField;
         [SerializeField] private TMP_InputField createConfirmInputField;
         [SerializeField] private Color successColor;
-        
+
+        private void Start()
+            {
+                _imageUploader = GetComponent<ImageUploader>();
+            }
+
         public void OnLoginClick()
             {
                 ActivateButtons(false);
@@ -31,7 +41,6 @@ public class LoginManager : MonoBehaviour
         public void OnCreateClick()
             {
                 ActivateButtons(false);
-
                 StartCoroutine(TryCreate());
             }
 
@@ -39,7 +48,7 @@ public class LoginManager : MonoBehaviour
             {
                 string username = loginIDInputField.text;
                 string password = loginPWInputField.text;
-
+                
                 if (username.Length < 3 || username.Length > 14)
                     {
                         loginAlertText.text = "Invalid username";
@@ -76,14 +85,13 @@ public class LoginManager : MonoBehaviour
                         if (response.code == 0) // login success?
                             {
                                 // 여기서 추가적인 처리하면됨
-
                                 ActivateButtons(false);
-                                // loginAlertText.text = "Welcome " + ((response.data.adminFlag == 1) ? " Admin" : "");
+                                GameManager.SetUserName(username);
                                 loginAlertText.text = "Welcome";
                                 loginAlertText.color = successColor;
                                 
+                                // Start a new game
                                 menuManager.OnConnectClick();
-
                             }
                         else
                             {
@@ -114,6 +122,7 @@ public class LoginManager : MonoBehaviour
             {
                 string username = createIDInputField.text;
                 string password = createPWInputField.text;
+                string userImage;
 
                 if (username.Length < 3 || username.Length > 24)
                     {
@@ -127,11 +136,21 @@ public class LoginManager : MonoBehaviour
                         ActivateButtons(true);
                         yield break;
                     }
+                
+                // Get the base64 encoded image from the ImageUploader
+                userImage = _imageUploader.GetBase64EncodedImage();
+                if (string.IsNullOrEmpty(userImage))
+                    {
+                        createAlertText.text = "Please select an image.";
+                        ActivateButtons(true);
+                        yield break;
+                    }
 
                 WWWForm form = new WWWForm();
                 form.AddField("rUsername", username);
                 form.AddField("rPassword", password);
-
+                form.AddField("userImage", userImage);
+                
                 UnityWebRequest request = UnityWebRequest.Post(createEndpoint, form);
                 Debug.Log("Create Request sent to: " + loginEndpoint);
                 Debug.Log(request);
@@ -159,8 +178,6 @@ public class LoginManager : MonoBehaviour
                             {
                                 createAlertText.text = "Account has been created!";
                                 createAlertText.color = successColor;
-                                
-                                menuManager.OnStartClick();
                             }
                         else
                             {

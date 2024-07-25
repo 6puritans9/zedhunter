@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     {
         private UIMenuManager _uiMenuManager; 
         private PlayerItem _playerItem;
-
+        
         private void Start()
             {
                 _playerItem = FindObjectOfType<PlayerItem>();

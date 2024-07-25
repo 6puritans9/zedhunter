@@ -27,7 +27,7 @@ public class PlayerSpawner : MonoBehaviour
 	// TODO: For Debug
 	private void SpawnPlayer()
 	{
-		GameObject playerToSpawn = playerPrefabs[0];
+		GameObject playerToSpawn = playerPrefabs[2];
 		if (playerToSpawn == null)
 		{
 			Debug.LogError("Player prefab to spawn is null.");
