@@ -76,6 +76,7 @@ public class EnemyHealth : MonoBehaviour
 		bossAttackAudioSource.loop = false;
 		bossAttackAudioSource.playOnAwake = false;
 		bossAttackAudioSource.clip = bossAttackSoundClip;
+		bossAttackAudioSource.volume = 1;
 
 
 		enemyAttack = GetComponentInChildren<EnemyAttack>();
@@ -295,6 +296,11 @@ public class EnemyHealth : MonoBehaviour
 		isChase = true;
 		isAttack = false;
 		anim.SetBool("isAttack", false);
+	}
+
+	public void PlayerCamShake()
+	{
+		ShakeCameraPos.Instance?.TriggerShake();
 	}
 
 	public void DoAttack()

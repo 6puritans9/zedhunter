@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a45e8ed386915d42b014d44b71eed50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAD: 30
+  enemyAD: 10
   canAttack: 0
   target: {fileID: 0}
 --- !u!1 &3685312587118461509
@@ -2409,16 +2409,9 @@ MonoBehaviour:
   MaxHealth: 30
   health: 30
   isDead: 0
-  chaseDistance: 5
-  minJumpDistance: 4
-  maxJumpDistance: 8
-  jumpSpeed: 2
-  jumpHeight: 2
-  jumpCooldown: 3
+  bossDeathSoundClip: {fileID: 0}
+  bossAttackSoundClip: {fileID: 0}
   zombie4Prefab: {fileID: 4894544454540710774, guid: 2901ee8780afa294b9880064a22b13f9,
-    type: 3}
-  maleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0, type: 3}
-  femaleZombieHitSound: {fileID: 8300000, guid: 7a5f2176cbf9e9d48b2043c540c253a0,
     type: 3}
 --- !u!114 &-7065475578750263168
 MonoBehaviour:

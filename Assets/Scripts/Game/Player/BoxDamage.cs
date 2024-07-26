@@ -54,7 +54,6 @@ public class BoxDamage : MonoBehaviour
 		{
 			if (collider.TryGetComponent(out EnemyHealth enemyHealth))
 			{
-				Debug.Log("데미지 들어감?");
 				enemyHealth.TakeDamage(300);
 			}
 			if (collider.TryGetComponent(out Rigidbody rb))

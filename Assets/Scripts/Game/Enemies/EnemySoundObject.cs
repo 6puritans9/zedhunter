@@ -21,13 +21,13 @@ public class EnemySoundObject : MonoBehaviour
 
 		pizzaZombieAudioSource = gameObject.AddComponent<AudioSource>();
 		pizzaZombieAudioSource.clip = pizzaZombieHitSound;
-		
 		pizzaZombieAudioSource.playOnAwake = false;
+		pizzaZombieAudioSource.volume = 0.5f;
 
 		playerZombieAudioSource = gameObject.AddComponent<AudioSource>();
 		playerZombieAudioSource.playOnAwake = false;
-		
 		playerZombieAudioSource.clip = playerZombieHitSound;
+		playerZombieAudioSource.volume = 0.5f;
 	}
 
 	private void OnEnable()

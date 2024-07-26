@@ -238,7 +238,7 @@ MonoBehaviour:
   - 30
   - 60
   spawnIndex: 0
-  HP: 500
+  HP: 950
 --- !u!54 &256532481381726042
 Rigidbody:
   m_ObjectHideFlags: 0

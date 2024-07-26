@@ -75,11 +75,11 @@ public class WallBuilder : MonoBehaviour
 			ToggleBuildMode();
 		}
 
-		if (isBuildingEnabled)
+		if (isBuildingEnabled && state.currentState != state.Reload)
 		{
 			UpdatePreview();
 
-			if (canBuild && Input.GetMouseButtonDown(0) && !isCooldown)
+			if (canBuild && Input.GetMouseButtonDown(0) && !isCooldown && state.currentState != state.Reload)
 			{
 				BuildWall();
 			}

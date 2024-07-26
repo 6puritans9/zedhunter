@@ -8,11 +8,19 @@ public class BoxSoundEffect : MonoBehaviour
 
 	public AudioClip collisionSound; // 충돌 소리 클립
 	public AudioClip fallingSound; // 낙하 소리 클립
+	public AudioClip overEnemySound; // 적을 깔아버릴 때 소리 클립
 	public AudioClip explosionSound; //폭발 소리 클립
 
 	private AudioSource audioSource;
 	private AudioSource fallingAudioSource;
 	[HideInInspector]public AudioSource explosionAudioSource;
+
+	bool OnlyOnePlay;
+
+	private void OnEnable()
+	{
+		OnlyOnePlay = false;
+	}
 
 	private void Awake()
 	{
@@ -47,12 +55,22 @@ public class BoxSoundEffect : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
+		//박스가 "Enemy" 레이어와 충돌할 때 소리 재생
+		if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !OnlyOnePlay)
+		{
+			OnlyOnePlay = true;
+			// 낙하 소리 중지
+			fallingAudioSource.Stop();
+			audioSource.clip = overEnemySound;
+			audioSource.PlayOneShot(audioSource.clip);
+		}
 		// 박스가 "Ground" 레이어와 충돌할 때 소리 재생
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			// 낙하 소리 중지
 			fallingAudioSource.Stop();
 
+			audioSource.clip = collisionSound;
 			// 충돌 소리 재생
 			audioSource.Play();
 		}

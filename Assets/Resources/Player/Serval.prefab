@@ -9264,13 +9264,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119775505879129950}
+  - component: {fileID: 4706485664173328515}
   m_Layer: 7
   m_Name: CameraFollowPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2119775505879129950
 Transform:
   m_ObjectHideFlags: 0
@@ -9287,6 +9288,22 @@ Transform:
   - {fileID: 5856739316404056377}
   m_Father: {fileID: 7925964180736000864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4706485664173328515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897877105587463843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3b662c0ea307749911ccbd151e2a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 0}
+  shakeDuration: 0.5
+  shakeAmount: 0.5
+  decreaseFactor: 1
 --- !u!1 &4907391451665322135
 GameObject:
   m_ObjectHideFlags: 0
@@ -10447,7 +10464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  playerHealth: 100
+  playerHealth: 600
   currentWeapon: {fileID: 7315655416296565097}
   ammo: {fileID: 0}
   anim: {fileID: 0}
@@ -10459,7 +10476,7 @@ MonoBehaviour:
   nextFireTime: 0
   lastClickedTime: 0
   maxComboDelay: 1
-  maxPlayerHealth: 100
+  maxPlayerHealth: 600
 --- !u!114 &2412741294798043782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14286,6 +14303,8 @@ MonoBehaviour:
   bulletPerShot: 1
   damage: 20
   gunShot: {fileID: 8300000, guid: 3bba340c1efffdd4ea23a5997f61fa71, type: 3}
+  bulletShot: {fileID: 8300000, guid: e62f7bb517eb1de47a42a7b37b315bd4, type: 3}
+  bulletHeadShot: {fileID: 8300000, guid: 5d7176f7636962c48a6f18445e78dafd, type: 3}
   lightReturnSpeed: 20
   enemyKickbackForce: 100
   initialParticlePoolSize: 5
@@ -15076,6 +15095,8 @@ MonoBehaviour:
   bulletPerShot: 0
   damage: 20
   gunShot: {fileID: 0}
+  bulletShot: {fileID: 0}
+  bulletHeadShot: {fileID: 0}
   lightReturnSpeed: 20
   enemyKickbackForce: 100
   initialParticlePoolSize: 10

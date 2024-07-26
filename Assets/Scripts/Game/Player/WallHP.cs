@@ -105,6 +105,8 @@ public class WallHP : MonoBehaviour
 		if (wallCollider != null) wallCollider.enabled = false;
 
 		canAttack = true;
+
+		ShakeCameraPos.Instance.TriggerShake();
 		// Æø¹ß ÀÌÆåÆ® »ý¼º
 		if (explosionEffect != null && explosionEffect2)
 		{

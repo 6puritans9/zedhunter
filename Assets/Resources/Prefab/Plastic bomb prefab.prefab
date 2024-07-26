@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionSound: {fileID: 8300000, guid: ef1cf68d9974dc842bfb8cf5aa24ac10, type: 3}
   fallingSound: {fileID: 8300000, guid: 03d931ff03c9aa04c894b756627cb496, type: 3}
+  overEnemySound: {fileID: 8300000, guid: 06a101c281d28494dbfc37430c85cf5a, type: 3}
   explosionSound: {fileID: 8300000, guid: f3098f3ca88e2c84d8fb8618fd60c417, type: 3}
   explosionAudioSource: {fileID: 0}
 --- !u!114 &-5429380974912344173

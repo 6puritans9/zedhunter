@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 2386790783998013877}
   - component: {fileID: 9021623118696851610}
   - component: {fileID: 2944078946521376918}
+  - component: {fileID: 524462826640227695}
   m_Layer: 8
   m_Name: Yaku J Ignite
   m_TagString: Enemy
@@ -106,6 +107,8 @@ Transform:
   - {fileID: 2566969649678187701}
   - {fileID: 2285138030242216010}
   - {fileID: 4116965187295275655}
+  - {fileID: 2306932351951762817}
+  - {fileID: 8689778714900178350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4893894478795274912
@@ -175,7 +178,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Height: 2.04
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -227,7 +230,7 @@ MonoBehaviour:
   health: 300
   isDead: 0
   bossDeathSoundClip: {fileID: 8300000, guid: 06a101c281d28494dbfc37430c85cf5a, type: 3}
-  bossAttackSoundClip: {fileID: 8300000, guid: 1ff2dd670bbbabc45a36ff128629a2d7, type: 3}
+  bossAttackSoundClip: {fileID: 8300000, guid: e19ef8369df6e224d994864454fb3ca6, type: 3}
   zombie4Prefab: {fileID: 0}
 --- !u!114 &9021623118696851610
 MonoBehaviour:
@@ -241,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37c0da6f5caf094c9b12e5e44c21a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 2
-  jumpSpeed: 2
+  jumpHeight: 4
+  jumpSpeed: 4
   chaseDistance: 5
   attackDistance: 2.5
   minJumpDistance: 7
@@ -268,6 +271,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8290675197187ad41b6536eddc3307da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &524462826640227695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336601600002010810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20407039b57a8b64e9cc87eefca69e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockPrefabs:
+  - {fileID: 6666360035290071834, guid: dfba94f386e7df042a16e7320e07b331, type: 3}
+  - {fileID: 8057878968003707422, guid: 1e0018ea00b3d5541b7f52f89f88e64f, type: 3}
+  - {fileID: 5711603181209838633, guid: c432c2372d471f4458fb2dd60c043a2b, type: 3}
+  explosionForce: 500
+  numberOfFragments: 20
+  fragmentLifetime: 1.5
+  TargetPos: {fileID: 8689778714900178350}
 --- !u!1 &352731715014043669
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +517,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9147696433319665488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137351094374888491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2306932351951762817}
+  - component: {fileID: 1178328386128227695}
+  - component: {fileID: 2731506341200343189}
+  m_Layer: 8
+  m_Name: HeadShot
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2306932351951762817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137351094374888491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.879, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5451328642494875741}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1178328386128227695
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137351094374888491}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.21
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2731506341200343189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137351094374888491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33e948eacbed2547aa1d94deddc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: {fileID: 0}
 --- !u!1 &1441789592795111955
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +721,37 @@ Transform:
   m_Children:
   - {fileID: 7580379706129730600}
   m_Father: {fileID: 8334881102784755851}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1863588670479465309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8689778714900178350}
+  m_Layer: 8
+  m_Name: RockPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8689778714900178350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863588670479465309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.036, y: 0.601, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5451328642494875741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942763281082450153
 GameObject:
@@ -1120,7 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a45e8ed386915d42b014d44b71eed50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAD: 100
+  enemyAD: 30
   canAttack: 0
   target: {fileID: 0}
 --- !u!1 &2919703323782910853
