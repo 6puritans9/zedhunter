@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
@@ -15,10 +16,10 @@ public class ActionStateManager : MonoBehaviour
 	public WallBuilder WallBuilder;
 
 	public bool isDead;
-	// public int playerMaxHP;
 	public int playerHealth;
 	private float healthRegenTimer = 0f;
 	private float healthRegenRate = 10f;
+	public TMP_Text playerHealthValueText;
 	
 	public GameObject currentWeapon;
 	[HideInInspector] public WeaponAmmo ammo;
@@ -91,8 +92,7 @@ public class ActionStateManager : MonoBehaviour
 
 		currentState.UpdateState(this);
 		
-		print(playerHealth);
-		if (playerHealth < 300)
+		if (playerHealth < maxPlayerHealth)
 			{
 				healthRegenTimer += Time.deltaTime;
 
@@ -102,27 +102,28 @@ public class ActionStateManager : MonoBehaviour
 						healthRegenTimer = 0f; // Reset the timer
 					}
 			}
-		UpdateHealthEffect(); // ü�� ȿ�� ������Ʈ
+		// UpdateHealthEffect(); // ü�� ȿ�� ������Ʈ
 	}
 
 	void UpdateHealthEffect()
-	{
-		if (vignette != null)
 		{
-			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float adjustedHealthPercentage = (healthPercentage - 0.5f) * 2f;
-			adjustedHealthPercentage = Mathf.Clamp01(adjustedHealthPercentage);
-			
-			
-			// float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
-			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, Mathf.Pow(adjustedHealthPercentage, 2));
-			vignette.intensity.Override(vignetteIntensity);
+			playerHealthValueText.text = playerHealth.ToString();
+			// if (vignette != null)
+			// {
+			// 	float healthPercentage = (float)playerHealth / maxPlayerHealth;
+			// 	float adjustedHealthPercentage = (healthPercentage - 0.5f) * 2f;
+			// 	adjustedHealthPercentage = Mathf.Clamp01(adjustedHealthPercentage);
+			// 	
+			// 	
+			// 	// float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
+			// 	float vignetteIntensity = Mathf.Lerp(0.5f, 0f, Mathf.Pow(adjustedHealthPercentage, 2));
+			// 	vignette.intensity.Override(vignetteIntensity);
+			// }
+			// else
+			// {
+			// 	Debug.LogError("Vignette effect is null!");
+			// }
 		}
-		else
-		{
-			Debug.LogError("Vignette effect is null!");
-		}
-	}
 
 	public void SetWeapon(int idx)
 	{

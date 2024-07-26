@@ -14,8 +14,10 @@ public class UIManager : MonoBehaviour
 	public Image coolDownImage;
 	public TMP_Text coolDownText;
 
-	[Header("Vignetting")] private Volume postProcessVolume;
-	private Vignette vignette;
+	private ActionStateManager _actionStateManager;
+
+	// [Header("Vignetting")] private Volume postProcessVolume;
+	// private Vignette vignette;
 
 	[Header("Bullets")] public TMP_Text ammoIndicator;
 
@@ -30,7 +32,9 @@ public class UIManager : MonoBehaviour
 	[Header("Player Score")] private GameManager _gameManager; 
 	public TMP_Text playerScoreText;
 
-
+	[Header("Player Health")]
+	public TMP_Text playerHealthValueText;
+	
 	private void Awake()
 	{
 		Instance = this;
@@ -40,6 +44,7 @@ public class UIManager : MonoBehaviour
 		{
 			_gameManager = FindObjectOfType<GameManager>();
 		_pizzaManager = FindObjectOfType<PizzaManager>();
+		StartCoroutine(FindActionStateManagerCoroutine());
 		// Set 5 pizzaIndicators
 		for (int i = 0; i < _pizzaManager.totalPizzas; i += 1)
 			{
@@ -60,7 +65,31 @@ public class UIManager : MonoBehaviour
 		}
 
 		playerScoreText.text = _gameManager.playerScore.ToString();
+		UpdateHealthEffect();
 	}
+	
+	private IEnumerator FindActionStateManagerCoroutine()
+		{
+			// Optionally wait for a condition or a delay
+			while (_actionStateManager == null)
+				{
+					_actionStateManager = FindObjectOfType<ActionStateManager>();
+
+					if (_actionStateManager == null)
+						{
+							Debug.LogWarning("ActionStateManager not found, retrying...");
+							yield return new WaitForSeconds(0.5f); // Wait for half a second before retrying
+						}
+				}
+
+			Debug.Log("ActionStateManager found!");
+			// Optionally perform additional setup after finding the manager
+		}
+	
+	void UpdateHealthEffect()
+		{
+			playerHealthValueText.text = _actionStateManager.playerHealth.ToString();
+		}
 	private void SetCursorState(bool isLocked)
 	{
 		if (isLocked)

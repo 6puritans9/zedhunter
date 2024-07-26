@@ -36,10 +36,10 @@ public class PizzaManager : MonoBehaviour
 
         private void ShowGameOver()
             {
-                gameOverPanel.SetActive(true);
                 Time.timeScale = 0;
                 
                 playerCharacter = GameObject.FindWithTag("Player");
                 playerCharacter.SetActive(false);
+                SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
             }
     }

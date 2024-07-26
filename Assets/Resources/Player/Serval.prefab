@@ -10465,7 +10465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WallBuilder: {fileID: 0}
   isDead: 0
-  playerHealth: 300
+  playerHealth: 100
+  playerHealthValueText: {fileID: 0}
   currentWeapon: {fileID: 7315655416296565097}
   ammo: {fileID: 0}
   anim: {fileID: 0}
@@ -10477,7 +10478,7 @@ MonoBehaviour:
   nextFireTime: 0
   lastClickedTime: 0
   maxComboDelay: 1
-  maxPlayerHealth: 300
+  maxPlayerHealth: 100
 --- !u!114 &2412741294798043782
 MonoBehaviour:
   m_ObjectHideFlags: 0
