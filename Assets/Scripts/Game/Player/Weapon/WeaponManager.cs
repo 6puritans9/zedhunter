@@ -141,7 +141,7 @@ public class WeaponManager : MonoBehaviour
 
 
 			//if(photonView.IsMine)
-			// ÆÄÆ¼Å¬ ½Ã½ºÅÛ Å¥¿¡ Ãß°¡
+			// ï¿½ï¿½Æ¼Å¬ ï¿½Ã½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ß°ï¿½
 			AddToHitParticlePool(particleSystem);
 			StartCoroutine(DeactivateParticleSystem(particleSystem));
 		}
@@ -153,9 +153,10 @@ public class WeaponManager : MonoBehaviour
 		ParticleSystem particleSystem;
 
 
-		if (hitParticlePool.Count > 0)
+		if (hitParticlePool.TryDequeue(out ParticleSystem particleObj))
 		{
-			particleSystem = hitParticleToZombiePool.Dequeue();
+			//particleSystem = hitParticleToZombiePool.Dequeue();
+			particleSystem = particleObj;
 		}
 		else
 		{
@@ -172,7 +173,7 @@ public class WeaponManager : MonoBehaviour
 
 
 			//if(photonView.IsMine)
-			// ÆÄÆ¼Å¬ ½Ã½ºÅÛ Å¥¿¡ Ãß°¡
+			// ï¿½ï¿½Æ¼Å¬ ï¿½Ã½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ß°ï¿½
 			AddToHitParticleToZombiePool(particleSystem);
 			StartCoroutine(DeactivateParticleToZombieSystem(particleSystem));
 		}
@@ -279,7 +280,7 @@ public class WeaponManager : MonoBehaviour
 				wallHP.TakeDamage((int)damage);
 			}
 
-			//¸öÅë¼¦
+			//ï¿½ï¿½ï¿½ë¼¦
 			if (hit.collider.TryGetComponent(out EnemyHealth enemyHealth))
 			{
 				enemyHealth.TakeDamage(damage);
@@ -288,7 +289,7 @@ public class WeaponManager : MonoBehaviour
 				if (enemyHealth.health <= 0 && !enemyHealth.isDead)
 					enemyHealth.isDead = true;
 			}
-			//Çìµå¼¦
+			//ï¿½ï¿½å¼¦
 			else if (hit.collider.TryGetComponent(out EnemyHeadShotDamage enemyHeadShotDamage))
 			{
 				enemyHeadShotDamage.TakeHeadShotDamage(damage * 2f);
