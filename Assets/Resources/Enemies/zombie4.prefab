@@ -58,15 +58,59 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2511240423080479738, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2083788358441965282, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
         type: 3}
       propertyPath: m_Name
       value: zombie4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131774471668849816, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089293526843864381, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360603143418417902, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017550049508752492, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1647966288821719991}
     - targetCorrespondingSourceObject: {fileID: -2511240423080479738, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
         type: 3}
       insertIndex: -1
@@ -334,6 +378,28 @@ CapsuleCollider:
   m_Height: 1.1399255
   m_Direction: 1
   m_Center: {x: -0.00031210482, y: 0.5612631, z: 0.090899184}
+--- !u!1 &4894544454540710774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bb5c3a2ee859fb41938b94bafd5f692,
+    type: 3}
+  m_PrefabInstance: {fileID: 5705361362688732711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1647966288821719991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894544454540710774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021c6b560e040bf46a162016b11bcc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieType: 0
+  pizzaZombieHitSound: {fileID: 8300000, guid: 8a588e9c2617af440a824e86928bbb7f, type: 3}
+  playerZombieHitSound: {fileID: 8300000, guid: af4f062fc000c334893c992936cbf315,
+    type: 3}
 --- !u!1 &8335734765435288777 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4360603143418417902, guid: 4bb5c3a2ee859fb41938b94bafd5f692,

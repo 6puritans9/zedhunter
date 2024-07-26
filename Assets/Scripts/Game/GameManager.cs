@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,11 +7,18 @@ public class GameManager : MonoBehaviour
 
         [Header("Player Character Index")]
         [HideInInspector] public int avatarIndex;
-        
-        [Header("Player Info")]
-        public int playerScore;
-        public int playerHealth;
 
+        [Header("Player Info")] public static string UserName;
+        [HideInInspector] public int playerScore;
+        private bool isNewRecord = false;
+
+        [Header("Scores")] private int PizzaZombieScore = 100;
+        private int PlayerZombieScore = 200;
+        private int BossZombieScore = 500;
+        private int LostPizzaItemScore = -1000;
+        
+        public static bool IsNewRecord { get; private set; }
+        
         private void Awake()
             {
                 if (instance != null && instance != this)
@@ -21,11 +26,21 @@ public class GameManager : MonoBehaviour
                         Destroy(gameObject);
                         return;
                     }
-
+                
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-
+        
+        public static void SetUserName(string name)
+            {
+                UserName = name;
+            }
+        
+        public void InitializeGame()
+            {
+                playerScore = 0;
+            }
+        
         public void SetPlayerAvatar(int index)
             {
                 avatarIndex = index;
@@ -35,11 +50,23 @@ public class GameManager : MonoBehaviour
             {
                 return avatarIndex;
             }
-        
-        public void InitializeGame()
+
+        public void AddPizzaZombieScore()
             {
-                playerScore = 0;
-                playerHealth = 100;
-                // Add any other initialization logic here
+                playerScore += PizzaZombieScore;
+            }
+        
+        public void AddPlayerZombieScore()
+            {
+                playerScore += PlayerZombieScore;
+            }
+        public void AddBossZombieScore()
+            {
+                playerScore += BossZombieScore;
+            }
+
+        public void SubtractPizzaItemScore()
+            {
+                playerScore += LostPizzaItemScore;
             }
     }

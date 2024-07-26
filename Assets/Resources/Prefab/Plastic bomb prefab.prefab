@@ -108,7 +108,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 150.75, y: 20, z: 160}
+  m_Size: {x: 150.75, y: 20.99, z: 160}
   m_Center: {x: 0, y: 10, z: 0}
 --- !u!54 &7381596496576600549
 Rigidbody:
@@ -135,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 122
   m_CollisionDetection: 2
 --- !u!208 &-7856811337900386442
 NavMeshObstacle:
@@ -147,12 +147,12 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 75.375, y: 1.77, z: 75.375}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 1
 --- !u!114 &6532835804956345964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2286384d1e73ab4587487da08fff2ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 500
+  HP: 100
   Player: {fileID: 2012685153070908845, guid: 30284aa2427f44868ad26dc285a1c430, type: 3}
+  canAttack: 0
   originalMaterial: {fileID: 2100000, guid: d422ba90fae5b754f8f163b9681968fb, type: 2}
   hitMaterial: {fileID: 2100000, guid: cc4d214d1d90c9d40b03015d558702ea, type: 2}
   explosionEffect: {fileID: 4593184484909914552, guid: 89b30e5b7b80d7445a75de039b2d1412,
@@ -187,9 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06aa897f92a55b4da7bc491a5c1c6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSound: {fileID: 8300000, guid: ef1cf68d9974dc842bfb8cf5aa24ac10, type: 3}
+  collisionSound: {fileID: 8300000, guid: 43bb2fc63577a3442a6aa050f796ab7b, type: 3}
   fallingSound: {fileID: 8300000, guid: 03d931ff03c9aa04c894b756627cb496, type: 3}
+  overEnemySound: {fileID: 8300000, guid: 06a101c281d28494dbfc37430c85cf5a, type: 3}
   explosionSound: {fileID: 8300000, guid: f3098f3ca88e2c84d8fb8618fd60c417, type: 3}
+  retroSound: {fileID: 8300000, guid: 7d4f5c9b6a68fcc40af3298b85db5f9b, type: 3}
+  retroAudioSource: {fileID: 0}
   explosionAudioSource: {fileID: 0}
 --- !u!114 &-5429380974912344173
 MonoBehaviour:
@@ -203,3 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fde25eca4533448af87f7363709f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundCheck: 0
+  downDamage: 0
+  explosionForce: 1000
+  explosionRadius: 5

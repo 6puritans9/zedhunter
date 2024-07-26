@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - Enemy
   - Pizza
+  - EnemyHead
   layers:
   - Default
   - TransparentFX
@@ -25,9 +26,9 @@ TagManager:
   - Gun
   - GroundCheck
   - Pizza
-  - 
-  - 
-  - 
+  - PlayerIcon
+  - EnemyIcon
+  - PizzaIcon
   - 
   - 
   - 

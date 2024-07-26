@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
@@ -12,6 +11,7 @@ public class ActionStateManager : MonoBehaviour
 
 	public ReloadState Reload = new ReloadState();
 	public DefaultState Default = new DefaultState();
+	public WallBuilder WallBuilder;
 
 	public bool isDead;
 	int playerMaxHP = 100;
@@ -39,12 +39,14 @@ public class ActionStateManager : MonoBehaviour
 
 
 	private Volume postProcessVolume;
-	private Vignette vignette; // ºñ³×Æ® È¿°ú
+	private Vignette vignette; // ï¿½ï¿½ï¿½Æ® È¿ï¿½ï¿½
 	public int maxPlayerHealth = 500;
+
+	private bool isGameOver = false;
 
 	private void Awake()
 	{
-
+		WallBuilder = GetComponent<WallBuilder>();
 		ammo = currentWeapon.GetComponent<WeaponAmmo>();
 		anim = GetComponent<Animator>();
 		audioSource = currentWeapon.GetComponent<AudioSource>();
@@ -72,7 +74,7 @@ public class ActionStateManager : MonoBehaviour
 	void Update()
 	{
 
-		// ÀÔ·Â¿¡ µû¶ó ·¹ÀÌ¾î °¡ÁßÄ¡ Á¶Àý
+		// ï¿½Ô·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			SetWeapon(1);
@@ -84,7 +86,7 @@ public class ActionStateManager : MonoBehaviour
 		}
 
 		currentState.UpdateState(this);
-		UpdateHealthEffect(); // Ã¼·Â È¿°ú ¾÷µ¥ÀÌÆ®
+		UpdateHealthEffect(); // Ã¼ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	}
 
 	void UpdateHealthEffect()
@@ -92,7 +94,7 @@ public class ActionStateManager : MonoBehaviour
 		if (vignette != null)
 		{
 			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(1.5f, 0f, healthPercentage);
+			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
 			vignette.intensity.Override(vignetteIntensity);
 		}
 		else
@@ -101,17 +103,15 @@ public class ActionStateManager : MonoBehaviour
 		}
 	}
 
-	void SetWeapon(int idx)
+	public void SetWeapon(int idx)
 	{
 		switch (idx)
 		{
 			case 1:
-				gun.SetActive(false);
 				//gunRig.weight = 0;
 				SetLayerWeight(0, 1);
 				break;
 			case 2:
-				gun.SetActive(true);
 				//gunRig.weight = 1;
 				SetLayerWeight(1, 1);
 				break;
@@ -123,6 +123,11 @@ public class ActionStateManager : MonoBehaviour
 	{
 		if (playerHealth > 0)
 		{
+			if (this.gameObject.name == "Kafka(Clone)" || this.gameObject.name == "Serval(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageServalKafkaSound();
+			else if (this.gameObject.name == "Yanqing(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageYanqingSound();
+
 			playerHealth -= damage;
 			if (playerHealth <= 0)
 			{
@@ -136,10 +141,17 @@ public class ActionStateManager : MonoBehaviour
 	void PlayerDeath()
 	{
 		isDead = true;
-		Invoke("RespawnPlayer", 5f); // 5ÃÊ ÈÄ¿¡ Àç»ý¼º
+		// Invoke("RespawnPlayer", 5f); // 5    Ä¿       
+		if (!isGameOver)
+		{
+			isGameOver = true;
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
+		}
 	}
 
-	void RPC_PlayerDeath()
+	/*void RPC_PlayerDeath()
 	{
 		gameObject.SetActive(false);
 	}
@@ -154,7 +166,7 @@ public class ActionStateManager : MonoBehaviour
 	public void RPC_RespawnPlayer()
 	{
 		gameObject.SetActive(true);
-	}
+	}*/
 
 
 	public void SwitchState(ActionBaseState state)
@@ -163,20 +175,23 @@ public class ActionStateManager : MonoBehaviour
 		currentState.EnterState(this);
 	}
 
-	void SetLayerWeight(int layerIndex, int weight)
+	public void SetLayerWeight(int layerIndex, int weight)
 	{
-		// ¸ðµç ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ 0À¸·Î ¼³Á¤
 		for (int i = 0; i < anim.layerCount; i++)
 		{
 			anim.SetLayerWeight(i, 0);
 		}
 
-		if (layerIndex == 1 && weight > 0.9f)
+		if (layerIndex == 1)
+		{
 			gunRig.weight = 1;
+			gun.SetActive(true);
+		}
 		else
+		{
 			gunRig.weight = 0;
-
-		// ÁöÁ¤µÈ ·¹ÀÌ¾îÀÇ °¡ÁßÄ¡¸¦ ¼³Á¤
+			gun.SetActive(false);
+		}
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 

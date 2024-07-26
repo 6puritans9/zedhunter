@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -25,7 +26,11 @@ public class WeaponManager : MonoBehaviour
 
 
 	[SerializeField] AudioClip gunShot;
-	AudioSource audioSource;
+	[SerializeField] AudioClip bulletShot;
+	[SerializeField] AudioClip bulletHeadShot;
+	AudioSource bulletShotAudioSource;
+	AudioSource bulletHeadShotAudioSource;
+	AudioSource gunShotAudioSource;
 	WeaponAmmo ammo;
 	WeaponBloom bloom;
 	ActionStateManager actions;
@@ -50,7 +55,6 @@ public class WeaponManager : MonoBehaviour
 	{
 		layerMask = ~((1 << 7) | (1 << 11));
 		recoil = GetComponent<WeaponRecoil>();
-		audioSource = GetComponent<AudioSource>();
 		aim = GetComponentInParent<AimStateManager>();
 		ammo = GetComponent<WeaponAmmo>();
 		bloom = GetComponent<WeaponBloom>();
@@ -61,7 +65,17 @@ public class WeaponManager : MonoBehaviour
 		muzzleFlashParticles = GetComponentInChildren<ParticleSystem>();
 		fireRateTimer = fireRate;
 
-		audioSource.volume = 0.1f;
+		gunShotAudioSource = GetComponent<AudioSource>();
+		gunShotAudioSource.clip = gunShot;
+		gunShotAudioSource.volume = 0.2f;
+
+		bulletShotAudioSource = gameObject.AddComponent<AudioSource>();
+		bulletShotAudioSource.clip = bulletShot;
+		bulletShotAudioSource.volume = 1f;
+
+		bulletHeadShotAudioSource = gameObject.AddComponent<AudioSource>();
+		bulletHeadShotAudioSource.clip = bulletHeadShot;
+		bulletHeadShotAudioSource.volume = 1;
 
 		InitializeHitParticlePool();
 		InitializeHitParticleToZombiePool();
@@ -227,7 +241,7 @@ public class WeaponManager : MonoBehaviour
 		barrelPos.localEulerAngles = bloom.BloomAngle(barrelPos);
 
 
-		audioSource.PlayOneShot(gunShot);
+		gunShotAudioSource.PlayOneShot(gunShot);
 		recoil.TriggerRecoil();
 		TriggerMuzzleFlash();
 		ammo.currentAmmo--;
@@ -246,17 +260,26 @@ public class WeaponManager : MonoBehaviour
 
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 		{
-			if(!hit.collider.gameObject.CompareTag("Enemy"))
+			if (!hit.collider.gameObject.CompareTag("Enemy"))
 				GetHitParticle(hit.point, Quaternion.LookRotation(hit.normal));
 			else
-				GetHitParticleToZombie(hit.point, Quaternion.LookRotation(hit.normal));
+			{
+				if (hit.collider.gameObject.name == "HeadShot")
+				{
+					bulletHeadShotAudioSource.PlayOneShot(bulletHeadShotAudioSource.clip);
+					ChangeCrosshairSprite.Instance.ChangeSprite(1);
+				}
+				else bulletShotAudioSource.Play();
 
+				GetHitParticleToZombie(hit.point, Quaternion.LookRotation(hit.normal));
+			}
+			
 			if (hit.collider.TryGetComponent(out WallHP wallHP))
 			{
 				wallHP.TakeDamage((int)damage);
 			}
 
-
+			//¸öÅë¼¦
 			if (hit.collider.TryGetComponent(out EnemyHealth enemyHealth))
 			{
 				enemyHealth.TakeDamage(damage);
@@ -264,6 +287,15 @@ public class WeaponManager : MonoBehaviour
 
 				if (enemyHealth.health <= 0 && !enemyHealth.isDead)
 					enemyHealth.isDead = true;
+			}
+			//Çìµå¼¦
+			else if (hit.collider.TryGetComponent(out EnemyHeadShotDamage enemyHeadShotDamage))
+			{
+				enemyHeadShotDamage.TakeHeadShotDamage(damage * 2f);
+
+
+				if (enemyHeadShotDamage.enemyHealth.health <= 0 && !enemyHeadShotDamage.enemyHealth.isDead)
+					enemyHeadShotDamage.enemyHealth.isDead = true;
 			}
 		}
 	}

@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PizzaSpawner : MonoBehaviour
     {
-        public GameObject pizza;
+        public PizzaManager pizzaManager;
+        
+        public GameObject pizzaPrefab;
         public Transform[] spawnPoints;
 
-        private bool[] hasPizza = new bool[9];
+        [HideInInspector] public bool[] hasPizza = new bool[6];
         private bool isSpawning = false;
-        public int MAX_PIZZA_COUNT = 3;
+        public int MAX_PIZZA_COUNT;
         private int currentPizzaCount = 0;
 
         void Start()
@@ -24,7 +25,7 @@ public class PizzaSpawner : MonoBehaviour
         // Update is called once per frame
         void Update()
             {
-                if (!isSpawning && currentPizzaCount < MAX_PIZZA_COUNT)
+                if (!isSpawning && currentPizzaCount <= MAX_PIZZA_COUNT)
                     {
                         int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
                         StartCoroutine(SpawnPizza(randomIndex));
@@ -37,12 +38,28 @@ public class PizzaSpawner : MonoBehaviour
 
                 if (!hasPizza[index])
                     {
-                        Instantiate(pizza, spawnPoints[index].position, spawnPoints[index].rotation);
+                        GameObject newPizza = Instantiate(pizzaPrefab, spawnPoints[index].position, spawnPoints[index].rotation);
+                        newPizza.GetComponent<Pizza>().spawnIndex = index;
                         hasPizza[index] = true;
 
                         yield return new WaitForSeconds(15f);
                     }
 
                 isSpawning = false;
+            }
+        
+        public void PizzaDisappeared(Pizza pizza)
+            {
+                print("Pizza Disappeared");
+                hasPizza[pizza.spawnIndex] = false;
+            }
+        
+        public void PizzaDestroyed(int index)
+            {
+                if (index >= 0 && index < hasPizza.Length)
+                    {
+                        hasPizza[index] = false;
+                        currentPizzaCount--;
+                    }
             }
     }
