@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class ActionStateManager : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class ActionStateManager : MonoBehaviour
 	public WallBuilder WallBuilder;
 
 	public bool isDead;
-	int playerMaxHP = 100;
-	public int playerHealth = 100;
+	// public int playerMaxHP;
+	public int playerHealth;
+	private float healthRegenTimer = 0f;
+	private float healthRegenRate = 10f;
+	
 	public GameObject currentWeapon;
 	[HideInInspector] public WeaponAmmo ammo;
 	AudioSource audioSource;
@@ -40,7 +44,7 @@ public class ActionStateManager : MonoBehaviour
 
 	private Volume postProcessVolume;
 	private Vignette vignette; // ���Ʈ ȿ��
-	public int maxPlayerHealth = 500;
+	public int maxPlayerHealth;
 
 	private bool isGameOver = false;
 
@@ -86,6 +90,18 @@ public class ActionStateManager : MonoBehaviour
 		}
 
 		currentState.UpdateState(this);
+		
+		print(playerHealth);
+		if (playerHealth < 300)
+			{
+				healthRegenTimer += Time.deltaTime;
+
+				if (healthRegenTimer >= 1f) // 1 second has passed
+					{
+						playerHealth += Mathf.FloorToInt(healthRegenRate); // Add 5 health points
+						healthRegenTimer = 0f; // Reset the timer
+					}
+			}
 		UpdateHealthEffect(); // ü�� ȿ�� ������Ʈ
 	}
 
@@ -94,7 +110,12 @@ public class ActionStateManager : MonoBehaviour
 		if (vignette != null)
 		{
 			float healthPercentage = (float)playerHealth / maxPlayerHealth;
-			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
+			float adjustedHealthPercentage = (healthPercentage - 0.5f) * 2f;
+			adjustedHealthPercentage = Mathf.Clamp01(adjustedHealthPercentage);
+			
+			
+			// float vignetteIntensity = Mathf.Lerp(0.5f, 0f, healthPercentage);
+			float vignetteIntensity = Mathf.Lerp(0.5f, 0f, Mathf.Pow(adjustedHealthPercentage, 2));
 			vignette.intensity.Override(vignetteIntensity);
 		}
 		else
@@ -147,7 +168,8 @@ public class ActionStateManager : MonoBehaviour
 			isGameOver = true;
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
-			SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
+			SceneManager.LoadScene("GameOverScene");
+			// SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
 		}
 	}
 

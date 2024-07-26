@@ -10465,7 +10465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WallBuilder: {fileID: 0}
   isDead: 0
-  playerHealth: 600
+  playerHealth: 300
   currentWeapon: {fileID: 7315655416296565097}
   ammo: {fileID: 0}
   anim: {fileID: 0}
@@ -10477,7 +10477,7 @@ MonoBehaviour:
   nextFireTime: 0
   lastClickedTime: 0
   maxComboDelay: 1
-  maxPlayerHealth: 600
+  maxPlayerHealth: 300
 --- !u!114 &2412741294798043782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14242,7 +14242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b92d6f8a86bb0645b2aef4139ca3e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipSize: 50
+  clipSize: 70
   extraAmmo: 1000
   currentAmmo: 0
   magInSound: {fileID: 8300000, guid: 29ff97669552f694381b4a72b47de684, type: 3}

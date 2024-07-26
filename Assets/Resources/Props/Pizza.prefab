@@ -234,11 +234,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 30
   timers:
-  - 15
-  - 30
-  - 60
+  - 18
   spawnIndex: 0
-  HP: 950
+  HP: 550
 --- !u!54 &256532481381726042
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -88,7 +88,7 @@ public class LoginManager : MonoBehaviour
                                 string dbUserImage = response.data.userImage;
                                 
                                 // 여기서 추가적인 처리하면됨
-                                ActivateButtons(false);
+                                // ActivateButtons(false);
                                 GameManager.SetUserName(dbUserName);
                                 loginAlertText.text = "Welcome";
                                 loginAlertText.color = successColor;

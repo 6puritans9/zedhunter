@@ -16882,8 +16882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314fd060391970449690d31a4be2649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerHealth: 1000
-  currentPlayerHealth: 1000
+  maxPlayerHealth: 300
+  currentPlayerHealth: 300
   isDead: 0
 --- !u!4 &1739823806
 Transform:
