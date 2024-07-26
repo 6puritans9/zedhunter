@@ -19,10 +19,10 @@ public class EndingManager : MonoBehaviour
         {
             yield return StartCoroutine(_database.TryGetRank());
             
-            SetRankItems();
+            GetRankItems();
         }
     
-    private void SetRankItems()
+    private void GetRankItems()
         {
             int rank = 1;
             

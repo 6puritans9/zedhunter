@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,7 +10,13 @@ public class GameManager : MonoBehaviour
 
         [Header("Player Info")] public static string UserName;
         public int playerScore;
+        // private int playerHighestScore;
         private bool isNewRecord = false;
+
+        [Header("Scores")] private int PizzaZombieScore = 100;
+        private int PlayerZombieScore = 200;
+        private int BossZombieScore = 500;
+        private int LostPizzaItemScore = -1000;
         
         public static bool IsNewRecord { get; private set; }
         
@@ -23,7 +27,7 @@ public class GameManager : MonoBehaviour
                         Destroy(gameObject);
                         return;
                     }
-
+                
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
@@ -46,5 +50,24 @@ public class GameManager : MonoBehaviour
         public int GetPlayerAvatar()
             {
                 return avatarIndex;
+            }
+
+        public void AddPizzaZombieScore()
+            {
+                playerScore += PizzaZombieScore;
+            }
+        
+        public void AddPlayerZombieScore()
+            {
+                playerScore += PlayerZombieScore;
+            }
+        public void AddBossZombieScore()
+            {
+                playerScore += BossZombieScore;
+            }
+
+        public void SubtractPizzaItemScore()
+            {
+                playerScore += LostPizzaItemScore;
             }
     }

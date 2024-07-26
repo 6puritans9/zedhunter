@@ -29,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (enemyHealth.zombieType == EnemyHealth.ZombieType.Female)
+		if (enemyHealth.zombieType == EnemyHealth.ZombieType.PizzaZombie)
 		{
 			//���ݹ����� �ִ� �÷��̾� �ٶ󺸱�
 			if (other.CompareTag("Pizza") && enemyHealth.Target != null)
@@ -42,7 +42,7 @@ public class EnemyAttack : MonoBehaviour
 				enemyHealth.transform.rotation = Quaternion.Slerp(enemyHealth.transform.rotation, lookRotation, 1);
 			}
 		}
-		else if (enemyHealth.zombieType == EnemyHealth.ZombieType.Male)
+		else if (enemyHealth.zombieType == EnemyHealth.ZombieType.PlayerZombie)
 		{
 			if ((other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Wall")) && enemyHealth.Target != null)
 			{

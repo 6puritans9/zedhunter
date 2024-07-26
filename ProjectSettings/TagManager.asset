@@ -9,7 +9,7 @@ TagManager:
   - FxTemporaire
   - Enemy
   - Pizza
-  - Vignette
+  - EnemyHead
   layers:
   - Default
   - TransparentFX

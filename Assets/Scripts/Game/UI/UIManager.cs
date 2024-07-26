@@ -27,6 +27,9 @@ public class UIManager : MonoBehaviour
 	private PizzaManager _pizzaManager; 
 	private List<GameObject> pizzaIndicators = new List<GameObject>();
 
+	[Header("Player Score")] private GameManager _gameManager; 
+	public TMP_Text playerScoreText;
+
 
 	private void Awake()
 	{
@@ -34,7 +37,8 @@ public class UIManager : MonoBehaviour
 	}
 
 	void Start()
-	{
+		{
+			_gameManager = FindObjectOfType<GameManager>();
 		_pizzaManager = FindObjectOfType<PizzaManager>();
 		// Set 5 pizzaIndicators
 		for (int i = 0; i < _pizzaManager.totalPizzas; i += 1)
@@ -54,6 +58,8 @@ public class UIManager : MonoBehaviour
 			isCursorLocked = !isCursorLocked;
 			SetCursorState(isCursorLocked);
 		}
+
+		playerScoreText.text = _gameManager.playerScore.ToString();
 	}
 	private void SetCursorState(bool isLocked)
 	{

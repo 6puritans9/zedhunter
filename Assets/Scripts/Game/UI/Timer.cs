@@ -55,9 +55,18 @@ public class Timer : MonoBehaviour
         // Invoke("LoadEndingScene", 4f);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        LoadEndingScene();
+
+        EndGame();
     }
 
+    private void EndGame()
+        {
+            UploadManager uploadManager = FindObjectOfType<UploadManager>();
+            
+            uploadManager.Connect();
+            LoadEndingScene();
+        }
+    
     private void LoadEndingScene()
     {
         SceneManager.LoadScene("EndingScene");

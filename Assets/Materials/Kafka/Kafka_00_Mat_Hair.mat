@@ -149,7 +149,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity0: 1
     - _SpecularRoughness0: 0.02
-    - _SpecularShininess0: 60
+    - _SpecularShininess0: 10
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0

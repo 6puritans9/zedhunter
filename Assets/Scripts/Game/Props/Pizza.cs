@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Pizza : MonoBehaviour
     {
+        private GameManager _gameManager;
+        
         public float rotationSpeed = 30f;
 
         public float[] timers;
@@ -15,6 +17,8 @@ public class Pizza : MonoBehaviour
         private void Start()
             {
                 int randomIndex = UnityEngine.Random.Range(0, timers.Length);
+
+                _gameManager = FindObjectOfType<GameManager>();
                 currentTime = timers[randomIndex];
             }
 
@@ -68,6 +72,7 @@ public class Pizza : MonoBehaviour
                         pizzaSpawner.PizzaDestroyed(spawnIndex);
                     }
                 
+                _gameManager.SubtractPizzaItemScore();
                 PizzaManager.Instance?.PizzaDestroyed(this);
                 Destroy(gameObject);
             }

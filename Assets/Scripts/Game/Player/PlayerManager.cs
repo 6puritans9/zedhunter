@@ -6,8 +6,8 @@ public class PlayerManager : MonoBehaviour
     {
         [Header("Player Info")]
         private GameObject _player;
-        public int maxPlayerHealth = 100;
-        public int currentPlayerHealth = 100;
+        public int maxPlayerHealth;
+        public int currentPlayerHealth;
         [HideInInspector] public bool isDead = false;
 
         [Header("Respawn")] private PlayerSpawner _playerSpawner;
@@ -23,11 +23,7 @@ public class PlayerManager : MonoBehaviour
             }
 
         // Update is called once per frame
-        void Update()
-            {
-                // _uiManager.UpdateHealthEffect(currentPlayerHealth, maxPlayerHealth);
-            }
-
+        
         public void TakeDamage(int damage)
             {
                 Debug.Log($"ActionStateManager: TakeDamage called with damage: {damage}");
@@ -49,13 +45,13 @@ public class PlayerManager : MonoBehaviour
                 _player.SetActive(false);
 
                 isDead = true;
-                StartCoroutine(DelayedRespawn(5f));
+                // StartCoroutine(DelayedRespawn(5f));
                 /*Invoke("RespawnPlayer", 5f);*/
             }
 
-        IEnumerator DelayedRespawn(float delay)
-            {
-                yield return new WaitForSeconds(delay);
-                _playerSpawner.RespawnPlayer();
-            }
+        // IEnumerator DelayedRespawn(float delay)
+        //     {
+        //         yield return new WaitForSeconds(delay);
+        //         _playerSpawner.RespawnPlayer();
+        //     }
     }

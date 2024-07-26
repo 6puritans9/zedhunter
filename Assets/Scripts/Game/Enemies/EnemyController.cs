@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
 	public float jumpCooldown = 3f; // 점프 쿨타임 (초 단위)
 
 	public NavMeshAgent agent;
+	float agentOriginSpeed;
 	public Animator animator;
 	public Vector3 jumpStartPosition;
 	public Vector3 jumpTargetPosition;
@@ -38,7 +39,7 @@ public class EnemyController : MonoBehaviour
 		enemyHealth = GetComponentInParent<EnemyHealth>();
 		agent = GetComponentInParent<NavMeshAgent>();
 		animator = GetComponentInParent<Animator>();
-
+		agentOriginSpeed = agent.speed;
 		StartCoroutine(Target());
 	}
 
@@ -97,6 +98,7 @@ public class EnemyController : MonoBehaviour
 		float elapsedTime = Time.time - jumpStartTime;
 		float jumpProgress = elapsedTime / jumpSpeed;
 		animator.SetBool("isJumping", isJumpAnimating);
+		agent.speed = agentOriginSpeed * 2f;
 		if (jumpProgress < 1f)
 		{
 			// 포물선 운동 계산
@@ -119,5 +121,6 @@ public class EnemyController : MonoBehaviour
 		isJumpAnimating = false;
 		animator.SetFloat("speed", 0);
 		animator.SetBool("isJumping", isJumpAnimating);
+		agent.speed = 0;
 	}
 }

@@ -5,454 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e353a090-214e-42ea-bd0d-19576e56e60a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.zedhunter_nh/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.zedhunter_nh/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/polyperfect/Poly Halloween/- Materials/universal-glass.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/polyperfect/Poly Halloween/- Materials/universal-glass.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Kafka/Kafka_01_Mat_Body2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Kafka/Kafka_01_Mat_Body2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/New Terrain.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/New Terrain.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Zombie4/Mremireh O Desbiens.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Zombie4/Mremireh O Desbiens.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Effects/CFXR2 WW Explosion.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Effects/CFXR2 WW Explosion.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/3 TourneVis_3_Tournevis_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/3 TourneVis_3_Tournevis_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/AeroMachine LP_AeroMachine_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/AeroMachine LP_AeroMachine_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Ampoule_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Ampoule_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Animated Door_Shed Door_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Animated Door_Shed Door_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/BarkPine0001_M_COLOR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/BarkPine0001_M_COLOR.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Bidon_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Bidon_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Bois Coupe_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Bois Coupe_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Boite_Old Box_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Boite_Old Box_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Brouette_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Brouette_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Caisse_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Caisse_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Chaine_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Chaine_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Chaise_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Chaise_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/CutMachine_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/CutMachine_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Decal_Debris01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Decal_Debris01.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/DecalsRusted0005_2_S.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/DecalsRusted0005_2_S.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Etagere_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Etagere_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Fenetre_Shed Window_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Fenetre_Shed Window_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Grande EcheLle_Grande Echelle_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Grande EcheLle_Grande Echelle_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Hache_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Hache_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Marteau LP_Marteau_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Marteau LP_Marteau_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Old Lavabo_OldLavabo_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Old Lavabo_OldLavabo_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/PLaque_Plaque_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/PLaque_Plaque_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Petite Echelle_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Petite Echelle_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Plafond_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Plafond_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/PlywoodOld0013_2_L.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/PlywoodOld0013_2_L.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Pompe_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Pompe_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Pots de fleurs_Pots de Fleurs_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Pots de fleurs_Pots de Fleurs_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/SerreJoints_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/SerreJoints_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tableau a Outils_Tableau Tools_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tableau a Outils_Tableau Tools_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tableau_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tableau_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/ToolBox_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/ToolBox_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tretaux_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tretaux_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tronc_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tronc_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tuyaux.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/Tuyaux.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodCutter_WoodClamper_color.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodCutter_WoodClamper_color.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksDirty0055_2_M.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksDirty0055_2_M.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksDirty0063_M_COLOR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksDirty0063_M_COLOR.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksVarious0010_1_L_COLOR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/WoodPlanksVarious0010_1_L_COLOR.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/_ivy_d.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Materials/_ivy_d.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed_Anims.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed_Anims.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed_Dooranimated.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Shed_Dooranimated.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/3 TourneVis_3_Tournevis_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/AeroMachine LP_AeroMachine_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Ampoule_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Animated Door_Shed Door_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/BarkPine0001_M_COLOR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/BarkPine0001_M_COLOR.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bidon_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Bois Coupe_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Boite_Old Box_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Brouette_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Caisse_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaine_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Chaise_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/CutMachine_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Decal_Debris01.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Decal_Debris01.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Decal_Debris01_NRM.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Decal_Debris01_NRM.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted0005_2_S.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted0005_2_S.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted_nrm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted_nrm.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted_spec.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/DecalsRusted_spec.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Etagere_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Fenetre_Shed Window_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Grande EcheLle_Grande Echelle_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Hache_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Marteau LP_Marteau_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Old Lavabo_OldLavabo_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PLaque_Plaque_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Petite Echelle_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Plafond_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PlywoodOld0013_2_L.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PlywoodOld0013_2_L.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PlywoodOld0013_2_nrm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/PlywoodOld0013_2_nrm.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pompe_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pots de fleurs_Pots de Fleurs_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pots de fleurs_Pots de Fleurs_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pots de fleurs_Pots de Fleurs_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Pots de fleurs_Pots de Fleurs_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/SerreJoints_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau a Outils_Tableau Tools_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tableau_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/ToolBox_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tretaux_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tronc_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tronc_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tronc_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tronc_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tuyaux.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/Tuyaux.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_nmap.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_nmap.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_specular.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodCutter_WoodClamper_specular.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0055_2_M.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0055_2_M.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0055_2_Nrm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0055_2_Nrm.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0063_M_COLOR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0063_M_COLOR.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0063_M_Nrm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksDirty0063_M_Nrm.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksVarious0010_1_L_COLOR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksVarious0010_1_L_COLOR.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksVarious0010_1_L_Nrm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/WoodPlanksVarious0010_1_L_Nrm.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/_ivy_d.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/Textures/_ivy_d.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/The shed.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/The shed.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/The shedSettings.lighting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/BlackantMasterStudio/The Shed/The shedSettings.lighting.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Material.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Material/Old_water_well.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Material/Old_water_well.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Mesh.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Mesh/old_water_well.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Mesh/old_water_well.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Prefab/old_water_well.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Prefab/old_water_well.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demo.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demo.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/demo_ground.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/demo_ground.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground_Diffuse.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground_Diffuse.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Scenes/Demoscene_files/ground_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/All_source_textures.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/All_source_textures.psd.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_AO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_AO.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_Albedo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_Albedo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_MetallicSmoothness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_MetallicSmoothness.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_Normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/Old Water Well/Textures/old_waterwell_Normal.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Roof_metall01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Roof_metall01.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wall01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wall01.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_Bark01.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_Bark01.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_02.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_02.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_03.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_03.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_04.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_04.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_05.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/MaterialsPBR/Wood_planks_05.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/OtherMaterials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/OtherMaterials/Soil.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/OtherMaterials/Soil.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/OtherMaterials/Windows_atlas.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/OtherMaterials/Windows_atlas.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Other.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Other/Soil01_Base_Color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Other/Soil01_Base_Color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Other/Soil01_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Other/Soil01_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Roof/Roof_metall01/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wall/Wall01/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Windows_atlas.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Windows_atlas/Windows_Base_Color.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Windows_atlas/Windows_Base_Color.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Windows_atlas/Windows_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Windows_atlas/Windows_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/WoodPlanks05/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Bark01/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_Planks04/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks02/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_AlbedoTransparency.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_AlbedoTransparency.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_MetallicSmoothness.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_MetallicSmoothness.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_Normal.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/PBR_Tiled/Textures/Wood/Wood_planks03/plane_3_3_DefaultMaterial_Normal.tga.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/SurvivalOldHouse01.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/SurvivalOldHouse01/SurvivalOldHouse01_model.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/SurvivalOldHouse01/SurvivalOldHouse01_model.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/SurvivalOldHouse01/SurvivalOldHouse01_prefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Environment/OldVillage/SurvivalOldHouse01/SurvivalOldHouse01_prefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Minimap/MinimapTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Minimap/MinimapTexture.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Kafka.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Kafka.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Props/Pizza.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Props/Pizza.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/EndingScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/EndingScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Enemies/EnemyAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Enemies/EnemyAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Enemies/EnemyHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Enemies/EnemyHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PizzaHP.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PizzaHP.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/ActionStates/ActionStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/ActionStates/ActionStateManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Props/Pizza.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Props/Pizza.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Props/PizzaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Props/PizzaManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Props/PizzaSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Props/PizzaSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Timer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Timer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Timer.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Auth/GameAccount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu/Auth/GameAccount.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Auth/LoginManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu/Auth/LoginManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ZombieResources/yaku_zombie_material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ZombieResources/yaku_zombie_material.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,13 +40,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Auth/ImageUploader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/ImageDecoder.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.stalomeow.star-rail-npr-shader@63b00dd897/Shaders/Character/CharBody.shader" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.9.7/Runtime/Core/LensSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Runtime/TMPro_Private.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -502,7 +74,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Build/NewZed.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\NewZed.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\dev\JungleDev\Unity\zedhunter_nh\Build" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -557,10 +129,6 @@
       <workItem from="1721762864518" duration="1551000" />
       <workItem from="1721789927890" duration="512000" />
       <workItem from="1721790459993" duration="436000" />
-      <workItem from="1721813543646" duration="11459000" />
-      <workItem from="1721891589933" duration="868000" />
-      <workItem from="1721892508349" duration="11645000" />
-      <workItem from="1721917483001" duration="11258000" />
     </task>
     <servers />
   </component>

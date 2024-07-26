@@ -41,6 +41,8 @@ public class ActionStateManager : MonoBehaviour
 	private Vignette vignette; // ���Ʈ ȿ��
 	public int maxPlayerHealth = 500;
 
+	private bool isGameOver = false;
+
 	private void Awake()
 	{
 
@@ -100,17 +102,15 @@ public class ActionStateManager : MonoBehaviour
 		}
 	}
 
-	void SetWeapon(int idx)
+	public void SetWeapon(int idx)
 	{
 		switch (idx)
 		{
 			case 1:
-				gun.SetActive(false);
 				//gunRig.weight = 0;
 				SetLayerWeight(0, 1);
 				break;
 			case 2:
-				gun.SetActive(true);
 				//gunRig.weight = 1;
 				SetLayerWeight(1, 1);
 				break;
@@ -122,6 +122,11 @@ public class ActionStateManager : MonoBehaviour
 	{
 		if (playerHealth > 0)
 		{
+			if (this.gameObject.name == "Kafka(Clone)" || this.gameObject.name == "Serval(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageServalKafkaSound();
+			else if (this.gameObject.name == "Yanqing(Clone)")
+				PlayerSoundSource.Instance.GetTakeDamageYanqingSound();
+
 			playerHealth -= damage;
 			if (playerHealth <= 0)
 			{
@@ -135,10 +140,17 @@ public class ActionStateManager : MonoBehaviour
 	void PlayerDeath()
 	{
 		isDead = true;
-		Invoke("RespawnPlayer", 5f); // 5�� �Ŀ� �����
+		// Invoke("RespawnPlayer", 5f); // 5    Ŀ       
+		if (!isGameOver)
+		{
+			isGameOver = true;
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			SceneTransitionManager.Instance.DissolveToScene("GameOverScene");
+		}
 	}
 
-	void RPC_PlayerDeath()
+	/*void RPC_PlayerDeath()
 	{
 		gameObject.SetActive(false);
 	}
@@ -153,7 +165,7 @@ public class ActionStateManager : MonoBehaviour
 	public void RPC_RespawnPlayer()
 	{
 		gameObject.SetActive(true);
-	}
+	}*/
 
 
 	public void SwitchState(ActionBaseState state)
@@ -162,20 +174,23 @@ public class ActionStateManager : MonoBehaviour
 		currentState.EnterState(this);
 	}
 
-	void SetLayerWeight(int layerIndex, int weight)
+	public void SetLayerWeight(int layerIndex, int weight)
 	{
-		// ��� ���̾��� ����ġ�� 0���� ����
 		for (int i = 0; i < anim.layerCount; i++)
 		{
 			anim.SetLayerWeight(i, 0);
 		}
 
-		if (layerIndex == 1 && weight > 0.9f)
+		if (layerIndex == 1)
+		{
 			gunRig.weight = 1;
+			gun.SetActive(true);
+		}
 		else
+		{
 			gunRig.weight = 0;
-
-		// ������ ���̾��� ����ġ�� ����
+			gun.SetActive(false);
+		}
 		anim.SetLayerWeight(layerIndex, weight);
 	}
 

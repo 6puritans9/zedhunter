@@ -120,8 +120,8 @@ Material:
     - _BackFaceUV2: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BloomColor: 1
-    - _BloomIntensity: 1
+    - _BloomColor: 0
+    - _BloomIntensity: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -133,7 +133,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _DstBlendColor: 0
-    - _EmissionIntensity: 5
+    - _EmissionIntensity: 0
     - _EmissionThreshold: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1

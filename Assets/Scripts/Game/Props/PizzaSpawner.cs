@@ -9,7 +9,7 @@ public class PizzaSpawner : MonoBehaviour
         public GameObject pizzaPrefab;
         public Transform[] spawnPoints;
 
-        [HideInInspector] public bool[] hasPizza = new bool[8];
+        [HideInInspector] public bool[] hasPizza = new bool[6];
         private bool isSpawning = false;
         public int MAX_PIZZA_COUNT;
         private int currentPizzaCount = 0;
